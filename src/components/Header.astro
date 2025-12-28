@@ -1,3 +1,46 @@
-<header>
-  <h1>Header</h1>
+---
+import Home from '@/assets/home.svg';
+import Person from '@/assets/person.svg';
+import WorkHistory from '@/assets/workhistory.svg';
+import Folder from '@/assets/folder.svg';
+---
+
+<header class="header">
+  <nav>
+    <a href="/">
+      <Home />
+    </a>
+    <!--TODO -->
+    <a href="/">
+      <Person />
+    </a>
+    <a href="/">
+      <WorkHistory />
+    </a>
+    <a href="/">
+      <Folder />
+    </a>
+  </nav>  
 </header>
+
+<style>
+  header {
+    position: fixed;
+    top: 1.5em;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5em;
+      background-color: var(--color-secondary);
+      padding: 0.5em 1.4em;
+      width: fit-content;
+      border: .2em solid var(--color-tertiary);
+      border-radius: 1em;
+    }
+  }
+</style>
