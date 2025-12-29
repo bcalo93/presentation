@@ -1,3 +1,33 @@
-<header>
-  <h1>Header</h1>
+---
+import Home from '@/assets/svgs/home.svg';
+import Person from '@/assets/svgs/person.svg';
+import WorkHistory from '@/assets/svgs/workhistory.svg';
+import Folder from '@/assets/svgs/folder.svg';
+import NavItem from '@/components/NavItem.astro'
+---
+
+<header class="center-content">
+  <nav class="center-content">
+    <NavItem asset={Home} href="/" />
+    <!--TODO -->
+    <NavItem asset={Person} href="/" />
+    <NavItem asset={WorkHistory} href="/" />
+    <NavItem asset={Folder} href="/" />
+  </nav>  
 </header>
+
+<style>
+  header {
+    position: fixed;
+    top: 1.5em;
+    width: 100%;
+
+    nav {
+      gap: 0.3em;
+      padding: 0.5em;
+      background-color: var(--color-secondary);
+      width: fit-content;
+      border-radius: 1em;
+    }
+  }
+</style>
