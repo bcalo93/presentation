@@ -1,6 +1,9 @@
 ---
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import '@/assets/styles/palette.scss';
+import '@/assets/styles/reset.scss';
+import '@/assets/styles/commons.scss';
 ---
 
 <!doctype html>
@@ -18,32 +21,3 @@ import Footer from '@/components/Footer.astro';
 		<Footer />
 	</body>
 </html>
-
-<style is:global>
-:root {
-		--color-primary: #5a5a5a;
-		--color-secondary: #4a9cee;
-		--color-tertiary: #29739c;
-		font-size: 16px;
-	}
-
-	html,
-	body {
-		margin: 0;
-		height: 100%;
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-	}
-
-	body {
-		background-color: var(--color-primary);
-		color: white;
-		position: relative;
-	}
-
-	h1 {
-		font-size: 1.5em;
-	}
-	a {
-		text-decoration: none;
-	}
-</style>
