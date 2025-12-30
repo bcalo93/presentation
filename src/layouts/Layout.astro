@@ -19,10 +19,10 @@ import '@/assets/styles/commons.scss';
 	<body>
 		<Header />
 		<main>
-			<div class="left-content">
+			<div class="summary">
 				<SummaryCard />
 			</div>
-			<div class="right-content">
+			<div class="page-content">
 				<slot />
 			</div>
 		</main>
@@ -36,19 +36,20 @@ import '@/assets/styles/commons.scss';
 		max-width: 65em;
 	}
 	main {
-		height: 100%;
+		height: 100%; // May be deleted
 		display: flex;
+		gap: 3em;
 		position: relative;
 
-		.left-content {
-			width: 40%;
+		.summary {
 			position: sticky;
 			top: 1.5em;
 			height: fit-content;
+			max-width: 20em;
 		}
 
-		.right-content {
-			width: 60%;
+		.page-content {
+			flex: 1 1 auto;
 		}
 	}
 </style>
