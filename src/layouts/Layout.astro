@@ -33,29 +33,27 @@ import "@/assets/styles/commons.scss";
 <style lang="scss">
 	body {
 		margin: auto;
-		max-width: 65em;
+		max-width: 55em;
 	}
 
 	.container {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 6em 1fr 3em;
+		grid-template-rows: 4.5em 1fr 2.5em;
 		grid-template-areas: 
 			"header header header"
 			"summary content content"
 			"footer footer footer"
 		;
 		min-height: 100vh;
+		gap: 1.5em;
 
 		main {
 			grid-area: content;
 		}
 
 		aside {
-			position: sticky;
-			top: 1.5em;
-			height: fit-content;
-			max-width: 20em;
+			max-width: 18em;
 			grid-area: summary;
 		}
 	}
