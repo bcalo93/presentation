@@ -1,17 +1,16 @@
 ---
-import type { SvgComponent } from 'astro/types';
+import type { HTMLAttributes, SvgComponent } from 'astro/types';
 
-interface Props {
+interface Props extends HTMLAttributes<'a'> {
   asset: SvgComponent;
-  href: string;
   srLabel?: string;
 }
 
-const { asset: Asset, href, srLabel } = Astro.props;
+const { asset: Asset,  srLabel, ...anchorProps } = Astro.props;
 ---
 
 <div class="nav-item">
-  <a href={href}>
+  <a {...anchorProps}>
     <Asset aria-label={srLabel} />
   </a>
 </div>
