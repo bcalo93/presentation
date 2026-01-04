@@ -1,10 +1,10 @@
 ---
-import NavItem from '@/components/NavItem.astro';
+import IconLink from '@/components/IconLink.astro';
 import { SOCIAL_LINKS } from '@/constants/socials';
 ---
 
 <div class="social-links">
-  {SOCIAL_LINKS.map((link) => <NavItem {...link} />)}
+  {SOCIAL_LINKS.map((link) => <IconLink {...link} />)}
 </div>
 
 <style>
