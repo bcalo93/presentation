@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import ProfilePhoto from '@/assets/profile_photo.png';
+import { calculateImageDimensions } from '@/utils/imageDimensions';
+import SocialLinks from '@/components/SocialLinks.astro';
+
+const imageDimensions = calculateImageDimensions(300, { aspectRatio: '4:5' });
+---
+
+<section class="summary-card">
+  <Image 
+    src={ProfilePhoto} 
+    alt="Profile photo" 
+    class="summary-card__profile-photo"
+    {...imageDimensions}
+  />
+  <h1>Brahian Calo</h1>
+  <p>Software Technical Leader from Uruguay</p>
+  <SocialLinks />
+</section>
+
+<style lang="scss">
+  .summary-card {
+    border: 2px solid var(--color-secondary);
+    border-radius: 0.5em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5em;
+    color: var(--color-primary);
+
+    &__profile-photo {
+      margin-bottom: 1em;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+</style>
