@@ -1,10 +1,10 @@
 ---
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import SummaryCard from '@/components/SummaryCard.astro'
-import '@/assets/styles/palette.scss';
-import '@/assets/styles/reset.scss';
-import '@/assets/styles/commons.scss';
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SummaryCard from "@/components/SummaryCard.astro";
+import "@/assets/styles/palette.scss";
+import "@/assets/styles/reset.scss";
+import "@/assets/styles/commons.scss";
 ---
 
 <!doctype html>
@@ -17,16 +17,16 @@ import '@/assets/styles/commons.scss';
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<div class="summary">
+		<div class="container">
+			<Header />
+			<aside>
 				<SummaryCard />
-			</div>
-			<div class="page-content">
+			</aside>
+			<main>
 				<slot />
-			</div>
-		</main>
-		<Footer />
+			</main>
+			<Footer />
+		</div>
 	</body>
 </html>
 
@@ -35,21 +35,28 @@ import '@/assets/styles/commons.scss';
 		margin: auto;
 		max-width: 65em;
 	}
-	main {
-		height: 100%; // May be deleted
-		display: flex;
-		gap: 3em;
-		position: relative;
 
-		.summary {
+	.container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 6em 1fr 3em;
+		grid-template-areas: 
+			"header header header"
+			"summary content content"
+			"footer footer footer"
+		;
+		min-height: 100vh;
+
+		main {
+			grid-area: content;
+		}
+
+		aside {
 			position: sticky;
 			top: 1.5em;
 			height: fit-content;
 			max-width: 20em;
-		}
-
-		.page-content {
-			flex: 1 1 auto;
+			grid-area: summary;
 		}
 	}
 </style>
