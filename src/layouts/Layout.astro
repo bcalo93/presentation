@@ -1,60 +1,44 @@
 ---
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import SummaryCard from "@/components/SummaryCard.astro";
-import "@/assets/styles/palette.scss";
-import "@/assets/styles/reset.scss";
-import "@/assets/styles/commons.scss";
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import '@/assets/styles/palette.scss';
+import '@/assets/styles/reset.scss';
+import '@/assets/styles/commons.scss';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Brahian Calo | Technical Lead & Software Engineer',
+  description = 'Technical Lead and Software Engineer with strong JavaScript/TypeScript experience across React and Express, Go backend experience, and practical AI adoption for engineering workflows.',
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<div class="container">
-			<Header />
-			<aside>
-				<SummaryCard />
-			</aside>
-			<main>
-				<slot />
-			</main>
-			<Footer />
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header />
+    <main class="page-shell">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
-
-<style lang="scss">
-	body {
-		margin: auto;
-		max-width: 55em;
-	}
-
-	.container {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-rows: 4.5em 1fr 2.5em;
-		grid-template-areas: 
-			"header header header"
-			"summary content content"
-			"footer footer footer"
-		;
-		min-height: 100vh;
-		gap: 1.5em;
-
-		main {
-			grid-area: content;
-		}
-
-		aside {
-			max-width: 18em;
-			grid-area: summary;
-		}
-	}
-</style>

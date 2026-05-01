@@ -1,14 +1,38 @@
 ---
-import IconLink from '@/components/IconLink.astro';
 import { SOCIAL_LINKS } from '@/constants/socials';
 ---
 
-<div class="social-links">
-  {SOCIAL_LINKS.map((link) => <IconLink {...link} target="_blank" />)}
-</div>
+<ul class="social-links" aria-label="Social links">
+  {SOCIAL_LINKS.map((link) => (
+    <li>
+      <a href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
+        {link.label}
+      </a>
+    </li>
+  ))}
+</ul>
 
-<style>
+<style lang="scss">
   .social-links {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .social-links a:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
   }
 </style>

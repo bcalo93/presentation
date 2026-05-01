@@ -1,0 +1,27 @@
+---
+const highlights = [
+  '9+ years building software',
+  '4 years at Mercado Libre',
+  '2 years as Technical Lead',
+  'JavaScript / TypeScript across frontend and backend',
+  'React, Express, and Go',
+  'Focus on architecture, quality, and AI-assisted workflows',
+  'Based in Uruguay',
+];
+---
+
+<section class="section" aria-labelledby="snapshot-title">
+  <div class="section__header">
+    <p class="eyebrow">Professional Snapshot</p>
+    <h2 id="snapshot-title">A fast read for recruiters and hiring managers</h2>
+    <p>
+      Seniority, technical breadth, and leadership experience should be obvious in seconds.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="pill-list">
+      {highlights.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+</section>

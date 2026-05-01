@@ -1,31 +1,74 @@
 ---
-import Home from '@/assets/svgs/home.svg';
-import Person from '@/assets/svgs/person.svg';
-import WorkHistory from '@/assets/svgs/workhistory.svg';
-import Folder from '@/assets/svgs/folder.svg';
-import IconLink from '@/components/IconLink.astro'
+const navItems = [
+  { href: '#home', label: 'Home' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#education', label: 'Education' },
+  { href: '#contact', label: 'Contact' },
+];
 ---
 
-<header class="center-content">
-  <nav class="center-content">
-    <IconLink asset={Home} href="/" />
-    <!--TODO -->
-    <IconLink asset={Person} href="/" />
-    <IconLink asset={WorkHistory} href="/" />
-    <IconLink asset={Folder} href="/" />
-  </nav>  
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="#home">Brahian Calo</a>
+    <nav aria-label="Primary">
+      <ul class="site-header__nav">
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<style>
-  header {
-    grid-area: header;
-    align-self: end;
+<style lang="scss">
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1rem 0;
+    background: rgba(247, 248, 250, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(221, 227, 234, 0.8);
+  }
 
-    nav {
-      gap: 0.3rem;
-      padding: 0.5rem;
-      background-color: var(--color-secondary);
-      border-radius: 0.7rem;
+  .site-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-header__brand {
+    font-weight: 700;
+  }
+
+  .site-header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .site-header__nav a {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .site-header__nav a:hover,
+  .site-header__brand:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 720px) {
+    .site-header__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .site-header__nav {
+      justify-content: flex-start;
     }
   }
 </style>

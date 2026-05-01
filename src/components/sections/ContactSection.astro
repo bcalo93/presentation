@@ -1,0 +1,87 @@
+---
+const contactLinks = [
+  {
+    label: 'Email',
+    href: 'mailto:brahiancalo@gmail.com',
+    value: 'brahiancalo@gmail.com',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/brahian-calo-suhr/',
+    value: 'linkedin.com/in/brahian-calo-suhr',
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/bcalo93',
+    value: 'github.com/bcalo93',
+  },
+  {
+    label: 'Resume',
+    href: '/resume.pdf',
+    value: 'Available once public/resume.pdf is added',
+  },
+];
+---
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="section__header">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-title">Interested in technical leadership, product engineering, or AI-assisted workflows?</h2>
+    <p>Let&apos;s connect.</p>
+  </div>
+
+  <div class="card contact-card">
+    <div class="cta-row">
+      <a class="button" href="mailto:brahiancalo@gmail.com">Send email</a>
+      <a class="button-secondary" href="https://www.linkedin.com/in/brahian-calo-suhr/" target="_blank" rel="noreferrer">Open LinkedIn</a>
+    </div>
+
+    <dl class="contact-list">
+      {contactLinks.map((item) => (
+        <div>
+          <dt>{item.label}</dt>
+          <dd><a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>{item.value}</a></dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style lang="scss">
+  .contact-card {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .contact-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+  }
+
+  .contact-list div {
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact-list dt {
+    margin-bottom: 0.35rem;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .contact-list dd {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .contact-list a:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 720px) {
+    .contact-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
