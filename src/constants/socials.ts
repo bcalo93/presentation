@@ -11,7 +11,7 @@ export const SOCIAL_LINKS = [
   },
   {
     id: 'email',
-    href: 'mailto:brahiancalo@gmail.com',
+    href: 'mailto:bcalo93@gmail.com',
     label: 'Email',
   },
 ];
