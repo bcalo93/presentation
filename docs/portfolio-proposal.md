@@ -249,7 +249,7 @@ Technical Lead & Software Engineer
 I build maintainable web applications with JavaScript, TypeScript, React, Express, and Go, while helping teams improve quality, architecture, and delivery through practical AI adoption.
 ```
 
-#### Professional Snapshot
+#### At a Glance
 
 Use a compact, scannable block:
 
