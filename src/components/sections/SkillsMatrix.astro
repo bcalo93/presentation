@@ -1,0 +1,66 @@
+---
+const groups = [
+  {
+    title: 'Frontend Engineering',
+    items: ['React', 'JavaScript', 'TypeScript', 'Astro', 'HTML', 'CSS/Sass', 'Accessibility', 'Performance'],
+  },
+  {
+    title: 'Backend Engineering',
+    items: ['Express', 'Node.js', 'Go', 'API design', 'Backend services', 'Performance-oriented development'],
+  },
+  {
+    title: 'Architecture',
+    items: ['Design patterns', 'Modularity', 'Maintainability', 'Trade-off analysis', 'Scalable frontend systems'],
+  },
+  {
+    title: 'Technical Leadership',
+    items: ['Mentoring', 'Code review', 'Team practices', 'Delivery quality', 'Process improvement'],
+  },
+  {
+    title: 'AI-Assisted Engineering',
+    items: ['AI adoption', 'Workflow automation', 'Development acceleration', 'Quality support', 'Prompt iteration'],
+  },
+  {
+    title: 'Product Thinking',
+    items: ['User experience', 'Prioritization', 'MVP definition', 'Pragmatic decisions'],
+  },
+];
+---
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="section__header">
+    <p class="eyebrow">Skills</p>
+    <h2 id="skills-title">Capabilities grouped by how the work is actually delivered</h2>
+    <p>
+      This is intentionally organized around engineering outcomes instead of a flat technology cloud.
+    </p>
+  </div>
+
+  <div class="card-grid skills-grid">
+    {groups.map((group) => (
+      <article class="card skills-card">
+        <h3>{group.title}</h3>
+        <div class="pill-list">
+          {group.items.map((item) => <span>{item}</span>)}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style lang="scss">
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (max-width: 820px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

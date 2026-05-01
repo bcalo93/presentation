@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import ProfilePhoto from '@/assets/profile_photo.png';
+import SocialLinks from '@/components/SocialLinks.astro';
+---
+
+<section class="section hero" id="home">
+  <div class="hero__content">
+    <div class="hero__copy">
+      <p class="eyebrow">Technical Lead & Software Engineer</p>
+      <h1>Brahian Calo</h1>
+      <p class="hero__lede">
+        I build maintainable web applications with JavaScript, TypeScript, React, Express, and Go, while helping teams improve quality, architecture, and delivery through practical AI adoption.
+      </p>
+      <div class="cta-row">
+        <a class="button" href="#contact">Contact me</a>
+        <a class="button-secondary" href="#projects">View projects</a>
+      </div>
+      <SocialLinks />
+    </div>
+    <div class="hero__photo card">
+      <Image
+        src={ProfilePhoto}
+        alt="Portrait of Brahian Calo"
+        width={371}
+        height={464}
+        sizes="(max-width: 900px) 100vw, 371px"
+      />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .hero__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 371px);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 42rem;
+  }
+
+  .hero__lede {
+    font-size: 1.125rem;
+    max-width: 38rem;
+  }
+
+  .hero__photo {
+    padding: 0.85rem;
+    background:
+      linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(20, 184, 166, 0.04)),
+      var(--color-surface);
+  }
+
+  .hero__photo img {
+    border-radius: 6px;
+  }
+
+  @media (max-width: 900px) {
+    .hero__content {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__photo {
+      max-width: 24rem;
+    }
+  }
+</style>

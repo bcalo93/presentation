@@ -1,31 +1,134 @@
 ---
-import Home from '@/assets/svgs/home.svg';
-import Person from '@/assets/svgs/person.svg';
-import WorkHistory from '@/assets/svgs/workhistory.svg';
-import Folder from '@/assets/svgs/folder.svg';
-import IconLink from '@/components/IconLink.astro'
+import ColorMode from '@/assets/svgs/color-mode.svg';
+
+const navItems = [
+  { href: '#home', label: 'Home' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#education', label: 'Education' },
+  { href: '#contact', label: 'Contact' },
+];
 ---
 
-<header class="center-content">
-  <nav class="center-content">
-    <IconLink asset={Home} href="/" />
-    <!--TODO -->
-    <IconLink asset={Person} href="/" />
-    <IconLink asset={WorkHistory} href="/" />
-    <IconLink asset={Folder} href="/" />
-  </nav>  
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="#home">Brahian Calo</a>
+    <nav aria-label="Primary">
+      <ul class="site-header__nav">
+        {navItems.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+        <li>
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="Toggle color theme"
+            title="Toggle color theme"
+            data-theme-toggle
+          >
+            <span class="theme-toggle__icon" aria-hidden="true">
+              <ColorMode />
+            </span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<style>
-  header {
-    grid-area: header;
-    align-self: end;
+<script is:inline>
+  (() => {
+    const storageKey = 'theme';
+    const button = document.querySelector('[data-theme-toggle]');
+    if (!button) return;
 
-    nav {
-      gap: 0.3rem;
-      padding: 0.5rem;
-      background-color: var(--color-secondary);
-      border-radius: 0.7rem;
+    button.addEventListener('click', () => {
+      const currentTheme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem(storageKey, nextTheme);
+    });
+  })();
+</script>
+
+<style lang="scss">
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 1rem 0;
+    background: var(--color-header-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-header-border);
+  }
+
+  .site-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-header__brand {
+    font-weight: 700;
+  }
+
+  .site-header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .site-header__nav a {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-primary);
+  }
+
+  .theme-toggle__icon {
+    display: inline-flex;
+    line-height: 1;
+  }
+
+  .theme-toggle__icon :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .site-header__nav a:hover,
+  .site-header__brand:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 720px) {
+    .site-header__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .site-header__nav {
+      justify-content: flex-start;
     }
   }
 </style>
