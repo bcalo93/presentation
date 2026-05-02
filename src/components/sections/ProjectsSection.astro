@@ -1,32 +1,11 @@
 ---
-const projects = [
-  {
-    title: 'Portfolio',
-    problem: 'Present a professional profile through a fast, content-driven site that communicates technical depth and credibility.',
-    status: 'Active',
-    stack: ['Astro', 'TypeScript', 'Sass', 'SEO'],
-    repository: 'This repository',
-    highlights: [
-      'Single-page architecture optimized for hiring flows.',
-      'Responsive sections with strong information hierarchy.',
-      'Prepared for future bilingual content without overbuilding the MVP.',
-    ],
-    nextStep: 'Move content into Astro Content Collections and add project detail pages.',
-  },
-  {
-    title: 'Splitit',
-    problem: 'Model shared expenses clearly in a multiplatform app with a clean product foundation.',
-    status: 'WIP',
-    stack: ['Kotlin Multiplatform', 'Shared logic', 'Product modeling'],
-    repository: 'Private / in progress',
-    highlights: [
-      'Focused on multiplatform architecture and reusable domain logic.',
-      'Explores expense-sharing workflows and product-level tradeoffs.',
-      'Useful as a case study in how features evolve from model design.',
-    ],
-    nextStep: 'Publish a full case study with screenshots, architecture notes, and roadmap.',
-  },
-];
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
 ---
 
 <section class="section" id="projects" aria-labelledby="projects-title">
@@ -42,18 +21,18 @@ const projects = [
     {projects.map((project) => (
       <article class="card project-card">
         <div class="project-card__header">
-          <h3>{project.title}</h3>
-          <span>{project.status}</span>
+          <h3>{project.data.title}</h3>
+          <span>{project.data.status}</span>
         </div>
-        <p><strong>Problem:</strong> {project.problem}</p>
-        <p><strong>Repository:</strong> {project.repository}</p>
+        <p><strong>Problem:</strong> {project.data.problem}</p>
+        <p><strong>Repository:</strong> {project.data.repository}</p>
         <div class="pill-list">
-          {project.stack.map((item) => <span>{item}</span>)}
+          {project.data.stack.map((item) => <span>{item}</span>)}
         </div>
         <ul class="project-card__highlights">
-          {project.highlights.map((highlight) => <li>{highlight}</li>)}
+          {project.data.highlights.map((highlight) => <li>{highlight}</li>)}
         </ul>
-        <p><strong>Next step:</strong> {project.nextStep}</p>
+        <p><strong>Next step:</strong> {project.data.nextStep}</p>
       </article>
     ))}
   </div>
