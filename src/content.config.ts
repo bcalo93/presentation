@@ -1,6 +1,21 @@
 import { defineCollection, z } from 'astro:content';
 
 const sharedLocale = z.enum(['en', 'es']);
+const navItem = z.object({
+  id: z.string(),
+  label: z.string(),
+});
+
+const sectionIntro = z.object({
+  eyebrow: z.string(),
+  title: z.string(),
+  description: z.string().optional(),
+});
+
+const contactLink = z.object({
+  label: z.string(),
+  value: z.string(),
+});
 
 const experience = defineCollection({
   type: 'content',
@@ -59,8 +74,81 @@ const education = defineCollection({
   }),
 });
 
+const home = defineCollection({
+  type: 'content',
+  schema: z.object({
+    locale: sharedLocale,
+    seo: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    nav: z.object({
+      ariaLabel: z.string(),
+      items: z.array(navItem).min(1),
+      themeToggleLabel: z.string(),
+      languageSwitcherLabel: z.string(),
+      languageLabels: z.object({
+        en: z.string(),
+        es: z.string(),
+      }),
+    }),
+    hero: z.object({
+      role: z.string(),
+      lede: z.string(),
+      primaryCta: z.string(),
+      secondaryCta: z.string(),
+      portraitAlt: z.string(),
+    }),
+    snapshot: sectionIntro.extend({
+      highlights: z.array(z.string()).min(1),
+    }),
+    experience: sectionIntro,
+    projects: sectionIntro.extend({
+      problemLabel: z.string(),
+      repositoryLabel: z.string(),
+      nextStepLabel: z.string(),
+      readCaseStudyLabel: z.string(),
+    }),
+    skills: sectionIntro.extend({
+      groups: z
+        .array(
+          z.object({
+            title: z.string(),
+            items: z.array(z.string()).min(1),
+          }),
+        )
+        .min(1),
+    }),
+    education: sectionIntro,
+    contact: sectionIntro.extend({
+      emailCta: z.string(),
+      linkedinCta: z.string(),
+      links: z.array(contactLink).min(1),
+    }),
+    footer: z.object({
+      blurb: z.string(),
+      backToTop: z.string(),
+    }),
+    projectPage: z.object({
+      backToProjects: z.string(),
+      eyebrow: z.string(),
+      statusLabel: z.string(),
+      repositoryLabel: z.string(),
+      stackLabel: z.string(),
+      problem: sectionIntro.omit({ description: true }),
+      constraints: sectionIntro.omit({ description: true }),
+      architecture: sectionIntro.omit({ description: true }),
+      tradeoffs: sectionIntro.omit({ description: true }),
+      status: sectionIntro.omit({ description: true }),
+      links: sectionIntro.omit({ description: true }),
+      nextStepsHeading: z.string(),
+    }),
+  }),
+});
+
 export const collections = {
   experience,
   projects,
   education,
+  home,
 };

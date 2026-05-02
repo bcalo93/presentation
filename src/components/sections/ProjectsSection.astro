@@ -1,20 +1,30 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getProjectPath } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
+  locale: Locale;
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+    problemLabel: string;
+    repositoryLabel: string;
+    nextStepLabel: string;
+    readCaseStudyLabel: string;
+  };
 }
 
-const { projects } = Astro.props;
+const { projects, locale, copy } = Astro.props;
 ---
 
 <section class="section" id="projects" aria-labelledby="projects-title">
   <div class="section__header">
-    <p class="eyebrow">Projects</p>
-    <h2 id="projects-title">Projects that show engineering intent, not only output</h2>
-    <p>
-      Even WIP work is valuable when it explains the problem, stack, current scope, and next decision.
-    </p>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="projects-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
   </div>
 
   <div class="card-grid projects-grid">
@@ -25,9 +35,9 @@ const { projects } = Astro.props;
           <span>{project.data.status}</span>
         </div>
         <p>{project.data.summary}</p>
-        <p><strong>Problem:</strong> {project.data.problem}</p>
+        <p><strong>{copy.problemLabel}:</strong> {project.data.problem}</p>
         <p>
-          <strong>Repository:</strong>{' '}
+          <strong>{copy.repositoryLabel}:</strong>{' '}
           {project.data.repositoryHref ? (
             <a href={project.data.repositoryHref} target="_blank" rel="noreferrer">
               {project.data.repositoryLabel}
@@ -42,9 +52,9 @@ const { projects } = Astro.props;
         <ul class="project-card__highlights">
           {project.data.highlights.map((highlight) => <li>{highlight}</li>)}
         </ul>
-        <p><strong>Next step:</strong> {project.data.nextStep}</p>
+        <p><strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}</p>
         <div class="project-card__actions">
-          <a class="button-secondary" href={`/projects/${project.data.path}`}>Read case study</a>
+          <a class="button-secondary" href={getProjectPath(locale, project.data.path)}>{copy.readCaseStudyLabel}</a>
         </div>
       </article>
     ))}

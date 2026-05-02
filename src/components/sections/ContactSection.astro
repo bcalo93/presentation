@@ -1,46 +1,55 @@
 ---
-const contactLinks = [
-  {
-    label: 'Email',
-    href: 'mailto:bcalo93@gmail.com',
-    value: 'bcalo93@gmail.com',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/brahian-calo-suhr/',
-    value: 'linkedin.com/in/brahian-calo-suhr',
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/bcalo93',
-    value: 'github.com/bcalo93',
-  },
-  {
-    label: 'Resume',
-    href: '/resume.pdf',
-    value: 'Available once public/resume.pdf is added',
-  },
-];
+interface Props {
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+    emailCta: string;
+    linkedinCta: string;
+    links: Array<{
+      label: string;
+      value: string;
+    }>;
+  };
+}
+
+const { copy } = Astro.props;
+
+const hrefByLabel: Record<string, string> = {
+  Email: 'mailto:bcalo93@gmail.com',
+  LinkedIn: 'https://www.linkedin.com/in/brahian-calo-suhr/',
+  GitHub: 'https://github.com/bcalo93',
+  Resume: '/resume.pdf',
+  CV: '/resume.pdf',
+};
 ---
 
 <section class="section" id="contact" aria-labelledby="contact-title">
   <div class="section__header">
-    <p class="eyebrow">Contact</p>
-    <h2 id="contact-title">Interested in technical leadership, product engineering, or AI-assisted workflows?</h2>
-    <p>Let&apos;s connect.</p>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="contact-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
   </div>
 
   <div class="card contact-card">
     <div class="cta-row">
-      <a class="button" href="mailto:bcalo93@gmail.com">Send email</a>
-      <a class="button-secondary" href="https://www.linkedin.com/in/brahian-calo-suhr/" target="_blank" rel="noreferrer">Open LinkedIn</a>
+      <a class="button" href="mailto:bcalo93@gmail.com">{copy.emailCta}</a>
+      <a class="button-secondary" href="https://www.linkedin.com/in/brahian-calo-suhr/" target="_blank" rel="noreferrer">{copy.linkedinCta}</a>
     </div>
 
     <dl class="contact-list">
-      {contactLinks.map((item) => (
+      {copy.links.map((item) => (
         <div>
           <dt>{item.label}</dt>
-          <dd><a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>{item.value}</a></dd>
+          <dd>
+            <a
+              href={hrefByLabel[item.label]}
+              target={hrefByLabel[item.label]?.startsWith('http') ? '_blank' : undefined}
+              rel={hrefByLabel[item.label]?.startsWith('http') ? 'noreferrer' : undefined}
+            >
+              {item.value}
+            </a>
+          </dd>
         </div>
       ))}
     </dl>

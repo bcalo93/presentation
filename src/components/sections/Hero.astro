@@ -2,26 +2,36 @@
 import { Image } from 'astro:assets';
 import ProfilePhoto from '@/assets/profile_photo.png';
 import SocialLinks from '@/components/SocialLinks.astro';
+
+interface Props {
+  copy: {
+    role: string;
+    lede: string;
+    primaryCta: string;
+    secondaryCta: string;
+    portraitAlt: string;
+  };
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="section hero" id="home">
   <div class="hero__content">
     <div class="hero__copy">
-      <p class="eyebrow">Technical Lead & Software Engineer</p>
+      <p class="eyebrow">{copy.role}</p>
       <h1>Brahian Calo</h1>
-      <p class="hero__lede">
-        I build maintainable web applications with JavaScript, TypeScript, React, Express, and Go, while helping teams improve quality, architecture, and delivery through practical AI adoption.
-      </p>
+      <p class="hero__lede">{copy.lede}</p>
       <div class="cta-row">
-        <a class="button" href="#contact">Contact me</a>
-        <a class="button-secondary" href="#projects">View projects</a>
+        <a class="button" href="#contact">{copy.primaryCta}</a>
+        <a class="button-secondary" href="#projects">{copy.secondaryCta}</a>
       </div>
       <SocialLinks />
     </div>
     <div class="hero__photo card">
       <Image
         src={ProfilePhoto}
-        alt="Portrait of Brahian Calo"
+        alt={copy.portraitAlt}
         width={371}
         height={464}
         sizes="(max-width: 900px) 100vw, 371px"

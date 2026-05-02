@@ -1,30 +1,45 @@
 ---
 import ColorMode from '@/assets/svgs/color-mode.svg';
+import { getHomePath, getSwitcherPath } from '@/i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import type { Locale } from '@/i18n/config';
 
-const navItems = [
-  { href: '#home', label: 'Home' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#education', label: 'Education' },
-  { href: '#contact', label: 'Contact' },
-];
+interface Props {
+  locale: Locale;
+  page: 'home' | 'project';
+  slug?: string;
+  homeEntry: CollectionEntry<'home'>;
+}
+
+const { locale, page, slug, homeEntry } = Astro.props;
+const homeHref = getHomePath(locale);
+const navItems = homeEntry.data.nav.items.map((item) => ({
+  ...item,
+  href: page === 'home' ? `#${item.id}` : `${homeHref}#${item.id}`,
+}));
+const switchTo = locale === 'en' ? 'es' : 'en';
+const languageHref = getSwitcherPath(switchTo, page, slug);
 ---
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a class="site-header__brand" href="#home">Brahian Calo</a>
-    <nav aria-label="Primary">
+    <a class="site-header__brand" href={page === 'home' ? '#home' : homeHref}>Brahian Calo</a>
+    <nav aria-label={homeEntry.data.nav.ariaLabel}>
       <ul class="site-header__nav">
         {navItems.map((item) => (
           <li><a href={item.href}>{item.label}</a></li>
         ))}
         <li>
+          <a class="language-switcher" href={languageHref}>
+            {homeEntry.data.nav.languageLabels[switchTo]}
+          </a>
+        </li>
+        <li>
           <button
             class="theme-toggle"
             type="button"
-            aria-label="Toggle color theme"
-            title="Toggle color theme"
+            aria-label={homeEntry.data.nav.themeToggleLabel}
+            title={homeEntry.data.nav.themeToggleLabel}
             data-theme-toggle
           >
             <span class="theme-toggle__icon" aria-hidden="true">
@@ -85,6 +100,10 @@ const navItems = [
   .site-header__nav a {
     color: var(--color-text-muted);
     font-size: 0.95rem;
+  }
+
+  .language-switcher {
+    font-weight: 700;
   }
 
   .theme-toggle {

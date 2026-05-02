@@ -1,43 +1,28 @@
 ---
-const groups = [
-  {
-    title: 'Frontend Engineering',
-    items: ['React', 'JavaScript', 'TypeScript', 'Astro', 'HTML', 'CSS/Sass', 'Accessibility', 'Performance'],
-  },
-  {
-    title: 'Backend Engineering',
-    items: ['Express', 'Node.js', 'Go', 'API design', 'Backend services', 'Performance-oriented development'],
-  },
-  {
-    title: 'Architecture',
-    items: ['Design patterns', 'Modularity', 'Maintainability', 'Trade-off analysis', 'Scalable frontend systems'],
-  },
-  {
-    title: 'Technical Leadership',
-    items: ['Mentoring', 'Code review', 'Team practices', 'Delivery quality', 'Process improvement'],
-  },
-  {
-    title: 'AI-Assisted Engineering',
-    items: ['AI adoption', 'Workflow automation', 'Development acceleration', 'Quality support', 'Prompt iteration'],
-  },
-  {
-    title: 'Product Thinking',
-    items: ['User experience', 'Prioritization', 'MVP definition', 'Pragmatic decisions'],
-  },
-];
+interface Props {
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+    groups: Array<{
+      title: string;
+      items: string[];
+    }>;
+  };
+}
+
+const { copy } = Astro.props;
 ---
 
 <section class="section" id="skills" aria-labelledby="skills-title">
   <div class="section__header">
-    <p class="eyebrow">Skills</p>
-    <h2 id="skills-title">Capabilities grouped by how the work is actually delivered</h2>
-    <p>
-      This is intentionally organized around engineering outcomes instead of a flat technology cloud.
-    </p>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="skills-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
   </div>
 
   <div class="card-grid skills-grid">
-    {groups.map((group) => (
+    {copy.groups.map((group) => (
       <article class="card skills-card">
         <h3>{group.title}</h3>
         <div class="pill-list">

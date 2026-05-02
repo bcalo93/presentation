@@ -3,15 +3,21 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   educationItems: CollectionEntry<'education'>[];
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+  };
 }
 
-const { educationItems } = Astro.props;
+const { educationItems, copy } = Astro.props;
 ---
 
 <section class="section" id="education" aria-labelledby="education-title">
   <div class="section__header">
-    <p class="eyebrow">Education</p>
-    <h2 id="education-title">Systems engineering foundations applied in practice</h2>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="education-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
   </div>
 
   {educationItems.map((item) => (

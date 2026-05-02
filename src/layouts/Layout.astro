@@ -1,37 +1,49 @@
 ---
+import Seo from '@/components/Seo.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import '@/assets/styles/palette.scss';
 import '@/assets/styles/reset.scss';
 import '@/assets/styles/commons.scss';
+import { getHomePath } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
 
 interface Props {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalPath: string;
+  alternatePaths: Record<Locale, string>;
+  page: 'home' | 'project';
+  slug?: string;
+  homeEntry: import('astro:content').CollectionEntry<'home'>;
 }
 
 const {
-  title = 'Brahian Calo | Technical Lead & Software Engineer',
-  description = 'Technical Lead and Software Engineer with strong JavaScript/TypeScript experience across React and Express, Go backend experience, and practical AI adoption for engineering workflows.',
+  title,
+  description,
+  locale,
+  canonicalPath,
+  alternatePaths,
+  page,
+  slug,
+  homeEntry,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="index,follow" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:locale" content="en_US" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Seo
+      title={title}
+      description={description}
+      locale={locale}
+      canonicalPath={canonicalPath}
+      alternates={[
+        { locale: 'en', href: alternatePaths.en ?? getHomePath('en') },
+        { locale: 'es', href: alternatePaths.es ?? getHomePath('es') },
+      ]}
+    />
     <script is:inline>
       (() => {
         const storageKey = 'theme';
@@ -40,13 +52,12 @@ const {
         document.documentElement.dataset.theme = theme;
       })();
     </script>
-    <title>{title}</title>
   </head>
   <body>
-    <Header />
+    <Header locale={locale} page={page} slug={slug} homeEntry={homeEntry} />
     <main class="page-shell">
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} page={page} slug={slug} homeEntry={homeEntry} />
   </body>
 </html>
