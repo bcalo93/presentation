@@ -1,32 +1,11 @@
 ---
-const experiences = [
-  {
-    company: 'Mercado Libre',
-    period: '2022 - Present',
-    roles: ['Technical Lead', 'Senior Frontend Developer'],
-    summary:
-      'Led frontend initiatives while staying close to implementation, architecture, delivery quality, and practical AI adoption inside engineering workflows.',
-    highlights: [
-      'Improved team practices, code quality, and delivery consistency.',
-      'Drove early AI usage to reduce repetitive work and support better engineering decisions.',
-      'Worked across cross-functional teams on frontend architecture and product execution.',
-    ],
-    stack: ['React', 'TypeScript', 'JavaScript', 'Architecture', 'AI workflows'],
-  },
-  {
-    company: 'Altimetrik',
-    period: '2015 - June 2022',
-    roles: ['Frontend Developer'],
-    summary:
-      'Built enterprise frontend solutions in constrained platform environments, with emphasis on maintainable components and business-critical workflows.',
-    highlights: [
-      'Delivered component-based frontend development on top of Salesforce ecosystems.',
-      'Worked on complex interfaces with a strong focus on maintainability.',
-      'Strengthened long-term product delivery discipline in enterprise contexts.',
-    ],
-    stack: ['JavaScript', 'Salesforce', 'Lightning Web Components', 'Frontend architecture'],
-  },
-];
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  experiences: CollectionEntry<'experience'>[];
+}
+
+const { experiences } = Astro.props;
 ---
 
 <section class="section" id="experience" aria-labelledby="experience-title">
@@ -42,17 +21,17 @@ const experiences = [
     {experiences.map((experience) => (
       <article class="timeline__item card">
         <div class="timeline__meta">
-          <p>{experience.period}</p>
-          <h3>{experience.company}</h3>
-          <p>{experience.roles.join(' • ')}</p>
+          <p>{experience.data.period}</p>
+          <h3>{experience.data.company}</h3>
+          <p>{experience.data.roles.join(' • ')}</p>
         </div>
         <div class="timeline__content">
-          <p>{experience.summary}</p>
+          <p>{experience.data.summary}</p>
           <ul class="timeline__highlights">
-            {experience.highlights.map((highlight) => <li>{highlight}</li>)}
+            {experience.data.highlights.map((highlight) => <li>{highlight}</li>)}
           </ul>
           <div class="pill-list">
-            {experience.stack.map((item) => <span>{item}</span>)}
+            {experience.data.stack.map((item) => <span>{item}</span>)}
           </div>
         </div>
       </article>

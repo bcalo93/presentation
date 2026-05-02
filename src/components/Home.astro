@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import Hero from '@/components/sections/Hero.astro';
 import ProfessionalSnapshot from '@/components/sections/ProfessionalSnapshot.astro';
 import ExperienceTimeline from '@/components/sections/ExperienceTimeline.astro';
@@ -6,12 +7,24 @@ import ProjectsSection from '@/components/sections/ProjectsSection.astro';
 import SkillsMatrix from '@/components/sections/SkillsMatrix.astro';
 import EducationSection from '@/components/sections/EducationSection.astro';
 import ContactSection from '@/components/sections/ContactSection.astro';
+
+const locale = 'en';
+
+const [experiences, projects, educationItems] = await Promise.all([
+  getCollection('experience', ({ data }) => data.locale === locale),
+  getCollection('projects', ({ data }) => data.locale === locale),
+  getCollection('education', ({ data }) => data.locale === locale),
+]);
+
+experiences.sort((left, right) => left.data.order - right.data.order);
+projects.sort((left, right) => left.data.order - right.data.order);
+educationItems.sort((left, right) => left.data.order - right.data.order);
 ---
 
 <Hero />
 <ProfessionalSnapshot />
-<ExperienceTimeline />
-<ProjectsSection />
+<ExperienceTimeline experiences={experiences} />
+<ProjectsSection projects={projects} />
 <SkillsMatrix />
-<EducationSection />
+<EducationSection educationItems={educationItems} />
 <ContactSection />
