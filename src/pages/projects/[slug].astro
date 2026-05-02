@@ -1,0 +1,230 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => data.locale === 'en');
+
+  return projects.map((project) => ({
+    params: { slug: project.data.path },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const title = `${project.data.title} | Project Case Study | Brahian Calo`;
+const description = project.data.summary;
+---
+
+<Layout title={title} description={description}>
+  <article class="case-study">
+    <a class="case-study__back-link" href="/#projects">Back to projects</a>
+
+    <header class="case-study__hero">
+      <div class="case-study__hero-copy">
+        <p class="eyebrow">Project Case Study</p>
+        <h1>{project.data.title}</h1>
+        <p class="case-study__summary">{project.data.summary}</p>
+      </div>
+
+      <div class="case-study__meta card">
+        <div>
+          <p class="case-study__label">Status</p>
+          <p>{project.data.status}</p>
+        </div>
+        <div>
+          <p class="case-study__label">Repository</p>
+          <p>
+            {project.data.repositoryHref ? (
+              <a href={project.data.repositoryHref} target="_blank" rel="noreferrer">
+                {project.data.repositoryLabel}
+              </a>
+            ) : (
+              project.data.repositoryLabel
+            )}
+          </p>
+        </div>
+        <div>
+          <p class="case-study__label">Stack</p>
+          <div class="pill-list">
+            {project.data.stack.map((item) => <span>{item}</span>)}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section case-study__section">
+      <div class="section__header">
+        <p class="eyebrow">Problem</p>
+        <h2>What this project needed to solve</h2>
+      </div>
+      <div class="card case-study__body">
+        <p>{project.data.problem}</p>
+        <Content />
+      </div>
+    </section>
+
+    <section class="section case-study__section">
+      <div class="section__header">
+        <p class="eyebrow">Constraints</p>
+        <h2>Boundaries that shaped the implementation</h2>
+      </div>
+      <div class="card">
+        <ul class="case-study__list">
+          {project.data.constraints.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-study__section">
+      <div class="section__header">
+        <p class="eyebrow">Architecture</p>
+        <h2>How the solution is structured</h2>
+      </div>
+      <div class="card">
+        <ul class="case-study__list">
+          {project.data.architecture.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-study__section">
+      <div class="section__header">
+        <p class="eyebrow">Trade-Offs</p>
+        <h2>Deliberate choices behind the current direction</h2>
+      </div>
+      <div class="card">
+        <ul class="case-study__list">
+          {project.data.tradeoffs.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-study__grid">
+      <div class="card">
+        <p class="eyebrow">Status</p>
+        <h2>Current state</h2>
+        <p>{project.data.statusNote}</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">{project.data.nextStepsTitle}</p>
+        <h2>{project.data.nextStepsTitle === 'Next steps' ? 'What comes next' : project.data.nextStepsTitle}</h2>
+        <p>{project.data.nextStep}</p>
+        <ul class="case-study__list">
+          {project.data.roadmap.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    {project.data.links.length > 0 && (
+      <section class="section case-study__section">
+        <div class="section__header">
+          <p class="eyebrow">Links</p>
+          <h2>Project references</h2>
+        </div>
+        <div class="card case-study__links">
+          {project.data.links.map((link) => (
+            <a class="button-secondary" href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>
+
+<style lang="scss">
+  .case-study {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .case-study__back-link {
+    display: inline-flex;
+    width: fit-content;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .case-study__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1rem 0 2rem;
+  }
+
+  .case-study__hero-copy {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+  }
+
+  .case-study__summary {
+    font-size: 1.1rem;
+  }
+
+  .case-study__meta {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .case-study__label {
+    margin-bottom: 0.35rem;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .case-study__body {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .case-study__body :global(p) + :global(p) {
+    margin-top: 1rem;
+  }
+
+  .case-study__list {
+    display: grid;
+    gap: 0.85rem;
+    padding-left: 1.1rem;
+    list-style: disc;
+  }
+
+  .case-study__list li {
+    color: var(--color-text-muted);
+  }
+
+  .case-study__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .case-study__grid .card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .case-study__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 860px) {
+    .case-study__hero,
+    .case-study__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

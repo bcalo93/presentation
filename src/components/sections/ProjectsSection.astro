@@ -24,8 +24,18 @@ const { projects } = Astro.props;
           <h3>{project.data.title}</h3>
           <span>{project.data.status}</span>
         </div>
+        <p>{project.data.summary}</p>
         <p><strong>Problem:</strong> {project.data.problem}</p>
-        <p><strong>Repository:</strong> {project.data.repository}</p>
+        <p>
+          <strong>Repository:</strong>{' '}
+          {project.data.repositoryHref ? (
+            <a href={project.data.repositoryHref} target="_blank" rel="noreferrer">
+              {project.data.repositoryLabel}
+            </a>
+          ) : (
+            project.data.repositoryLabel
+          )}
+        </p>
         <div class="pill-list">
           {project.data.stack.map((item) => <span>{item}</span>)}
         </div>
@@ -33,6 +43,9 @@ const { projects } = Astro.props;
           {project.data.highlights.map((highlight) => <li>{highlight}</li>)}
         </ul>
         <p><strong>Next step:</strong> {project.data.nextStep}</p>
+        <div class="project-card__actions">
+          <a class="button-secondary" href={`/projects/${project.data.path}`}>Read case study</a>
+        </div>
       </article>
     ))}
   </div>
@@ -73,6 +86,11 @@ const { projects } = Astro.props;
 
   .project-card__highlights li {
     color: var(--color-text-muted);
+  }
+
+  .project-card__actions {
+    display: flex;
+    justify-content: flex-start;
   }
 
   @media (max-width: 820px) {
