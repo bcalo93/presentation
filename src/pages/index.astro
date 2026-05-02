@@ -1,8 +1,20 @@
 ---
 import Home from '@/components/Home.astro';
 import Layout from '@/layouts/Layout.astro';
+import { getHomeEntry } from '@/utils/content';
+
+const locale = 'en';
+const homeEntry = await getHomeEntry(locale);
 ---
 
-<Layout>
-	<Home />
+<Layout
+	title={homeEntry.data.seo.title}
+	description={homeEntry.data.seo.description}
+	locale={locale}
+	canonicalPath="/"
+	alternatePaths={{ en: '/', es: '/es' }}
+	page="home"
+	homeEntry={homeEntry}
+>
+	<Home locale={locale} homeEntry={homeEntry} />
 </Layout>

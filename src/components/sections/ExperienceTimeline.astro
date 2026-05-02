@@ -3,18 +3,21 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   experiences: CollectionEntry<'experience'>[];
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+  };
 }
 
-const { experiences } = Astro.props;
+const { experiences, copy } = Astro.props;
 ---
 
 <section class="section" id="experience" aria-labelledby="experience-title">
   <div class="section__header">
-    <p class="eyebrow">Experience</p>
-    <h2 id="experience-title">Role progression backed by delivery and technical ownership</h2>
-    <p>
-      The focus is on hands-on leadership, scalable frontend work, and measurable quality improvements.
-    </p>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="experience-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
   </div>
 
   <div class="timeline">

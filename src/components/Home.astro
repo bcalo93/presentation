@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import Hero from '@/components/sections/Hero.astro';
 import ProfessionalSnapshot from '@/components/sections/ProfessionalSnapshot.astro';
 import ExperienceTimeline from '@/components/sections/ExperienceTimeline.astro';
@@ -7,8 +8,15 @@ import ProjectsSection from '@/components/sections/ProjectsSection.astro';
 import SkillsMatrix from '@/components/sections/SkillsMatrix.astro';
 import EducationSection from '@/components/sections/EducationSection.astro';
 import ContactSection from '@/components/sections/ContactSection.astro';
+import type { Locale } from '@/i18n/config';
+import { sortCollection } from '@/utils/content';
 
-const locale = 'en';
+interface Props {
+  locale: Locale;
+  homeEntry: CollectionEntry<'home'>;
+}
+
+const { locale, homeEntry } = Astro.props;
 
 const [experiences, projects, educationItems] = await Promise.all([
   getCollection('experience', ({ data }) => data.locale === locale),
@@ -16,15 +24,15 @@ const [experiences, projects, educationItems] = await Promise.all([
   getCollection('education', ({ data }) => data.locale === locale),
 ]);
 
-experiences.sort((left, right) => left.data.order - right.data.order);
-projects.sort((left, right) => left.data.order - right.data.order);
-educationItems.sort((left, right) => left.data.order - right.data.order);
+sortCollection(experiences);
+sortCollection(projects);
+sortCollection(educationItems);
 ---
 
-<Hero />
-<ProfessionalSnapshot />
-<ExperienceTimeline experiences={experiences} />
-<ProjectsSection projects={projects} />
-<SkillsMatrix />
-<EducationSection educationItems={educationItems} />
-<ContactSection />
+<Hero copy={homeEntry.data.hero} />
+<ProfessionalSnapshot copy={homeEntry.data.snapshot} />
+<ExperienceTimeline experiences={experiences} copy={homeEntry.data.experience} />
+<ProjectsSection projects={projects} copy={homeEntry.data.projects} locale={locale} />
+<SkillsMatrix copy={homeEntry.data.skills} />
+<EducationSection educationItems={educationItems} copy={homeEntry.data.education} />
+<ContactSection copy={homeEntry.data.contact} />
