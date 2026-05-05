@@ -1,13 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import ProjectCaseStudy from '@/components/ProjectCaseStudy.astro';
-import { getHomeEntry, getLocalizedProjectByPath } from '@/utils/content';
-import { getProjectPath } from '@/i18n/config';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import ProjectCaseStudy from "@/components/ProjectCaseStudy.astro";
+import { getHomeEntry, getLocalizedProjectByPath } from "@/utils/content";
+import { getProjectPath } from "@/i18n/config";
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects', ({ data }) => data.locale === 'es');
+  const projects = await getCollection(
+    "projects",
+    ({ data }) => data.locale === "es",
+  );
 
   return projects.map((project) => ({
     params: { slug: project.data.path },
@@ -16,13 +19,16 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: CollectionEntry<"projects">;
 }
 
-const locale = 'es';
+const locale = "es";
 const { project } = Astro.props;
 const homeEntry = await getHomeEntry(locale);
-const localizedEnglishProject = await getLocalizedProjectByPath('en', project.data.path);
+const localizedEnglishProject = await getLocalizedProjectByPath(
+  "en",
+  project.data.path,
+);
 const title = `${project.data.title} | ${homeEntry.data.projectPage.eyebrow} | Brahian Calo`;
 const description = project.data.summary;
 ---
@@ -33,12 +39,18 @@ const description = project.data.summary;
   locale={locale}
   canonicalPath={getProjectPath(locale, project.data.path)}
   alternatePaths={{
-    en: localizedEnglishProject ? getProjectPath('en', localizedEnglishProject.data.path) : '/',
-    es: getProjectPath('es', project.data.path),
+    en: localizedEnglishProject
+      ? getProjectPath("en", localizedEnglishProject.data.path)
+      : "/",
+    es: getProjectPath("es", project.data.path),
   }}
   page="project"
   slug={project.data.path}
   homeEntry={homeEntry}
 >
-  <ProjectCaseStudy homeEntry={homeEntry} project={project} backHref="/es#projects" />
+  <ProjectCaseStudy
+    homeEntry={homeEntry}
+    project={project}
+    backHref="/es#projects"
+  />
 </Layout>

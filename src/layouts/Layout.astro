@@ -1,12 +1,12 @@
 ---
-import Seo from '@/components/Seo.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import '@/assets/styles/palette.scss';
-import '@/assets/styles/reset.scss';
-import '@/assets/styles/commons.scss';
-import { getHomePath } from '@/i18n/config';
-import type { Locale } from '@/i18n/config';
+import Seo from "@/components/Seo.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import "@/assets/styles/palette.scss";
+import "@/assets/styles/reset.scss";
+import "@/assets/styles/commons.scss";
+import { getHomePath } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
 interface Props {
   title: string;
@@ -14,9 +14,9 @@ interface Props {
   locale: Locale;
   canonicalPath: string;
   alternatePaths: Record<Locale, string>;
-  page: 'home' | 'project';
+  page: "home" | "project";
   slug?: string;
-  homeEntry: import('astro:content').CollectionEntry<'home'>;
+  homeEntry: import("astro:content").CollectionEntry<"home">;
 }
 
 const {
@@ -40,15 +40,19 @@ const {
       locale={locale}
       canonicalPath={canonicalPath}
       alternates={[
-        { locale: 'en', href: alternatePaths.en ?? getHomePath('en') },
-        { locale: 'es', href: alternatePaths.es ?? getHomePath('es') },
+        { locale: "en", href: alternatePaths.en ?? getHomePath("en") },
+        { locale: "es", href: alternatePaths.es ?? getHomePath("es") },
       ]}
     />
     <script is:inline>
       (() => {
-        const storageKey = 'theme';
+        const storageKey = "theme";
         const storedTheme = localStorage.getItem(storageKey);
-        const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const theme =
+          storedTheme ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
         document.documentElement.dataset.theme = theme;
       })();
     </script>

@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
-import ProfilePhoto from '@/assets/profile_photo.png';
-import SocialLinks from '@/components/SocialLinks.astro';
+import { Image } from "astro:assets";
+import ProfilePhoto from "@/assets/profile_photo.png";
+import SocialLinks from "@/components/SocialLinks.astro";
 
 interface Props {
   copy: {
@@ -62,7 +62,11 @@ const { copy } = Astro.props;
   .hero__photo {
     padding: 0.85rem;
     background:
-      linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(20, 184, 166, 0.04)),
+      linear-gradient(
+        180deg,
+        rgba(37, 99, 235, 0.08),
+        rgba(20, 184, 166, 0.04)
+      ),
       var(--color-surface);
   }
 

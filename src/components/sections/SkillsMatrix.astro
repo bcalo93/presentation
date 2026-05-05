@@ -22,14 +22,18 @@ const { copy } = Astro.props;
   </div>
 
   <div class="card-grid skills-grid">
-    {copy.groups.map((group) => (
-      <article class="card skills-card">
-        <h3>{group.title}</h3>
-        <div class="pill-list">
-          {group.items.map((item) => <span>{item}</span>)}
-        </div>
-      </article>
-    ))}
+    {
+      copy.groups.map((group) => (
+        <article class="card skills-card">
+          <h3>{group.title}</h3>
+          <div class="pill-list">
+            {group.items.map((item) => (
+              <span>{item}</span>
+            ))}
+          </div>
+        </article>
+      ))
+    }
   </div>
 </section>
 

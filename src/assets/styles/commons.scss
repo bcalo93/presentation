@@ -1,6 +1,8 @@
 html,
 body {
-  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  font-family:
+    Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+    sans-serif;
   font-size: 16px;
   background: var(--color-bg);
   color: var(--color-text);
@@ -105,7 +107,10 @@ p {
   border-radius: 8px;
   border: 1px solid transparent;
   font-weight: 600;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .button {

@@ -590,26 +590,26 @@ Practical recommendation:
 
 ## 7. Risk Management
 
-| Risk | Impact | Mitigation |
-| --- | --- | --- |
-| The portfolio feels generic | Weak differentiation | Use clear positioning and concrete engineering examples |
-| Too much visual design, not enough evidence | Lower technical credibility | Prioritize experience, projects, decisions, and impact |
-| WIP projects look unfinished | Reduced trust | Explain status, scope, next steps, and technical learning |
-| No metrics available | Impact feels abstract | Use qualitative evidence first and add metrics later |
-| Too much JavaScript | Loses Astro performance advantage | Keep static content in Astro and use islands sparingly |
-| Bilingual support added too early | Slows MVP delivery | Ship English first, prepare content structure, add Spanish later |
-| Copy has grammar issues | Hurts professional credibility | Review English copy before publishing |
+| Risk                                        | Impact                            | Mitigation                                                       |
+| ------------------------------------------- | --------------------------------- | ---------------------------------------------------------------- |
+| The portfolio feels generic                 | Weak differentiation              | Use clear positioning and concrete engineering examples          |
+| Too much visual design, not enough evidence | Lower technical credibility       | Prioritize experience, projects, decisions, and impact           |
+| WIP projects look unfinished                | Reduced trust                     | Explain status, scope, next steps, and technical learning        |
+| No metrics available                        | Impact feels abstract             | Use qualitative evidence first and add metrics later             |
+| Too much JavaScript                         | Loses Astro performance advantage | Keep static content in Astro and use islands sparingly           |
+| Bilingual support added too early           | Slows MVP delivery                | Ship English first, prepare content structure, add Spanish later |
+| Copy has grammar issues                     | Hurts professional credibility    | Review English copy before publishing                            |
 
 ## 8. Roadmap Summary
 
-| Phase | Result | Priority |
-| --- | --- | --- |
-| Professional MVP | English homepage, complete and publishable | High |
-| Structured Content | Content collections prepared for scale and i18n | High |
-| Project Case Studies | Technical evidence and deeper narrative | Medium-high |
-| Spanish Version | `/es` localized version with SEO support | Medium |
-| Differentiators | AI practice, writing, metrics, timeline | Medium |
-| Continuous Quality | CI, accessibility, SEO, maintenance | Ongoing |
+| Phase                | Result                                          | Priority    |
+| -------------------- | ----------------------------------------------- | ----------- |
+| Professional MVP     | English homepage, complete and publishable      | High        |
+| Structured Content   | Content collections prepared for scale and i18n | High        |
+| Project Case Studies | Technical evidence and deeper narrative         | Medium-high |
+| Spanish Version      | `/es` localized version with SEO support        | Medium      |
+| Differentiators      | AI practice, writing, metrics, timeline         | Medium      |
+| Continuous Quality   | CI, accessibility, SEO, maintenance             | Ongoing     |
 
 ## 9. Recommended Next Decision
 

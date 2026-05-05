@@ -1,10 +1,10 @@
 ---
-import { render } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  homeEntry: CollectionEntry<'home'>;
-  project: CollectionEntry<'projects'>;
+  homeEntry: CollectionEntry<"home">;
+  project: CollectionEntry<"projects">;
   backHref: string;
 }
 
@@ -31,13 +31,19 @@ const copy = homeEntry.data.projectPage;
       <div>
         <p class="case-study__label">{copy.repositoryLabel}</p>
         <p>
-          {project.data.repositoryHref ? (
-            <a href={project.data.repositoryHref} target="_blank" rel="noreferrer">
-              {project.data.repositoryLabel}
-            </a>
-          ) : (
-            project.data.repositoryLabel
-          )}
+          {
+            project.data.repositoryHref ? (
+              <a
+                href={project.data.repositoryHref}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {project.data.repositoryLabel}
+              </a>
+            ) : (
+              project.data.repositoryLabel
+            )
+          }
         </p>
       </div>
       <div>
@@ -112,21 +118,28 @@ const copy = homeEntry.data.projectPage;
     </div>
   </section>
 
-  {project.data.links.length > 0 && (
-    <section class="section case-study__section">
-      <div class="section__header">
-        <p class="eyebrow">{copy.links.eyebrow}</p>
-        <h2>{copy.links.title}</h2>
-      </div>
-      <div class="card case-study__links">
-        {project.data.links.map((link) => (
-          <a class="button-secondary" href={link.href} target="_blank" rel="noreferrer">
-            {link.label}
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
+  {
+    project.data.links.length > 0 && (
+      <section class="section case-study__section">
+        <div class="section__header">
+          <p class="eyebrow">{copy.links.eyebrow}</p>
+          <h2>{copy.links.title}</h2>
+        </div>
+        <div class="card case-study__links">
+          {project.data.links.map((link) => (
+            <a
+              class="button-secondary"
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 </article>
 
 <style lang="scss">

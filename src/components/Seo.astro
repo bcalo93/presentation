@@ -1,6 +1,6 @@
 ---
-import { defaultLocale, locales, ogLocaleByLocale } from '@/i18n/config';
-import type { Locale } from '@/i18n/config';
+import { defaultLocale, locales, ogLocaleByLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
 interface Alternate {
   locale: Locale;
@@ -16,7 +16,9 @@ interface Props {
 }
 
 const { title, description, locale, canonicalPath, alternates } = Astro.props;
-const canonicalHref = Astro.site ? new URL(canonicalPath, Astro.site).toString() : canonicalPath;
+const canonicalHref = Astro.site
+  ? new URL(canonicalPath, Astro.site).toString()
+  : canonicalPath;
 ---
 
 <meta charset="UTF-8" />
@@ -25,26 +27,42 @@ const canonicalHref = Astro.site ? new URL(canonicalPath, Astro.site).toString()
 <meta name="generator" content={Astro.generator} />
 <meta name="robots" content="index,follow" />
 <link rel="canonical" href={canonicalHref} />
-{alternates.map((alternate) => (
-  <link
-    rel="alternate"
-    hreflang={alternate.locale}
-    href={Astro.site ? new URL(alternate.href, Astro.site).toString() : alternate.href}
-  />
-))}
+{
+  alternates.map((alternate) => (
+    <link
+      rel="alternate"
+      hreflang={alternate.locale}
+      href={
+        Astro.site
+          ? new URL(alternate.href, Astro.site).toString()
+          : alternate.href
+      }
+    />
+  ))
+}
 <link
   rel="alternate"
   hreflang="x-default"
-  href={Astro.site ? new URL(alternates.find((alternate) => alternate.locale === defaultLocale)?.href ?? '/', Astro.site).toString() : '/'}
+  href={Astro.site
+    ? new URL(
+        alternates.find((alternate) => alternate.locale === defaultLocale)
+          ?.href ?? "/",
+        Astro.site,
+      ).toString()
+    : "/"}
 />
 <meta property="og:type" content="website" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:locale" content={ogLocaleByLocale[locale]} />
 {Astro.site && <meta property="og:url" content={canonicalHref} />}
-{locales
-  .filter((item) => item !== locale)
-  .map((item) => <meta property="og:locale:alternate" content={ogLocaleByLocale[item]} />)}
+{
+  locales
+    .filter((item) => item !== locale)
+    .map((item) => (
+      <meta property="og:locale:alternate" content={ogLocaleByLocale[item]} />
+    ))
+}
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />

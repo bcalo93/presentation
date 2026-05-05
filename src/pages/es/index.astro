@@ -1,9 +1,9 @@
 ---
-import Home from '@/components/Home.astro';
-import Layout from '@/layouts/Layout.astro';
-import { getHomeEntry } from '@/utils/content';
+import Home from "@/components/Home.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getHomeEntry } from "@/utils/content";
 
-const locale = 'es';
+const locale = "es";
 const homeEntry = await getHomeEntry(locale);
 ---
 
@@ -12,7 +12,7 @@ const homeEntry = await getHomeEntry(locale);
   description={homeEntry.data.seo.description}
   locale={locale}
   canonicalPath="/es"
-  alternatePaths={{ en: '/', es: '/es' }}
+  alternatePaths={{ en: "/", es: "/es" }}
   page="home"
   homeEntry={homeEntry}
 >

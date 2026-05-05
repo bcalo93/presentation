@@ -1,8 +1,8 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  experiences: CollectionEntry<'experience'>[];
+  experiences: CollectionEntry<"experience">[];
   copy: {
     eyebrow: string;
     title: string;
@@ -21,24 +21,30 @@ const { experiences, copy } = Astro.props;
   </div>
 
   <div class="timeline">
-    {experiences.map((experience) => (
-      <article class="timeline__item card">
-        <div class="timeline__meta">
-          <p>{experience.data.period}</p>
-          <h3>{experience.data.company}</h3>
-          <p>{experience.data.roles.join(' • ')}</p>
-        </div>
-        <div class="timeline__content">
-          <p>{experience.data.summary}</p>
-          <ul class="timeline__highlights">
-            {experience.data.highlights.map((highlight) => <li>{highlight}</li>)}
-          </ul>
-          <div class="pill-list">
-            {experience.data.stack.map((item) => <span>{item}</span>)}
+    {
+      experiences.map((experience) => (
+        <article class="timeline__item card">
+          <div class="timeline__meta">
+            <p>{experience.data.period}</p>
+            <h3>{experience.data.company}</h3>
+            <p>{experience.data.roles.join(" • ")}</p>
           </div>
-        </div>
-      </article>
-    ))}
+          <div class="timeline__content">
+            <p>{experience.data.summary}</p>
+            <ul class="timeline__highlights">
+              {experience.data.highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+            <div class="pill-list">
+              {experience.data.stack.map((item) => (
+                <span>{item}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))
+    }
   </div>
 </section>
 

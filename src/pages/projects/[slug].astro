@@ -1,13 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import ProjectCaseStudy from '@/components/ProjectCaseStudy.astro';
-import { getHomeEntry, getLocalizedProjectByPath } from '@/utils/content';
-import { getProjectPath } from '@/i18n/config';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import ProjectCaseStudy from "@/components/ProjectCaseStudy.astro";
+import { getHomeEntry, getLocalizedProjectByPath } from "@/utils/content";
+import { getProjectPath } from "@/i18n/config";
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects', ({ data }) => data.locale === 'en');
+  const projects = await getCollection(
+    "projects",
+    ({ data }) => data.locale === "en",
+  );
 
   return projects.map((project) => ({
     params: { slug: project.data.path },
@@ -16,13 +19,16 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: CollectionEntry<"projects">;
 }
 
-const locale = 'en';
+const locale = "en";
 const { project } = Astro.props;
 const homeEntry = await getHomeEntry(locale);
-const localizedSpanishProject = await getLocalizedProjectByPath('es', project.data.path);
+const localizedSpanishProject = await getLocalizedProjectByPath(
+  "es",
+  project.data.path,
+);
 const title = `${project.data.title} | ${homeEntry.data.projectPage.eyebrow} | Brahian Calo`;
 const description = project.data.summary;
 ---
@@ -33,12 +39,18 @@ const description = project.data.summary;
   locale={locale}
   canonicalPath={getProjectPath(locale, project.data.path)}
   alternatePaths={{
-    en: getProjectPath('en', project.data.path),
-    es: localizedSpanishProject ? getProjectPath('es', localizedSpanishProject.data.path) : '/es',
+    en: getProjectPath("en", project.data.path),
+    es: localizedSpanishProject
+      ? getProjectPath("es", localizedSpanishProject.data.path)
+      : "/es",
   }}
   page="project"
   slug={project.data.path}
   homeEntry={homeEntry}
 >
-  <ProjectCaseStudy homeEntry={homeEntry} project={project} backHref="/#projects" />
+  <ProjectCaseStudy
+    homeEntry={homeEntry}
+    project={project}
+    backHref="/#projects"
+  />
 </Layout>
