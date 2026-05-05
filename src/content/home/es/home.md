@@ -8,10 +8,16 @@ nav:
   items:
     - id: home
       label: Inicio
+    - id: timeline
+      label: Timeline
     - id: experience
       label: Experiencia
+    - id: ai-practice
+      label: IA en práctica
     - id: projects
       label: Proyectos
+    - id: writing
+      label: Artículos
     - id: skills
       label: Skills
     - id: education
@@ -41,10 +47,23 @@ snapshot:
     - React, Express y Go
     - Foco en arquitectura, calidad y workflows asistidos por IA
     - Radicado en Uruguay
+timeline:
+  eyebrow: Timeline
+  title: Un mapa breve de carrera enfocado en evolución y alcance
+  description: Una lectura visual rápida de la progresión de roles, el contexto de plataforma y las responsabilidades actuales de liderazgo técnico.
+  currentLabel: Foco actual
+  transitionLabel: Evolución
 experience:
   eyebrow: Experiencia
   title: Evolución de roles respaldada por delivery y ownership técnico
   description: El foco está puesto en liderazgo hands-on, trabajo frontend escalable y mejoras concretas de calidad.
+aiPractice:
+  eyebrow: IA en práctica
+  title: Adopción práctica de IA apoyada en trabajo real de delivery
+  description: El objetivo no es la novedad. El foco está en usar IA donde mejora velocidad, calidad de revisión y claridad del equipo.
+  challengeLabel: Desafío
+  workflowLabel: Workflow
+  outcomeLabel: Resultado
 projects:
   eyebrow: Proyectos
   title: Proyectos que muestran intención de ingeniería, no solo resultado
@@ -53,6 +72,17 @@ projects:
   repositoryLabel: Repositorio
   nextStepLabel: Próximo paso
   readCaseStudyLabel: Leer caso de estudio
+writing:
+  eyebrow: Artículos
+  title: Notas técnicas cortas sobre arquitectura, delivery y uso de IA
+  description: Escribir de forma concisa ayuda a volver visible el criterio de ingeniería más allá de una línea en el CV.
+  readingTimeLabel: Tiempo de lectura
+  publishedLabel: Publicado
+  readArticleLabel: Leer artículo
+  viewAllLabel: Ver todos los artículos
+  pageTitle: Artículos técnicos y notas de ingeniería
+  pageDescription: Textos breves sobre arquitectura, sistemas frontend, prácticas de delivery e ingeniería asistida por IA.
+  backLabel: Volver al inicio
 skills:
   eyebrow: Skills
   title: Capacidades agrupadas según cómo se entrega realmente el trabajo

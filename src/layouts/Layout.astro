@@ -14,8 +14,9 @@ interface Props {
   locale: Locale;
   canonicalPath: string;
   alternatePaths: Record<Locale, string>;
-  page: 'home' | 'project';
+  page: 'home' | 'project' | 'writing';
   slug?: string;
+  switcherPath?: string;
   homeEntry: import('astro:content').CollectionEntry<'home'>;
 }
 
@@ -27,8 +28,10 @@ const {
   alternatePaths,
   page,
   slug,
+  switcherPath,
   homeEntry,
 } = Astro.props;
+const goatCounterDomain = import.meta.env.PUBLIC_GOATCOUNTER_DOMAIN;
 ---
 
 <!doctype html>
@@ -52,9 +55,16 @@ const {
         document.documentElement.dataset.theme = theme;
       })();
     </script>
+    {goatCounterDomain && (
+      <script
+        async
+        data-goatcounter={`https://${goatCounterDomain}/count`}
+        src="https://gc.zgo.at/count.js"
+      ></script>
+    )}
   </head>
   <body>
-    <Header locale={locale} page={page} slug={slug} homeEntry={homeEntry} />
+    <Header locale={locale} page={page} slug={slug} switcherPath={switcherPath} homeEntry={homeEntry} />
     <main class="page-shell">
       <slot />
     </main>

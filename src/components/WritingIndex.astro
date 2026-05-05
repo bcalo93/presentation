@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getWritingPath } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+  homeEntry: CollectionEntry<'home'>;
+  entries: CollectionEntry<'writing'>[];
+}
+
+const { locale, homeEntry, entries } = Astro.props;
+const copy = homeEntry.data.writing;
+---
+
+<section class="section writing-index" aria-labelledby="writing-index-title">
+  <div class="section__header">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1 id="writing-index-title">{copy.pageTitle}</h1>
+    <p>{copy.pageDescription}</p>
+  </div>
+
+  <div class="writing-index__actions">
+    <a class="button-secondary" href={locale === 'en' ? '/' : '/es'}>{copy.backLabel}</a>
+  </div>
+
+  <div class="card-grid writing-index__grid">
+    {entries.map((entry) => (
+      <article class="card writing-index__card">
+        <div class="writing-index__meta">
+          <span>{copy.publishedLabel}: {entry.data.publishedOn}</span>
+          <span>{copy.readingTimeLabel}: {entry.data.readingTime}</span>
+        </div>
+        <h2>{entry.data.title}</h2>
+        <p>{entry.data.summary}</p>
+        <div class="pill-list">
+          {entry.data.tags.map((tag) => <span>{tag}</span>)}
+        </div>
+        <a class="button" href={getWritingPath(locale, entry.data.path)}>{copy.readArticleLabel}</a>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style lang="scss">
+  .writing-index {
+    padding-top: 2rem;
+  }
+
+  .writing-index__actions {
+    margin-bottom: 1.5rem;
+  }
+
+  .writing-index__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .writing-index__card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .writing-index__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 820px) {
+    .writing-index__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

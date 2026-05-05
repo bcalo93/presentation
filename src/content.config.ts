@@ -17,6 +17,11 @@ const contactLink = z.object({
   value: z.string(),
 });
 
+const impactMetric = z.object({
+  value: z.string(),
+  label: z.string(),
+});
+
 const experience = defineCollection({
   type: 'content',
   schema: z.object({
@@ -24,10 +29,12 @@ const experience = defineCollection({
     order: z.number().int().nonnegative(),
     company: z.string(),
     period: z.string(),
+    timelineLabel: z.string(),
     roles: z.array(z.string()).min(1),
     summary: z.string(),
     highlights: z.array(z.string()).min(1),
     stack: z.array(z.string()).min(1),
+    impactMetrics: z.array(impactMetric).default([]),
   }),
 });
 
@@ -74,6 +81,36 @@ const education = defineCollection({
   }),
 });
 
+const aiCases = defineCollection({
+  type: 'content',
+  schema: z.object({
+    locale: sharedLocale,
+    order: z.number().int().nonnegative(),
+    title: z.string(),
+    summary: z.string(),
+    challenge: z.string(),
+    workflow: z.array(z.string()).min(1),
+    outcome: z.string(),
+    metrics: z.array(impactMetric).default([]),
+    tags: z.array(z.string()).min(1),
+  }),
+});
+
+const writing = defineCollection({
+  type: 'content',
+  schema: z.object({
+    locale: sharedLocale,
+    path: z.string(),
+    translationKey: z.string(),
+    order: z.number().int().nonnegative(),
+    title: z.string(),
+    summary: z.string(),
+    publishedOn: z.string(),
+    readingTime: z.string(),
+    tags: z.array(z.string()).min(1),
+  }),
+});
+
 const home = defineCollection({
   type: 'content',
   schema: z.object({
@@ -102,12 +139,30 @@ const home = defineCollection({
     snapshot: sectionIntro.extend({
       highlights: z.array(z.string()).min(1),
     }),
+    timeline: sectionIntro.extend({
+      currentLabel: z.string(),
+      transitionLabel: z.string(),
+    }),
     experience: sectionIntro,
+    aiPractice: sectionIntro.extend({
+      challengeLabel: z.string(),
+      workflowLabel: z.string(),
+      outcomeLabel: z.string(),
+    }),
     projects: sectionIntro.extend({
       problemLabel: z.string(),
       repositoryLabel: z.string(),
       nextStepLabel: z.string(),
       readCaseStudyLabel: z.string(),
+    }),
+    writing: sectionIntro.extend({
+      readingTimeLabel: z.string(),
+      publishedLabel: z.string(),
+      readArticleLabel: z.string(),
+      viewAllLabel: z.string(),
+      pageTitle: z.string(),
+      pageDescription: z.string(),
+      backLabel: z.string(),
     }),
     skills: sectionIntro.extend({
       groups: z
@@ -150,5 +205,7 @@ export const collections = {
   experience,
   projects,
   education,
+  aiCases,
   home,
+  writing,
 };

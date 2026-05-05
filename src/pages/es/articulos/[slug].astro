@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import WritingArticle from '@/components/WritingArticle.astro';
+import { getHomeEntry, getLocalizedWritingByTranslationKey } from '@/utils/content';
+import { getWritingPath } from '@/i18n/config';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('writing', ({ data }) => data.locale === 'es');
+
+  return entries.map((article) => ({
+    params: { slug: article.data.path },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: CollectionEntry<'writing'>;
+}
+
+const locale = 'es';
+const { article } = Astro.props;
+const homeEntry = await getHomeEntry(locale);
+const localizedEnglishArticle = await getLocalizedWritingByTranslationKey('en', article.data.translationKey);
+---
+
+<Layout
+  title={`${article.data.title} | Brahian Calo`}
+  description={article.data.summary}
+  locale={locale}
+  canonicalPath={getWritingPath(locale, article.data.path)}
+  alternatePaths={{
+    en: localizedEnglishArticle ? getWritingPath('en', localizedEnglishArticle.data.path) : getWritingPath('en'),
+    es: getWritingPath('es', article.data.path),
+  }}
+  page="writing"
+  slug={article.data.path}
+  switcherPath={localizedEnglishArticle ? getWritingPath('en', localizedEnglishArticle.data.path) : getWritingPath('en')}
+  homeEntry={homeEntry}
+>
+  <WritingArticle locale={locale} homeEntry={homeEntry} article={article} />
+</Layout>

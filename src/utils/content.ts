@@ -18,7 +18,12 @@ export async function getLocalizedProjectByPath(locale: Locale, path: string) {
   return entries[0];
 }
 
-export function sortCollection<T extends CollectionEntry<'experience' | 'projects' | 'education'>>(items: T[]) {
+export async function getLocalizedWritingByTranslationKey(locale: Locale, translationKey: string) {
+  const entries = await getCollection('writing', ({ data }) => data.locale === locale && data.translationKey === translationKey);
+  return entries[0];
+}
+
+export function sortCollection<T extends CollectionEntry<'experience' | 'projects' | 'education' | 'aiCases' | 'writing'>>(items: T[]) {
   items.sort((left, right) => left.data.order - right.data.order);
   return items;
 }

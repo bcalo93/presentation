@@ -30,6 +30,16 @@ const { experiences, copy } = Astro.props;
         </div>
         <div class="timeline__content">
           <p>{experience.data.summary}</p>
+          {experience.data.impactMetrics.length > 0 && (
+            <dl class="timeline__metrics">
+              {experience.data.impactMetrics.map((metric) => (
+                <div>
+                  <dt>{metric.value}</dt>
+                  <dd>{metric.label}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
           <ul class="timeline__highlights">
             {experience.data.highlights.map((highlight) => <li>{highlight}</li>)}
           </ul>
@@ -67,6 +77,29 @@ const { experiences, copy } = Astro.props;
   .timeline__content {
     display: grid;
     gap: 1rem;
+  }
+
+  .timeline__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .timeline__metrics div {
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface-alt);
+  }
+
+  .timeline__metrics dt {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .timeline__metrics dd {
+    margin: 0.35rem 0 0;
+    color: var(--color-text-muted);
   }
 
   .timeline__highlights {

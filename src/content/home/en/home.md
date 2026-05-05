@@ -8,10 +8,16 @@ nav:
   items:
     - id: home
       label: Home
+    - id: timeline
+      label: Timeline
     - id: experience
       label: Experience
+    - id: ai-practice
+      label: AI in Practice
     - id: projects
       label: Projects
+    - id: writing
+      label: Writing
     - id: skills
       label: Skills
     - id: education
@@ -41,10 +47,23 @@ snapshot:
     - React, Express, and Go
     - Focus on architecture, quality, and AI-assisted workflows
     - Based in Uruguay
+timeline:
+  eyebrow: Timeline
+  title: A small career map focused on progression and scope
+  description: A quick visual read of role progression, platform context, and current technical leadership responsibilities.
+  currentLabel: Current focus
+  transitionLabel: Progression
 experience:
   eyebrow: Experience
   title: Role progression backed by delivery and technical ownership
   description: The focus is on hands-on leadership, scalable frontend work, and measurable quality improvements.
+aiPractice:
+  eyebrow: AI in Practice
+  title: Practical AI adoption grounded in delivery work
+  description: The goal is not novelty. The focus is using AI where it meaningfully improves speed, review quality, and team clarity.
+  challengeLabel: Challenge
+  workflowLabel: Workflow
+  outcomeLabel: Outcome
 projects:
   eyebrow: Projects
   title: Projects that show engineering intent, not only output
@@ -53,6 +72,17 @@ projects:
   repositoryLabel: Repository
   nextStepLabel: Next step
   readCaseStudyLabel: Read case study
+writing:
+  eyebrow: Writing
+  title: Short technical notes about architecture, delivery, and AI usage
+  description: Concise writing helps make engineering judgment legible beyond a resume bullet list.
+  readingTimeLabel: Reading time
+  publishedLabel: Published
+  readArticleLabel: Read article
+  viewAllLabel: View all writing
+  pageTitle: Technical writing and engineering notes
+  pageDescription: Short essays about architecture, frontend systems, delivery practices, and practical AI-assisted engineering.
+  backLabel: Back to home
 skills:
   eyebrow: Skills
   title: Capabilities grouped by how the work is actually delivered

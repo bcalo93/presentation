@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  cases: CollectionEntry<'aiCases'>[];
+  copy: {
+    eyebrow: string;
+    title: string;
+    description?: string;
+    challengeLabel: string;
+    workflowLabel: string;
+    outcomeLabel: string;
+  };
+}
+
+const { cases, copy } = Astro.props;
+---
+
+<section class="section" id="ai-practice" aria-labelledby="ai-practice-title">
+  <div class="section__header">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ai-practice-title">{copy.title}</h2>
+    {copy.description && <p>{copy.description}</p>}
+  </div>
+
+  <div class="card-grid ai-grid">
+    {cases.map((item) => (
+      <article class="card ai-card">
+        <div class="ai-card__header">
+          <h3>{item.data.title}</h3>
+          <div class="pill-list">
+            {item.data.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </div>
+        <p>{item.data.summary}</p>
+        <p><strong>{copy.challengeLabel}:</strong> {item.data.challenge}</p>
+        <div class="ai-card__workflow">
+          <p><strong>{copy.workflowLabel}:</strong></p>
+          <ul>
+            {item.data.workflow.map((step) => <li>{step}</li>)}
+          </ul>
+        </div>
+        <p><strong>{copy.outcomeLabel}:</strong> {item.data.outcome}</p>
+        {item.data.metrics.length > 0 && (
+          <dl class="ai-card__metrics">
+            {item.data.metrics.map((metric) => (
+              <div>
+                <dt>{metric.value}</dt>
+                <dd>{metric.label}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </article>
+    ))}
+  </div>
+</section>
+
+<style lang="scss">
+  .ai-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ai-card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .ai-card__header {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .ai-card__workflow {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .ai-card__workflow ul {
+    display: grid;
+    gap: 0.7rem;
+    padding-left: 1rem;
+    list-style: disc;
+  }
+
+  .ai-card__workflow li,
+  .ai-card__metrics dd {
+    color: var(--color-text-muted);
+  }
+
+  .ai-card__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .ai-card__metrics div {
+    padding: 0.9rem 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .ai-card__metrics dt {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .ai-card__metrics dd {
+    margin: 0.35rem 0 0;
+  }
+
+  @media (max-width: 820px) {
+    .ai-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

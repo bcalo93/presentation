@@ -3,6 +3,7 @@ locale: es
 order: 1
 company: Mercado Libre
 period: 2022 - Presente
+timelineLabel: 2022 - Hoy
 roles:
   - Technical Lead
   - Senior Frontend Developer
@@ -17,4 +18,11 @@ stack:
   - JavaScript
   - Arquitectura
   - Workflows con IA
+impactMetrics:
+  - value: 4 años
+    label: Construyendo y evolucionando sistemas de producto en Mercado Libre
+  - value: 2 años
+    label: Liderando equipos sin alejarme de la implementación
+  - value: Adopción temprana de IA
+    label: Aplicada para reducir trabajo repetitivo y mejorar claridad técnica
 ---

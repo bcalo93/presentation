@@ -9,6 +9,11 @@ export const projectSegmentByLocale: Record<Locale, string> = {
   es: 'proyectos',
 };
 
+export const writingSegmentByLocale: Record<Locale, string> = {
+  en: 'writing',
+  es: 'articulos',
+};
+
 export const ogLocaleByLocale: Record<Locale, string> = {
   en: 'en_US',
   es: 'es_ES',
@@ -27,9 +32,19 @@ export function getProjectPath(locale: Locale, slug: string) {
   return locale === defaultLocale ? `/${segment}/${slug}` : `/${locale}/${segment}/${slug}`;
 }
 
-export function getSwitcherPath(locale: Locale, page: 'home' | 'project', slug?: string) {
+export function getWritingPath(locale: Locale, slug?: string) {
+  const segment = writingSegmentByLocale[locale];
+  const basePath = locale === defaultLocale ? `/${segment}` : `/${locale}/${segment}`;
+  return slug ? `${basePath}/${slug}` : basePath;
+}
+
+export function getSwitcherPath(locale: Locale, page: 'home' | 'project' | 'writing', slug?: string) {
   if (page === 'project' && slug) {
     return getProjectPath(locale, slug);
+  }
+
+  if (page === 'writing') {
+    return getWritingPath(locale, slug);
   }
 
   return getHomePath(locale);

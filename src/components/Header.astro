@@ -6,19 +6,20 @@ import type { Locale } from '@/i18n/config';
 
 interface Props {
   locale: Locale;
-  page: 'home' | 'project';
+  page: 'home' | 'project' | 'writing';
   slug?: string;
+  switcherPath?: string;
   homeEntry: CollectionEntry<'home'>;
 }
 
-const { locale, page, slug, homeEntry } = Astro.props;
+const { locale, page, slug, switcherPath, homeEntry } = Astro.props;
 const homeHref = getHomePath(locale);
 const navItems = homeEntry.data.nav.items.map((item) => ({
   ...item,
   href: page === 'home' ? `#${item.id}` : `${homeHref}#${item.id}`,
 }));
 const switchTo = locale === 'en' ? 'es' : 'en';
-const languageHref = getSwitcherPath(switchTo, page, slug);
+const languageHref = switcherPath ?? getSwitcherPath(switchTo, page, slug);
 ---
 
 <header class="site-header">

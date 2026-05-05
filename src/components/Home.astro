@@ -3,8 +3,11 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Hero from '@/components/sections/Hero.astro';
 import ProfessionalSnapshot from '@/components/sections/ProfessionalSnapshot.astro';
+import CareerTimeline from '@/components/sections/CareerTimeline.astro';
 import ExperienceTimeline from '@/components/sections/ExperienceTimeline.astro';
+import AiPracticeSection from '@/components/sections/AiPracticeSection.astro';
 import ProjectsSection from '@/components/sections/ProjectsSection.astro';
+import WritingSection from '@/components/sections/WritingSection.astro';
 import SkillsMatrix from '@/components/sections/SkillsMatrix.astro';
 import EducationSection from '@/components/sections/EducationSection.astro';
 import ContactSection from '@/components/sections/ContactSection.astro';
@@ -18,21 +21,28 @@ interface Props {
 
 const { locale, homeEntry } = Astro.props;
 
-const [experiences, projects, educationItems] = await Promise.all([
+const [experiences, aiCases, projects, educationItems, writingEntries] = await Promise.all([
   getCollection('experience', ({ data }) => data.locale === locale),
+  getCollection('aiCases', ({ data }) => data.locale === locale),
   getCollection('projects', ({ data }) => data.locale === locale),
   getCollection('education', ({ data }) => data.locale === locale),
+  getCollection('writing', ({ data }) => data.locale === locale),
 ]);
 
 sortCollection(experiences);
+sortCollection(aiCases);
 sortCollection(projects);
 sortCollection(educationItems);
+sortCollection(writingEntries);
 ---
 
 <Hero copy={homeEntry.data.hero} />
 <ProfessionalSnapshot copy={homeEntry.data.snapshot} />
+<CareerTimeline experiences={experiences} copy={homeEntry.data.timeline} />
 <ExperienceTimeline experiences={experiences} copy={homeEntry.data.experience} />
+<AiPracticeSection cases={aiCases} copy={homeEntry.data.aiPractice} />
 <ProjectsSection projects={projects} copy={homeEntry.data.projects} locale={locale} />
+<WritingSection entries={writingEntries.slice(0, 2)} copy={homeEntry.data.writing} locale={locale} />
 <SkillsMatrix copy={homeEntry.data.skills} />
 <EducationSection educationItems={educationItems} copy={homeEntry.data.education} />
 <ContactSection copy={homeEntry.data.contact} />

@@ -1,10 +1,11 @@
 import { getCollection } from 'astro:content';
-import { getHomePath, getProjectPath, locales } from '@/i18n/config';
+import { getHomePath, getProjectPath, getWritingPath, locales } from '@/i18n/config';
 
 const fallbackSite = 'https://example.com';
 
 export async function GET({ site }) {
   const projects = await getCollection('projects');
+  const writing = await getCollection('writing');
   const urls = new Set<string>();
   const origin = new URL(site?.toString() ?? fallbackSite);
 
@@ -14,6 +15,14 @@ export async function GET({ site }) {
 
   projects.forEach((project) => {
     urls.add(new URL(getProjectPath(project.data.locale, project.data.path), origin).toString());
+  });
+
+  locales.forEach((locale) => {
+    urls.add(new URL(getWritingPath(locale), origin).toString());
+  });
+
+  writing.forEach((article) => {
+    urls.add(new URL(getWritingPath(article.data.locale, article.data.path), origin).toString());
   });
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>

@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import WritingIndex from '@/components/WritingIndex.astro';
+import { getHomeEntry, sortCollection } from '@/utils/content';
+import { getWritingPath } from '@/i18n/config';
+
+const locale = 'en';
+const homeEntry = await getHomeEntry(locale);
+const entries = await getCollection('writing', ({ data }) => data.locale === locale);
+
+sortCollection(entries);
+---
+
+<Layout
+  title={`${homeEntry.data.writing.pageTitle} | Brahian Calo`}
+  description={homeEntry.data.writing.pageDescription}
+  locale={locale}
+  canonicalPath={getWritingPath(locale)}
+  alternatePaths={{ en: getWritingPath('en'), es: getWritingPath('es') }}
+  page="writing"
+  homeEntry={homeEntry}
+>
+  <WritingIndex locale={locale} homeEntry={homeEntry} entries={entries} />
+</Layout>

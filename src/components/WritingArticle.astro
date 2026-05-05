@@ -1,0 +1,82 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getWritingPath } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+
+interface Props {
+  locale: Locale;
+  homeEntry: CollectionEntry<'home'>;
+  article: CollectionEntry<'writing'>;
+}
+
+const { locale, homeEntry, article } = Astro.props;
+const { Content } = await render(article);
+const copy = homeEntry.data.writing;
+---
+
+<article class="writing-article">
+  <a class="writing-article__back" href={getWritingPath(locale)}>{copy.viewAllLabel}</a>
+
+  <header class="writing-article__header">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{article.data.title}</h1>
+    <p>{article.data.summary}</p>
+    <div class="writing-article__meta">
+      <span>{copy.publishedLabel}: {article.data.publishedOn}</span>
+      <span>{copy.readingTimeLabel}: {article.data.readingTime}</span>
+    </div>
+    <div class="pill-list">
+      {article.data.tags.map((tag) => <span>{tag}</span>)}
+    </div>
+  </header>
+
+  <section class="section writing-article__body">
+    <div class="card">
+      <Content />
+    </div>
+  </section>
+</article>
+
+<style lang="scss">
+  .writing-article {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .writing-article__back {
+    display: inline-flex;
+    width: fit-content;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .writing-article__header {
+    display: grid;
+    gap: 1rem;
+    max-width: 48rem;
+    padding-top: 1rem;
+  }
+
+  .writing-article__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .writing-article__body {
+    padding-top: 0;
+  }
+
+  .writing-article__body .card {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .writing-article__body :global(p) + :global(p) {
+    margin-top: 1rem;
+  }
+</style>
