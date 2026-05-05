@@ -1,46 +1,27 @@
-# Astro Starter Kit: Basics
+# Profile Presentation
 
-```sh
-yarn create astro@latest -- --template basics
-```
+Portfolio site built with Astro, Sass, and content collections for bilingual professional content.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command             | Action                                             |
+| :------------------ | :------------------------------------------------- |
+| `yarn dev`          | Start the local Astro dev server                   |
+| `yarn build`        | Build the static production site into `dist/`      |
+| `yarn preview`      | Preview the production build locally               |
+| `yarn lint`         | Run Astro and TypeScript checks                    |
+| `yarn format`       | Format the repository with Prettier                |
+| `yarn format:check` | Validate formatting without changing files         |
+| `yarn check:links`  | Check generated local links and anchors in `dist/` |
+| `yarn quality`      | Run the full continuous quality suite              |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Quality
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+The continuous quality baseline includes:
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Astro and TypeScript validation with `astro check`.
+- Consistent formatting with Prettier and the Astro plugin.
+- Broken local link detection against the generated build output.
+- GitHub Actions CI for pull requests and pushes to `main`.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `yarn install`             | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+For the full release checklist, see [docs/quality-checklist.md](/Users/bcalo/Documents/workspace/profile_presentation/docs/quality-checklist.md).

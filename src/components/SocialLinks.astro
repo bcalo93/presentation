@@ -1,15 +1,22 @@
 ---
-import { SOCIAL_LINKS } from '@/constants/socials';
+import { SOCIAL_LINKS } from "@/constants/socials";
 ---
 
 <ul class="social-links" aria-label="Social links">
-  {SOCIAL_LINKS.map((link) => (
-    <li>
-      <a href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
-        {link.label}
-      </a>
-    </li>
-  ))}
+  {
+    SOCIAL_LINKS.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={link.label}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
 </ul>
 
 <style lang="scss">

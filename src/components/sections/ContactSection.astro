@@ -16,11 +16,9 @@ interface Props {
 const { copy } = Astro.props;
 
 const hrefByLabel: Record<string, string> = {
-  Email: 'mailto:bcalo93@gmail.com',
-  LinkedIn: 'https://www.linkedin.com/in/brahian-calo-suhr/',
-  GitHub: 'https://github.com/bcalo93',
-  Resume: '/resume.pdf',
-  CV: '/resume.pdf',
+  Email: "mailto:bcalo93@gmail.com",
+  LinkedIn: "https://www.linkedin.com/in/brahian-calo-suhr/",
+  GitHub: "https://github.com/bcalo93",
 };
 ---
 
@@ -34,24 +32,43 @@ const hrefByLabel: Record<string, string> = {
   <div class="card contact-card">
     <div class="cta-row">
       <a class="button" href="mailto:bcalo93@gmail.com">{copy.emailCta}</a>
-      <a class="button-secondary" href="https://www.linkedin.com/in/brahian-calo-suhr/" target="_blank" rel="noreferrer">{copy.linkedinCta}</a>
+      <a
+        class="button-secondary"
+        href="https://www.linkedin.com/in/brahian-calo-suhr/"
+        target="_blank"
+        rel="noreferrer">{copy.linkedinCta}</a
+      >
     </div>
 
     <dl class="contact-list">
-      {copy.links.map((item) => (
-        <div>
-          <dt>{item.label}</dt>
-          <dd>
-            <a
-              href={hrefByLabel[item.label]}
-              target={hrefByLabel[item.label]?.startsWith('http') ? '_blank' : undefined}
-              rel={hrefByLabel[item.label]?.startsWith('http') ? 'noreferrer' : undefined}
-            >
-              {item.value}
-            </a>
-          </dd>
-        </div>
-      ))}
+      {
+        copy.links.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>
+              {hrefByLabel[item.label] ? (
+                <a
+                  href={hrefByLabel[item.label]}
+                  target={
+                    hrefByLabel[item.label]?.startsWith("http")
+                      ? "_blank"
+                      : undefined
+                  }
+                  rel={
+                    hrefByLabel[item.label]?.startsWith("http")
+                      ? "noreferrer"
+                      : undefined
+                  }
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <span>{item.value}</span>
+              )}
+            </dd>
+          </div>
+        ))
+      }
     </dl>
   </div>
 </section>

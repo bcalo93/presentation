@@ -1,10 +1,10 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { getProjectPath } from '@/i18n/config';
-import type { Locale } from '@/i18n/config';
+import type { CollectionEntry } from "astro:content";
+import { getProjectPath } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
 interface Props {
-  projects: CollectionEntry<'projects'>[];
+  projects: CollectionEntry<"projects">[];
   locale: Locale;
   copy: {
     eyebrow: string;
@@ -28,36 +28,55 @@ const { projects, locale, copy } = Astro.props;
   </div>
 
   <div class="card-grid projects-grid">
-    {projects.map((project) => (
-      <article class="card project-card">
-        <div class="project-card__header">
-          <h3>{project.data.title}</h3>
-          <span>{project.data.status}</span>
-        </div>
-        <p>{project.data.summary}</p>
-        <p><strong>{copy.problemLabel}:</strong> {project.data.problem}</p>
-        <p>
-          <strong>{copy.repositoryLabel}:</strong>{' '}
-          {project.data.repositoryHref ? (
-            <a href={project.data.repositoryHref} target="_blank" rel="noreferrer">
-              {project.data.repositoryLabel}
+    {
+      projects.map((project) => (
+        <article class="card project-card">
+          <div class="project-card__header">
+            <h3>{project.data.title}</h3>
+            <span>{project.data.status}</span>
+          </div>
+          <p>{project.data.summary}</p>
+          <p>
+            <strong>{copy.problemLabel}:</strong> {project.data.problem}
+          </p>
+          <p>
+            <strong>{copy.repositoryLabel}:</strong>{" "}
+            {project.data.repositoryHref ? (
+              <a
+                href={project.data.repositoryHref}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {project.data.repositoryLabel}
+              </a>
+            ) : (
+              project.data.repositoryLabel
+            )}
+          </p>
+          <div class="pill-list">
+            {project.data.stack.map((item) => (
+              <span>{item}</span>
+            ))}
+          </div>
+          <ul class="project-card__highlights">
+            {project.data.highlights.map((highlight) => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+          <p>
+            <strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}
+          </p>
+          <div class="project-card__actions">
+            <a
+              class="button-secondary"
+              href={getProjectPath(locale, project.data.path)}
+            >
+              {copy.readCaseStudyLabel}
             </a>
-          ) : (
-            project.data.repositoryLabel
-          )}
-        </p>
-        <div class="pill-list">
-          {project.data.stack.map((item) => <span>{item}</span>)}
-        </div>
-        <ul class="project-card__highlights">
-          {project.data.highlights.map((highlight) => <li>{highlight}</li>)}
-        </ul>
-        <p><strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}</p>
-        <div class="project-card__actions">
-          <a class="button-secondary" href={getProjectPath(locale, project.data.path)}>{copy.readCaseStudyLabel}</a>
-        </div>
-      </article>
-    ))}
+          </div>
+        </article>
+      ))
+    }
   </div>
 </section>
 

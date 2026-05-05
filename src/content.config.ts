@@ -1,6 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
-const sharedLocale = z.enum(['en', 'es']);
+const sharedLocale = z.enum(["en", "es"]);
 const navItem = z.object({
   id: z.string(),
   label: z.string(),
@@ -18,7 +18,7 @@ const contactLink = z.object({
 });
 
 const experience = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     locale: sharedLocale,
     order: z.number().int().nonnegative(),
@@ -32,7 +32,7 @@ const experience = defineCollection({
 });
 
 const projects = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     locale: sharedLocale,
     path: z.string(),
@@ -50,7 +50,7 @@ const projects = defineCollection({
     tradeoffs: z.array(z.string()).min(1),
     statusNote: z.string(),
     nextStep: z.string(),
-    nextStepsTitle: z.string().default('Next steps'),
+    nextStepsTitle: z.string().default("Next steps"),
     roadmap: z.array(z.string()).min(1),
     links: z
       .array(
@@ -64,7 +64,7 @@ const projects = defineCollection({
 });
 
 const education = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     locale: sharedLocale,
     order: z.number().int().nonnegative(),
@@ -75,7 +75,7 @@ const education = defineCollection({
 });
 
 const home = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     locale: sharedLocale,
     seo: z.object({

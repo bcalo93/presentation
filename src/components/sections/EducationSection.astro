@@ -1,8 +1,8 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  educationItems: CollectionEntry<'education'>[];
+  educationItems: CollectionEntry<"education">[];
   copy: {
     eyebrow: string;
     title: string;
@@ -20,13 +20,17 @@ const { educationItems, copy } = Astro.props;
     {copy.description && <p>{copy.description}</p>}
   </div>
 
-  {educationItems.map((item) => (
-    <article class="card education-card">
-      <h3>{item.data.institution}</h3>
-      {item.data.degree && <p class="education-card__degree">{item.data.degree}</p>}
-      <p>{item.data.summary}</p>
-    </article>
-  ))}
+  {
+    educationItems.map((item) => (
+      <article class="card education-card">
+        <h3>{item.data.institution}</h3>
+        {item.data.degree && (
+          <p class="education-card__degree">{item.data.degree}</p>
+        )}
+        <p>{item.data.summary}</p>
+      </article>
+    ))
+  }
 </section>
 
 <style lang="scss">

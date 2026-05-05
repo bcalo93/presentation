@@ -1,27 +1,27 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import Hero from '@/components/sections/Hero.astro';
-import ProfessionalSnapshot from '@/components/sections/ProfessionalSnapshot.astro';
-import ExperienceTimeline from '@/components/sections/ExperienceTimeline.astro';
-import ProjectsSection from '@/components/sections/ProjectsSection.astro';
-import SkillsMatrix from '@/components/sections/SkillsMatrix.astro';
-import EducationSection from '@/components/sections/EducationSection.astro';
-import ContactSection from '@/components/sections/ContactSection.astro';
-import type { Locale } from '@/i18n/config';
-import { sortCollection } from '@/utils/content';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Hero from "@/components/sections/Hero.astro";
+import ProfessionalSnapshot from "@/components/sections/ProfessionalSnapshot.astro";
+import ExperienceTimeline from "@/components/sections/ExperienceTimeline.astro";
+import ProjectsSection from "@/components/sections/ProjectsSection.astro";
+import SkillsMatrix from "@/components/sections/SkillsMatrix.astro";
+import EducationSection from "@/components/sections/EducationSection.astro";
+import ContactSection from "@/components/sections/ContactSection.astro";
+import type { Locale } from "@/i18n/config";
+import { sortCollection } from "@/utils/content";
 
 interface Props {
   locale: Locale;
-  homeEntry: CollectionEntry<'home'>;
+  homeEntry: CollectionEntry<"home">;
 }
 
 const { locale, homeEntry } = Astro.props;
 
 const [experiences, projects, educationItems] = await Promise.all([
-  getCollection('experience', ({ data }) => data.locale === locale),
-  getCollection('projects', ({ data }) => data.locale === locale),
-  getCollection('education', ({ data }) => data.locale === locale),
+  getCollection("experience", ({ data }) => data.locale === locale),
+  getCollection("projects", ({ data }) => data.locale === locale),
+  getCollection("education", ({ data }) => data.locale === locale),
 ]);
 
 sortCollection(experiences);
@@ -31,8 +31,18 @@ sortCollection(educationItems);
 
 <Hero copy={homeEntry.data.hero} />
 <ProfessionalSnapshot copy={homeEntry.data.snapshot} />
-<ExperienceTimeline experiences={experiences} copy={homeEntry.data.experience} />
-<ProjectsSection projects={projects} copy={homeEntry.data.projects} locale={locale} />
+<ExperienceTimeline
+  experiences={experiences}
+  copy={homeEntry.data.experience}
+/>
+<ProjectsSection
+  projects={projects}
+  copy={homeEntry.data.projects}
+  locale={locale}
+/>
 <SkillsMatrix copy={homeEntry.data.skills} />
-<EducationSection educationItems={educationItems} copy={homeEntry.data.education} />
+<EducationSection
+  educationItems={educationItems}
+  copy={homeEntry.data.education}
+/>
 <ContactSection copy={homeEntry.data.contact} />

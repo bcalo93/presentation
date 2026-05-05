@@ -1,18 +1,18 @@
 ---
-import { getHomePath } from '@/i18n/config';
-import type { CollectionEntry } from 'astro:content';
-import type { Locale } from '@/i18n/config';
+import { getHomePath } from "@/i18n/config";
+import type { CollectionEntry } from "astro:content";
+import type { Locale } from "@/i18n/config";
 
 interface Props {
   locale: Locale;
-  page: 'home' | 'project';
+  page: "home" | "project";
   slug?: string;
-  homeEntry: CollectionEntry<'home'>;
+  homeEntry: CollectionEntry<"home">;
 }
 
 const { locale, page, homeEntry } = Astro.props;
 const footerCopy = homeEntry.data.footer;
-const backHref = page === 'home' ? '#home' : getHomePath(locale);
+const backHref = page === "home" ? "#home" : getHomePath(locale);
 ---
 
 <footer class="site-footer">

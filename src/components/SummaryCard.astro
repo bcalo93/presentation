@@ -1,16 +1,16 @@
 ---
-import { Image } from 'astro:assets';
-import ProfilePhoto from '@/assets/profile_photo.png';
-import { calculateImageDimensions } from '@/utils/imageDimensions';
-import SocialLinks from '@/components/SocialLinks.astro';
+import { Image } from "astro:assets";
+import ProfilePhoto from "@/assets/profile_photo.png";
+import { calculateImageDimensions } from "@/utils/imageDimensions";
+import SocialLinks from "@/components/SocialLinks.astro";
 
-const imageDimensions = calculateImageDimensions(300, { aspectRatio: '4:5' });
+const imageDimensions = calculateImageDimensions(300, { aspectRatio: "4:5" });
 ---
 
 <section class="summary-card">
-  <Image 
-    src={ProfilePhoto} 
-    alt="Profile photo" 
+  <Image
+    src={ProfilePhoto}
+    alt="Profile photo"
     class="summary-card__profile-photo"
     {...imageDimensions}
   />

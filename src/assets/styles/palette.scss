@@ -10,7 +10,7 @@ $light-colors: (
   "secondary": #14b8a6,
   "shadow": rgba(21, 23, 26, 0.08),
   "header-bg": rgba(247, 248, 250, 0.92),
-  "header-border": rgba(221, 227, 234, 0.8)
+  "header-border": rgba(221, 227, 234, 0.8),
 );
 
 $dark-colors: (
@@ -25,7 +25,7 @@ $dark-colors: (
   "secondary": #2dd4bf,
   "shadow": rgba(15, 23, 42, 0.28),
   "header-bg": rgba(15, 23, 42, 0.92),
-  "header-border": rgba(51, 65, 85, 0.9)
+  "header-border": rgba(51, 65, 85, 0.9),
 );
 
 :root {
@@ -36,7 +36,7 @@ $dark-colors: (
   }
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   color-scheme: dark;
 
   @each $name, $color in $dark-colors {
