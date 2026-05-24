@@ -5,16 +5,16 @@ order: 2
 title: Splitit
 summary: A Kotlin Multiplatform expense-sharing project focused on payment-settlement logic, shared domain modeling, and a pragmatic WIP roadmap.
 status: WIP
-problem: Design reliable shared-expense and payment-optimization logic before investing in a visual product layer.
+problem: After a get-together with friends, splitting expenses turned into an awkward Excel exercise because using Splitwise meant asking everyone to create an account for a one-time need. Splitit came from wanting something simpler, clearer, and easier to use in real life.
 repositoryLabel: Public GitHub repository available
 stack:
   - Kotlin Multiplatform
   - Shared logic
   - Product modeling
 highlights:
-  - Focused on multiplatform architecture and reusable domain logic.
-  - Explores expense-sharing workflows, settlement optimization, and product-level tradeoffs.
-  - Useful as a case study in how a product can start from domain correctness instead of UI breadth.
+  - "Started from a real personal need: splitting group expenses fairly without asking everyone to create an account for a one-time use."
+  - The most important part of the project is the logic behind balances, settlements, and fair expense distribution.
+  - It was intentionally shaped as a native app idea, avoiding the overhead of deploying and maintaining a web product for a simple use case.
 constraints:
   - Expense sharing becomes messy quickly when the domain model is weak, so correctness matters early.
   - The project needs to prove shared business logic is worth the extra upfront modeling cost.
@@ -27,8 +27,8 @@ tradeoffs:
   - Investing in shared logic early slows visible UI progress but reduces the risk of platform-specific divergence later.
   - The roadmap favors core expense-sharing and optimization flows over broad feature coverage to keep the product model coherent.
   - Some implementation details are still intentionally fluid because the project is being shaped as a learning and architecture case study, not just a shipping checklist.
-statusNote: "Splitit is still in progress, but the current value is already clear: it demonstrates how multiplatform architecture and domain modeling decisions shape the product before the feature set is complete."
-nextStep: The next milestone is to make the payment-optimization logic more explicit through documented scenarios, stronger rule definitions, and broader automated verification.
+statusNote: "Splitit is still evolving, but its core idea is already clear: divide shared expenses fairly and accurately, without turning the process into another headache."
+nextStep: The next step is to keep strengthening the expense and settlement logic so the app can handle real scenarios clearly and reliably.
 nextStepsTitle: Next steps
 roadmap:
   - Expand the documented domain model with concrete examples of shared-expense, balance, and settlement scenarios.
@@ -37,8 +37,8 @@ roadmap:
   - Continue refining the multiplatform architecture around the product rules that are hardest to change later.
 ---
 
-Splitit is positioned as more than a clone exercise. The interesting part is the modeling work behind shared expenses: who paid, who owes, how balances evolve, and how payment obligations can be simplified between participants.
+Splitit started from a real situation: after a get-together with friends, splitting expenses ended up in a confusing Excel sheet because the available alternative required everyone to create an account for something that only needed to be solved once. The project came from wanting a simpler way to handle that moment without adding friction.
 
-That makes Kotlin Multiplatform a good fit for the project. The case for shared logic becomes much stronger when the hard part of the product lives in rules, optimization, and state transitions rather than in platform-specific rendering. The project is still a work in progress, but it already serves as a useful example of how architecture can support product clarity.
+That is also why the project made more sense as a native app than as a web product. For this kind of use case, deploying and maintaining a web application felt like overengineering. Installing an APK manually on my phone was enough, and it kept the project aligned with the level of simplicity I wanted.
 
-The current phase of the project prioritizes the foundation. Instead of maximizing feature count, the emphasis is on making the expense-sharing and settlement model dependable enough to support future UI decisions, more scenarios, and a cleaner roadmap. Because the present scope is centered on logic, this case study should be evaluated through domain design, technical decisions, and scenario coverage rather than through screenshots or a polished demo.
+The part I have enjoyed the most is the logic. That is where the project really starts to matter: who paid, who owes, how balances evolve, and how settlements can be simplified fairly. The current phase is still centered on making that logic dependable before expanding the product further.

@@ -1,8 +1,8 @@
 ---
 locale: en
 seo:
-  title: Brahian Calo | Technical Lead & Software Engineer
-  description: Technical Lead and Software Engineer with strong JavaScript and TypeScript experience across React and Express, Go backend experience, and practical AI adoption for engineering workflows.
+  title: Brahian Calo | Software Engineer
+  description: Software Engineer with a systems engineering background, focused on technical leadership, software architecture, and AI-first ways of working.
 nav:
   ariaLabel: Primary
   items:
@@ -24,39 +24,39 @@ nav:
     en: English
     es: Español
 hero:
-  role: Technical Lead & Software Engineer
-  lede: I build maintainable web applications with JavaScript, TypeScript, React, Express, and Go, while helping teams improve quality, architecture, and delivery through practical AI adoption.
+  role: Software Engineer
+  lede: Systems Engineer and Technical Lead. I lead technical work, shape software architecture, and stay close to the code when the problem deserves it.
   primaryCta: Contact me
   secondaryCta: View projects
   portraitAlt: Portrait of Brahian Calo
 snapshot:
   eyebrow: At a Glance
-  title: A compact overview of experience, leadership, and technical breadth
-  description: Seniority, technical breadth, and leadership experience should be obvious in seconds.
+  title: Experience, technical leadership, and hands-on work
+  description: A quick view of the experience I bring across engineering, technical leadership, and software architecture.
   highlights:
     - 9+ years building software
     - 4 years at Mercado Libre
     - 2 years as Technical Lead
     - JavaScript / TypeScript across frontend and backend
     - React, Express, and Go
-    - Focus on architecture, quality, and AI-assisted workflows
+    - Software architecture and hands-on technical leadership
     - Based in Uruguay
 experience:
   eyebrow: Experience
-  title: Role progression backed by delivery and technical ownership
-  description: The focus is on hands-on leadership, scalable frontend work, and measurable quality improvements.
+  title: Where I’ve worked and how I’ve grown technically
+  description: A look at the roles where I’ve kept building, leading, and developing a stronger point of view on software architecture.
 projects:
   eyebrow: Projects
-  title: Projects that show engineering intent, not only output
-  description: Even WIP work is valuable when it explains the problem, stack, current scope, and next decision.
+  title: Projects shaped by real needs and technical decisions
+  description: These projects reflect how I think about application design, software architecture, and building things with a clear reason behind them.
   problemLabel: Problem
   repositoryLabel: Repository
   nextStepLabel: Next step
   readCaseStudyLabel: Read case study
 skills:
   eyebrow: Skills
-  title: Capabilities grouped by how the work is actually delivered
-  description: This is intentionally organized around engineering outcomes instead of a flat technology cloud.
+  title: Tools, technical strengths, and how I work
+  description: A mix of the technologies I use and the way I approach building software, leading technical work, and improving how things get done.
   groups:
     - title: Frontend Engineering
       items:
@@ -105,12 +105,12 @@ skills:
         - Pragmatic decisions
 education:
   eyebrow: Education
-  title: Systems engineering foundations applied in practice
+  title: Where I built my formal foundation in systems engineering
   description: ""
 contact:
   eyebrow: Contact
-  title: Interested in technical leadership, product engineering, or AI-assisted workflows?
-  description: Let's connect.
+  title: Open to connecting with people in tech
+  description: If you’d like to connect, exchange ideas, or talk about software, architecture, or AI-first ways of working, feel free to reach out.
   emailCta: Send email
   linkedinCta: Open LinkedIn
   links:
@@ -123,7 +123,7 @@ contact:
     - label: Resume
       value: Available once public/resume.pdf is added
 footer:
-  blurb: Based in Uruguay. Open to technical leadership and product engineering opportunities.
+  blurb: Based in Uruguay and always open to connecting with people in tech.
   backToTop: Back to top
 projectPage:
   backToProjects: Back to projects

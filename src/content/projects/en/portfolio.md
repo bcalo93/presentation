@@ -3,9 +3,9 @@ locale: en
 path: portfolio
 order: 1
 title: Portfolio
-summary: A fast Astro portfolio designed as a product surface for hiring flows, structured content, and future bilingual expansion.
+summary: A fast Astro portfolio built as a technical point of contact, with structured content, clear navigation, and room to grow over time.
 status: Active
-problem: Present a professional profile through a fast, content-driven site that communicates technical depth and credibility.
+problem: Create a portfolio that works as a clear introduction, a technical presentation, and a place to connect with peers without turning it into an overbuilt personal website.
 repositoryLabel: This repository
 stack:
   - Astro
@@ -13,11 +13,11 @@ stack:
   - Sass
   - SEO
 highlights:
-  - Single-page architecture optimized for hiring flows.
-  - Responsive sections with strong information hierarchy.
-  - Prepared for future bilingual content without overbuilding the MVP.
+  - Designed as a focused point of contact rather than a generic personal landing page.
+  - Structured to present experience, projects, and technical thinking clearly.
+  - Built to grow over time, including future bilingual content, without overengineering the first version.
 constraints:
-  - The site needed to stay fast and easy to scan during recruiter and hiring-manager flows.
+  - The site needed to stay fast and easy to scan without losing technical depth.
   - The MVP had to launch in English while keeping the structure ready for a later Spanish version.
   - Most content is static, so extra client-side JavaScript would add cost without improving the core experience.
 architecture:
@@ -28,8 +28,8 @@ tradeoffs:
   - A single-page homepage was chosen for speed and clarity even though it limits how much detail can live above the fold.
   - React islands were intentionally avoided in the MVP to preserve performance and reduce maintenance overhead.
   - The content model was made future-ready for i18n without building a full language switcher before Spanish content exists.
-statusNote: The portfolio already works as a professional homepage and now expands into project case studies so the work shows reasoning, constraints, and technical decisions.
-nextStep: The most likely future iteration is to deepen the portfolio as a long-term professional artifact without adding noise to the hiring flow.
+statusNote: The portfolio already works as a solid presentation layer and continues to evolve as a longer-term technical artifact.
+nextStep: The next step is to keep improving the content depth and project case studies while preserving the clarity of the main experience.
 nextStepsTitle: Future iterations
 roadmap:
   - Add Spanish content and localized routing once the English information architecture is stable.
@@ -37,8 +37,8 @@ roadmap:
   - Keep evolving project case studies so the portfolio shows reasoning and outcomes instead of becoming a static profile page.
 ---
 
-This portfolio is intentionally treated as a product, not just a personal landing page. The goal is to help a recruiter qualify the profile quickly while still giving a technical evaluator enough context to inspect engineering judgment.
+This portfolio was built as a clear point of contact and presentation, especially for people in tech. The idea was not to create a decorative personal site, but something simple, intentional, and useful for showing how I work and what I care about technically.
 
-Phase 1 focused on turning the site into a credible professional MVP. Phase 2 moved the project toward a content architecture that can scale with more experience entries, more case studies, and a future bilingual version. This phase adds project details so the portfolio itself demonstrates how product goals, content modeling, and performance concerns were balanced.
+Astro was a good fit because most of the site is content-driven and does not need unnecessary client-side complexity. That made it easier to keep the experience fast, structured, and ready to grow without adding noise.
 
-The central design choice was to keep the homepage concise and scannable, then use dedicated case-study pages for technical depth. That preserves the hiring flow on `/` while creating room for architecture, trade-offs, and roadmap decisions where they belong.
+The homepage stays concise, while project pages create room for more detail around architecture, trade-offs, and implementation decisions. That balance matters to me because I want the portfolio to feel clear at first glance, but still rewarding if someone wants to look deeper.
