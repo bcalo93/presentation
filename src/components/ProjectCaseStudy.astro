@@ -11,6 +11,7 @@ interface Props {
 const { homeEntry, project, backHref } = Astro.props;
 const { Content } = await render(project);
 const copy = homeEntry.data.projectPage;
+const hasNextStep = Boolean(project.data.nextStep);
 ---
 
 <article class="case-study">
@@ -102,20 +103,30 @@ const copy = homeEntry.data.projectPage;
     </div>
   </section>
 
-  <section class="section case-study__grid">
+  <section
+    class:list={[
+      "section",
+      "case-study__grid",
+      !hasNextStep && "case-study__grid--single",
+    ]}
+  >
     <div class="card">
       <p class="eyebrow">{copy.status.eyebrow}</p>
       <h2>{copy.status.title}</h2>
       <p>{project.data.statusNote}</p>
     </div>
-    <div class="card">
-      <p class="eyebrow">{project.data.nextStepsTitle}</p>
-      <h2>{copy.nextStepsHeading}</h2>
-      {project.data.nextStep && <p>{project.data.nextStep}</p>}
-      <ul class="case-study__list">
-        {project.data.roadmap.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
+    {
+      hasNextStep && (
+        <div class="card">
+          <p class="eyebrow">{project.data.nextStepsTitle}</p>
+          <h2>{copy.nextStepsHeading}</h2>
+          <p>{project.data.nextStep}</p>
+          <ul class="case-study__list">
+            {project.data.roadmap.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      )
+    }
   </section>
 
   {
@@ -213,8 +224,14 @@ const copy = homeEntry.data.projectPage;
   }
 
   .case-study__grid .card {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .case-study__grid--single {
+    grid-template-columns: 1fr;
   }
 
   .case-study__links {
