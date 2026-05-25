@@ -1,5 +1,4 @@
 ---
-import { getHomePath } from "@/i18n/config";
 import type { CollectionEntry } from "astro:content";
 import type { Locale } from "@/i18n/config";
 
@@ -10,9 +9,9 @@ interface Props {
   homeEntry: CollectionEntry<"home">;
 }
 
-const { locale, page, homeEntry } = Astro.props;
+const { page, homeEntry } = Astro.props;
 const footerCopy = homeEntry.data.footer;
-const backHref = page === "home" ? "#home" : getHomePath(locale);
+const backHref = page === "home" ? "#home" : "#";
 ---
 
 <footer class="site-footer">
