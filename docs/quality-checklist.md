@@ -7,7 +7,7 @@ Use this checklist before publishing major content or design updates.
 Run the full validation suite locally:
 
 ```sh
-yarn quality
+pnpm quality
 ```
 
 This covers:
@@ -21,7 +21,7 @@ This covers:
 
 Run these checks on the preview deployment or a local production preview:
 
-1. Start a local preview with `yarn build && yarn preview`.
+1. Start a local preview with `pnpm build && pnpm preview`.
 2. Open Chrome DevTools Lighthouse and run:
    - Performance
    - Accessibility

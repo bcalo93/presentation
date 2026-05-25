@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:links": "node ./scripts/check-links.mjs",
-    "quality": "yarn lint && yarn format:check && yarn build && yarn check:links"
+    "quality": "pnpm lint && pnpm format:check && pnpm build && pnpm check:links"
   },
   "dependencies": {
     "astro": "^5.16.6",
