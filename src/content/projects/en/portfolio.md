@@ -4,7 +4,7 @@ path: portfolio
 order: 1
 title: Portfolio
 summary: A fast Astro portfolio built as a technical point of contact, with structured content, clear navigation, and room to grow over time.
-status: Active
+status: Completed
 problem: Create a portfolio that works as a clear introduction, a technical presentation, and a place to connect with peers without turning it into an overbuilt personal website.
 repositoryLabel: This repository
 stack:
@@ -29,7 +29,6 @@ tradeoffs:
   - React islands were intentionally avoided in the MVP to preserve performance and reduce maintenance overhead.
   - The content model was made future-ready for i18n without building a full language switcher before Spanish content exists.
 statusNote: The portfolio already works as a solid presentation layer and continues to evolve as a longer-term technical artifact.
-nextStep: The next step is to keep improving the content depth and project case studies while preserving the clarity of the main experience.
 nextStepsTitle: Future iterations
 roadmap:
   - Add Spanish content and localized routing once the English information architecture is stable.

@@ -111,7 +111,7 @@ const copy = homeEntry.data.projectPage;
     <div class="card">
       <p class="eyebrow">{project.data.nextStepsTitle}</p>
       <h2>{copy.nextStepsHeading}</h2>
-      <p>{project.data.nextStep}</p>
+      {project.data.nextStep && <p>{project.data.nextStep}</p>}
       <ul class="case-study__list">
         {project.data.roadmap.map((item) => <li>{item}</li>)}
       </ul>

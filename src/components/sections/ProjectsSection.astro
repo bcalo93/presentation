@@ -63,9 +63,9 @@ const { projects, locale, copy } = Astro.props;
               <li>{highlight}</li>
             ))}
           </ul>
-          <p>
+          {project.data.nextStep && <p>
             <strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}
-          </p>
+          </p>}
           <div class="project-card__actions">
             <a
               class="button-secondary"
@@ -88,6 +88,7 @@ const { projects, locale, copy } = Astro.props;
   .project-card {
     display: grid;
     gap: 1rem;
+    height: 100%;
   }
 
   .project-card__header {
@@ -120,6 +121,7 @@ const { projects, locale, copy } = Astro.props;
   .project-card__actions {
     display: flex;
     justify-content: flex-start;
+    margin-top: auto;
   }
 
   @media (max-width: 820px) {

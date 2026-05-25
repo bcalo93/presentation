@@ -49,7 +49,7 @@ const projects = defineCollection({
     architecture: z.array(z.string()).min(1),
     tradeoffs: z.array(z.string()).min(1),
     statusNote: z.string(),
-    nextStep: z.string(),
+    nextStep: z.string().optional(),
     nextStepsTitle: z.string().default("Next steps"),
     roadmap: z.array(z.string()).min(1),
     links: z

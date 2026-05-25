@@ -142,7 +142,7 @@ projectPage:
     title: Cómo está estructurada la solución
   tradeoffs:
     eyebrow: Trade-offs
-    title: Decisiones deliberadas detrás de la dirección actual
+    title: Decisiones detrás de la dirección actual
   status:
     eyebrow: Estado
     title: Estado actual
