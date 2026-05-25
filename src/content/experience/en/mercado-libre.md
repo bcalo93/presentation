@@ -6,11 +6,11 @@ period: 2022 - Present
 roles:
   - Technical Lead
   - Senior Frontend Developer
-summary: Led frontend initiatives while staying close to implementation, architecture, delivery quality, and practical AI adoption inside engineering workflows.
+summary: I became a key part of technical definition and software architecture across the systems we build, helping the team adopt new tools and ways of working before they became standard.
 highlights:
-  - Improved team practices, code quality, and delivery consistency.
-  - Drove early AI usage to reduce repetitive work and support better engineering decisions.
-  - Worked across cross-functional teams on frontend architecture and product execution.
+  - Helped introduce end-to-end testing with Playwright as a practical step toward stronger quality and confidence.
+  - Pushed early adoption of AI agents by sharing concrete use cases and showing where they could add real value.
+  - Contributed to architecture and technical decisions across the full chain, from backend services to frontend applications.
 stack:
   - React
   - TypeScript

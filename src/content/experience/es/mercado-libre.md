@@ -4,17 +4,17 @@ order: 1
 company: Mercado Libre
 period: 2022 - Presente
 roles:
-  - Technical Lead
+  - Líder técnico
   - Senior Frontend Developer
-summary: Lideré iniciativas frontend manteniéndome cerca de la implementación, la arquitectura, la calidad del delivery y la adopción práctica de IA dentro de workflows de ingeniería.
+summary: Me convertí en una parte clave de la definición técnica y la arquitectura de software de los sistemas que construimos, ayudando al equipo a adoptar nuevas herramientas y formas de trabajo antes de que se volvieran estándar.
 highlights:
-  - Mejoré prácticas de equipo, calidad de código y consistencia de delivery.
-  - Impulsé usos tempranos de IA para reducir trabajo repetitivo y apoyar mejores decisiones de ingeniería.
-  - Trabajé con equipos cross-functional en arquitectura frontend y ejecución de producto.
+  - Ayudé a introducir pruebas end-to-end con Playwright como un paso práctico para ganar más calidad y confianza.
+  - Impulsé la adopción temprana de agentes de IA compartiendo casos de uso concretos y mostrando dónde podían aportar valor real.
+  - Contribuí a la arquitectura y a las decisiones técnicas de toda la cadena, desde servicios backend hasta aplicaciones frontend.
 stack:
   - React
   - TypeScript
   - JavaScript
   - Arquitectura
-  - Workflows con IA
+  - Agentes de IA
 ---

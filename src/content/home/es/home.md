@@ -1,8 +1,8 @@
 ---
 locale: es
 seo:
-  title: Brahian Calo | Technical Lead y Software Engineer
-  description: Technical Lead y Software Engineer con experiencia sólida en JavaScript y TypeScript sobre React y Express, experiencia backend con Go y adopción práctica de IA para workflows de ingeniería.
+  title: Brahian Calo | Software Engineer
+  description: Software Engineer con formación en ingeniería de sistemas, enfocado en liderazgo técnico, arquitectura de software y una forma de trabajo AI-first.
 nav:
   ariaLabel: Principal
   items:
@@ -13,7 +13,7 @@ nav:
     - id: projects
       label: Proyectos
     - id: skills
-      label: Skills
+      label: Habilidades
     - id: education
       label: Educación
     - id: contact
@@ -24,39 +24,39 @@ nav:
     en: English
     es: Español
 hero:
-  role: Technical Lead y Software Engineer
-  lede: Desarrollo aplicaciones web mantenibles con JavaScript, TypeScript, React, Express y Go, mientras ayudo a los equipos a mejorar calidad, arquitectura y delivery mediante una adopción práctica de IA.
+  role: Software Engineer
+  lede: Ingeniero de Sistemas y líder técnico. Lidero el trabajo técnico, doy forma a la arquitectura de software y me mantengo cerca del código cuando el problema lo amerita.
   primaryCta: Contactarme
   secondaryCta: Ver proyectos
   portraitAlt: Retrato de Brahian Calo
 snapshot:
   eyebrow: Resumen
-  title: Una vista compacta de experiencia, liderazgo y amplitud técnica
-  description: La seniority, la amplitud técnica y la experiencia liderando deberían ser evidentes en segundos.
+  title: Experiencia, liderazgo técnico y trabajo cercano a la implementación
+  description: Una vista rápida de la experiencia que aporto en ingeniería, liderazgo técnico y arquitectura de software.
   highlights:
     - Más de 9 años desarrollando software
     - 4 años en Mercado Libre
-    - 2 años como Technical Lead
+    - 2 años como líder técnico
     - JavaScript / TypeScript en frontend y backend
     - React, Express y Go
-    - Foco en arquitectura, calidad y workflows asistidos por IA
+    - Arquitectura de software y liderazgo técnico cercano a la implementación
     - Radicado en Uruguay
 experience:
   eyebrow: Experiencia
-  title: Evolución de roles respaldada por delivery y ownership técnico
-  description: El foco está puesto en liderazgo hands-on, trabajo frontend escalable y mejoras concretas de calidad.
+  title: Dónde trabajé y cómo fui creciendo técnicamente
+  description: Un recorrido por los roles en los que seguí construyendo, liderando y desarrollando un punto de vista más sólido sobre arquitectura de software.
 projects:
   eyebrow: Proyectos
-  title: Proyectos que muestran intención de ingeniería, no solo resultado
-  description: Incluso el trabajo en progreso aporta valor cuando explica el problema, el stack, el alcance actual y la próxima decisión.
+  title: Proyectos marcados por necesidades reales y decisiones técnicas
+  description: Estos proyectos reflejan cómo pienso el diseño de aplicaciones, la arquitectura de software y la construcción de soluciones con una razón clara detrás.
   problemLabel: Problema
   repositoryLabel: Repositorio
   nextStepLabel: Próximo paso
   readCaseStudyLabel: Leer caso de estudio
 skills:
-  eyebrow: Skills
-  title: Capacidades agrupadas según cómo se entrega realmente el trabajo
-  description: Esto está organizado deliberadamente alrededor de resultados de ingeniería, no como una nube plana de tecnologías.
+  eyebrow: Habilidades
+  title: Herramientas, fortalezas técnicas y mi forma de trabajar
+  description: Una mezcla de las tecnologías que uso y de cómo encaro la construcción de software, el liderazgo técnico y la mejora de cómo se hacen las cosas.
   groups:
     - title: Ingeniería Frontend
       items:
@@ -67,7 +67,7 @@ skills:
         - HTML
         - CSS/Sass
         - Accesibilidad
-        - Performance
+        - Rendimiento
     - title: Ingeniería Backend
       items:
         - Express
@@ -75,7 +75,7 @@ skills:
         - Go
         - Diseño de APIs
         - Servicios backend
-        - Desarrollo orientado a performance
+        - Desarrollo orientado al rendimiento
     - title: Arquitectura
       items:
         - Patrones de diseño
@@ -85,19 +85,19 @@ skills:
         - Sistemas frontend escalables
     - title: Liderazgo Técnico
       items:
-        - Mentoring
-        - Code review
+        - Mentoría
+        - Revisión de código
         - Prácticas de equipo
-        - Calidad de delivery
+        - Calidad de entrega
         - Mejora de procesos
     - title: Ingeniería Asistida por IA
       items:
         - Adopción de IA
-        - Automatización de workflows
+        - Automatización de flujos de trabajo
         - Aceleración del desarrollo
         - Soporte de calidad
-        - Iteración de prompts
-    - title: Product Thinking
+        - Refinamiento de prompts
+    - title: Producto
       items:
         - Experiencia de usuario
         - Priorización
@@ -105,12 +105,12 @@ skills:
         - Decisiones pragmáticas
 education:
   eyebrow: Educación
-  title: Fundamentos de ingeniería de sistemas aplicados en la práctica
+  title: Dónde construí mi base formal en ingeniería de sistemas
   description: ""
 contact:
   eyebrow: Contacto
-  title: ¿Te interesa conversar sobre liderazgo técnico, product engineering o workflows asistidos por IA?
-  description: Conectemos.
+  title: Abierto a conectar con gente de tecnología
+  description: Si te interesa conectar, intercambiar ideas o conversar sobre software, arquitectura o una forma de trabajo AI-first, no dudes en escribirme.
   emailCta: Enviar email
   linkedinCta: Abrir LinkedIn
   links:
@@ -123,14 +123,14 @@ contact:
     - label: CV
       value: Disponible cuando se agregue public/resume.pdf
 footer:
-  blurb: Radicado en Uruguay. Abierto a oportunidades de liderazgo técnico y product engineering.
+  blurb: Radicado en Uruguay y siempre abierto a conectar con gente de tecnología.
   backToTop: Volver arriba
 projectPage:
   backToProjects: Volver a proyectos
-  eyebrow: Caso de estudio del proyecto
+  eyebrow: Detalle del proyecto
   statusLabel: Estado
   repositoryLabel: Repositorio
-  stackLabel: Stack
+  stackLabel: Tecnologías
   problem:
     eyebrow: Problema
     title: Qué necesitaba resolver este proyecto
@@ -142,12 +142,12 @@ projectPage:
     title: Cómo está estructurada la solución
   tradeoffs:
     eyebrow: Trade-offs
-    title: Decisiones deliberadas detrás de la dirección actual
+    title: Decisiones detrás de la dirección actual
   status:
     eyebrow: Estado
     title: Estado actual
   links:
-    eyebrow: Links
+    eyebrow: Enlaces
     title: Referencias del proyecto
   nextStepsHeading: Qué sigue
 ---
