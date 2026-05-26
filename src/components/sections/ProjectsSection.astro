@@ -68,9 +68,11 @@ const { projects, locale, copy } = Astro.props;
                 <li>{highlight}</li>
               ))}
             </ul>
-            {project.data.nextStep && <p class="project-card__next-step">
-              <strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}
-            </p>}
+            {project.data.nextStep && (
+              <p class="project-card__next-step">
+                <strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}
+              </p>
+            )}
           </div>
           <div class="project-card__actions">
             <a

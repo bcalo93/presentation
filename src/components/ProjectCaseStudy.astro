@@ -122,7 +122,9 @@ const hasNextStep = Boolean(project.data.nextStep);
           <h2>{copy.nextStepsHeading}</h2>
           <p>{project.data.nextStep}</p>
           <ul class="case-study__list">
-            {project.data.roadmap.map((item) => <li>{item}</li>)}
+            {project.data.roadmap.map((item) => (
+              <li>{item}</li>
+            ))}
           </ul>
         </div>
       )
