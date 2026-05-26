@@ -1,14 +1,14 @@
 # Profile Presentation
 
-Portfolio personal construido con Astro y Sass para presentar experiencia profesional, proyectos y perfil técnico en dos idiomas. El proyecto prioriza contenido estructurado, buenas bases de SEO y una arquitectura simple de mantener para seguir iterando el sitio como producto.
+Personal portfolio built with Astro and Sass to present professional experience, projects, and a technical profile in two languages. The project prioritizes structured content, solid SEO foundations, and a simple architecture that is easy to maintain as the site evolves.
 
 ## Purpose
 
-Este sitio funciona como portfolio profesional y también como caso práctico de implementación frontend. Reúne contenido editorial en colecciones de Astro, páginas de proyecto con enfoque de case study, y una estructura preparada para mantener versiones en inglés y español sin duplicar la lógica de presentación.
+This site works both as a professional portfolio and as a frontend implementation case study. It brings together editorial content in Astro collections, project pages structured as case studies, and an architecture prepared to maintain English and Spanish versions without duplicating presentation logic.
 
 ## Setup
 
-Este repositorio usa `pnpm` como package manager.
+This repository uses `pnpm` as its package manager.
 
 ```sh
 pnpm install
@@ -40,9 +40,9 @@ pnpm install
 
 ## Localization
 
-La localización se resuelve con dos locales definidos en [`src/i18n/config.ts`](/Users/bcalo/Documents/workspace/profile_presentation/src/i18n/config.ts): `en` y `es`. Inglés es el locale por defecto, por eso la home principal vive en `/` y la versión en español en `/es`.
+Localization is handled through two locales defined in [`src/i18n/config.ts`](/Users/bcalo/Documents/workspace/profile_presentation/src/i18n/config.ts): `en` and `es`. English is the default locale, so the main homepage lives at `/` and the Spanish version lives at `/es`.
 
-El contenido localizado está organizado por carpetas dentro de [`src/content`](/Users/bcalo/Documents/workspace/profile_presentation/src/content), por ejemplo `src/content/home/en` y `src/content/home/es`. Las rutas de proyectos también cambian por idioma: `projects` para inglés y `proyectos` para español.
+Localized content is organized into folders inside [`src/content`](/Users/bcalo/Documents/workspace/profile_presentation/src/content), for example `src/content/home/en` and `src/content/home/es`. Project routes also change by language: `projects` for English and `proyectos` for Spanish.
 
 ## Quality
 
