@@ -40,8 +40,7 @@ Run these checks on the preview deployment or a local production preview:
 5. Confirm portfolio content is current:
    - experience dates,
    - project summaries,
-   - contact links,
-   - resume availability.
+   - contact links
 
 ## CI baseline
 
