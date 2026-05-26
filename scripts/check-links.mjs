@@ -119,7 +119,7 @@ function shouldSkipLink(value) {
 async function main() {
   if (!(await pathExists(distDir))) {
     console.error(
-      "dist/ was not found. Run `yarn build` before checking links.",
+      "dist/ was not found. Run `pnpm build` before checking links.",
     );
     process.exit(1);
   }
