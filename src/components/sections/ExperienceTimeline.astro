@@ -31,7 +31,7 @@ const { experiences, copy } = Astro.props;
           </div>
           <div class="timeline__content">
             <p>{experience.data.summary}</p>
-            <ul class="timeline__highlights">
+            <ul class="list-muted timeline__highlights">
               {experience.data.highlights.map((highlight) => (
                 <li>{highlight}</li>
               ))}
@@ -49,45 +49,36 @@ const { experiences, copy } = Astro.props;
 </section>
 
 <style lang="scss">
+  @use "../../assets/styles/index" as *;
+
   .timeline {
     display: grid;
-    gap: 1.25rem;
+    gap: space(lg);
   }
 
   .timeline__item {
     display: grid;
     grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-    gap: 1.5rem;
+    gap: space(2xl);
   }
 
   .timeline__meta {
     display: grid;
     align-items: center;
-    gap: 0.4rem;
+    gap: space(xs);
   }
 
   .timeline__meta p:first-child {
-    color: var(--color-primary);
+    color: color(primary);
     font-weight: 600;
   }
 
   .timeline__content {
     display: grid;
-    gap: 1rem;
+    gap: space(md);
   }
 
-  .timeline__highlights {
-    display: grid;
-    gap: 0.7rem;
-    padding-left: 1rem;
-    list-style: disc;
-  }
-
-  .timeline__highlights li {
-    color: var(--color-text-muted);
-  }
-
-  @media (max-width: 720px) {
+  @include respond-below(sm) {
     .timeline__item {
       grid-template-columns: 1fr;
     }

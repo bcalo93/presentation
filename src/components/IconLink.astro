@@ -16,6 +16,8 @@ const { asset: Asset, srLabel, ...anchorProps } = Astro.props;
 </div>
 
 <style lang="scss">
+  @use "../assets/styles/index" as *;
+
   $duration: 0.3s;
   $delay: 0.15s;
 
@@ -24,8 +26,8 @@ const { asset: Asset, srLabel, ...anchorProps } = Astro.props;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0.5rem;
-      border-radius: 4rem;
+      padding: space(xs);
+      border-radius: radius(pill);
       transition:
         transform $duration ease $delay,
         background-color $duration ease $delay;
@@ -33,7 +35,7 @@ const { asset: Asset, srLabel, ...anchorProps } = Astro.props;
 
     a:hover {
       transform: scale(1.3, 1.3);
-      background-color: var(--color-tertiary);
+      background-color: color(surface-alt);
     }
   }
 </style>

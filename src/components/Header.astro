@@ -75,21 +75,23 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
 </script>
 
 <style lang="scss">
+  @use "../assets/styles/index" as *;
+
   .site-header {
     position: sticky;
     top: 0;
     z-index: 10;
-    padding: 1rem 0;
-    background: var(--color-header-bg);
+    padding: space(md) 0;
+    background: color(header-bg);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-header-border);
+    border-bottom: 1px solid color(header-border);
   }
 
   .site-header__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: space(md);
   }
 
   .site-header__brand {
@@ -100,12 +102,12 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 1rem;
+    gap: space(md);
     align-items: center;
   }
 
   .site-header__nav a {
-    color: var(--color-text-muted);
+    color: color(text-muted);
     font-size: 0.95rem;
   }
 
@@ -116,20 +118,20 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
   .theme-toggle {
     display: inline-grid;
     place-items: center;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     padding: 0;
     border: 0;
     border-radius: 0;
     background: transparent;
-    color: var(--color-text-muted);
+    color: color(text-muted);
     font: inherit;
     cursor: pointer;
     transition: color 0.2s ease;
   }
 
   .theme-toggle:hover {
-    color: var(--color-primary);
+    color: color(primary);
   }
 
   .theme-toggle__icon {
@@ -144,10 +146,10 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
 
   .site-header__nav a:hover,
   .site-header__brand:hover {
-    color: var(--color-primary);
+    color: color(primary);
   }
 
-  @media (max-width: 720px) {
+  @include respond-below(sm) {
     .site-header__inner {
       align-items: flex-start;
       flex-direction: column;

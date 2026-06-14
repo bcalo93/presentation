@@ -33,7 +33,7 @@ const { projects, locale, copy } = Astro.props;
         <article class="card project-card">
           <div class="project-card__header">
             <h3>{project.data.title}</h3>
-            <span>{project.data.status}</span>
+            <span class="chip chip--accent">{project.data.status}</span>
           </div>
           <div class="project-card__overview">
             <p>{project.data.summary}</p>
@@ -63,7 +63,7 @@ const { projects, locale, copy } = Astro.props;
             ))}
           </div>
           <div class="project-card__body">
-            <ul class="project-card__highlights">
+            <ul class="list-muted project-card__highlights">
               {project.data.highlights.map((highlight) => (
                 <li>{highlight}</li>
               ))}
@@ -89,14 +89,20 @@ const { projects, locale, copy } = Astro.props;
 </section>
 
 <style lang="scss">
+  @use "../../assets/styles/index" as *;
+
+  a:hover {
+    color: color(primary);
+  }
+
   .projects-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include responsive-grid(2, md);
   }
 
   .project-card {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: space(md);
     height: 100%;
   }
 
@@ -104,7 +110,7 @@ const { projects, locale, copy } = Astro.props;
   .project-card__meta,
   .project-card__body {
     display: grid;
-    gap: 0.9rem;
+    gap: space(sm);
   }
 
   .project-card__overview {
@@ -114,28 +120,8 @@ const { projects, locale, copy } = Astro.props;
   .project-card__header {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: space(md);
     align-items: center;
-  }
-
-  .project-card__header span {
-    padding: 0.35rem 0.65rem;
-    border-radius: 999px;
-    background: var(--color-surface-alt);
-    color: var(--color-primary);
-    font-size: 0.875rem;
-    font-weight: 700;
-  }
-
-  .project-card__highlights {
-    display: grid;
-    gap: 0.7rem;
-    padding-left: 1rem;
-    list-style: disc;
-  }
-
-  .project-card__highlights li {
-    color: var(--color-text-muted);
   }
 
   .project-card__body {
@@ -143,19 +129,13 @@ const { projects, locale, copy } = Astro.props;
   }
 
   .project-card__next-step {
-    padding-top: 0.9rem;
-    border-top: 1px solid var(--color-border);
+    padding-top: space(sm);
+    border-top: 1px solid color(border);
   }
 
   .project-card__actions {
     display: flex;
     justify-content: flex-start;
     margin-top: auto;
-  }
-
-  @media (max-width: 820px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

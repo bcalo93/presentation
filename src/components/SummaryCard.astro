@@ -7,7 +7,7 @@ import SocialLinks from "@/components/SocialLinks.astro";
 const imageDimensions = calculateImageDimensions(300, { aspectRatio: "4:5" });
 ---
 
-<section class="summary-card">
+<section class="card card--accent summary-card">
   <Image
     src={ProfilePhoto}
     alt="Profile photo"
@@ -20,18 +20,16 @@ const imageDimensions = calculateImageDimensions(300, { aspectRatio: "4:5" });
 </section>
 
 <style lang="scss">
+  @use "../assets/styles/index" as *;
+
   .summary-card {
-    border: 0.15rem solid var(--color-secondary);
-    border-radius: 0.5rem;
-    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5rem;
-    color: var(--color-primary);
+    gap: space(md);
 
     &__profile-photo {
-      margin-bottom: 1rem;
+      margin-bottom: space(xs);
     }
 
     p {

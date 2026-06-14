@@ -120,8 +120,6 @@ contact:
       value: linkedin.com/in/brahian-calo-suhr
     - label: GitHub
       value: github.com/bcalo93
-    - label: CV
-      value: Disponible cuando se agregue public/resume.pdf
 footer:
   blurb: Radicado en Uruguay y siempre abierto a conectar con gente de tecnología.
   backToTop: Volver arriba
