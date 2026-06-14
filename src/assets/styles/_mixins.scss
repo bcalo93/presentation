@@ -1,0 +1,123 @@
+@use "./tokens" as *;
+
+@mixin page-width {
+  width: min($layout-width, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+@mixin respond-below($breakpoint) {
+  @media (max-width: breakpoint($breakpoint)) {
+    @content;
+  }
+}
+
+@mixin section-stack {
+  display: grid;
+  gap: space(4xl);
+}
+
+@mixin section-header {
+  display: grid;
+  gap: space(sm);
+  max-width: $content-width;
+  margin-bottom: space(2xl);
+}
+
+@mixin surface-card(
+  $padding: space(xl),
+  $background: color(surface),
+  $border-color: color(border)
+) {
+  padding: $padding;
+  border: 1px solid $border-color;
+  border-radius: radius(md);
+  background: $background;
+  box-shadow: shadow(card);
+}
+
+@mixin chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid color(border);
+  border-radius: radius(pill);
+  background: color(surface);
+  color: color(text);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: color(primary);
+    color: color(primary);
+  }
+}
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: radius(md);
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid color(primary);
+    outline-offset: 2px;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: color(primary);
+  color: color(surface);
+
+  &:hover {
+    background: color(primary-strong);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: color(surface);
+  border-color: color(border);
+
+  &:hover {
+    border-color: color(primary);
+    color: color(primary);
+  }
+}
+
+@mixin muted-bullet-list {
+  display: grid;
+  gap: space(sm);
+  padding-left: 1rem;
+  list-style: disc;
+
+  li {
+    color: color(text-muted);
+  }
+}
+
+@mixin responsive-grid($columns, $collapse-at) {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+  gap: space(lg);
+
+  @include respond-below($collapse-at) {
+    grid-template-columns: 1fr;
+  }
+}

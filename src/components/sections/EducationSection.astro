@@ -34,13 +34,15 @@ const { educationItems, copy } = Astro.props;
 </section>
 
 <style lang="scss">
+  @use "../../assets/styles/index" as *;
+
   .education-card {
     max-width: 54rem;
   }
 
   .education-card__degree {
-    margin-bottom: 0.75rem;
-    color: var(--color-primary);
+    margin-bottom: space(sm);
+    color: color(primary);
     font-weight: 600;
   }
 </style>

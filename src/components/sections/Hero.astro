@@ -41,16 +41,18 @@ const { copy } = Astro.props;
 </section>
 
 <style lang="scss">
+  @use "../../assets/styles/index" as *;
+
   .hero__content {
     display: grid;
     grid-template-columns: minmax(0, 1.4fr) minmax(280px, 371px);
-    gap: 2rem;
+    gap: space(2xl);
     align-items: center;
   }
 
   .hero__copy {
     display: grid;
-    gap: 1.25rem;
+    gap: space(xl);
     max-width: 42rem;
   }
 
@@ -60,21 +62,21 @@ const { copy } = Astro.props;
   }
 
   .hero__photo {
-    padding: 0.85rem;
+    padding: space(sm);
     background:
       linear-gradient(
         180deg,
         rgba(37, 99, 235, 0.08),
         rgba(20, 184, 166, 0.04)
       ),
-      var(--color-surface);
+      color(surface);
   }
 
   .hero__photo img {
-    border-radius: 6px;
+    border-radius: radius(sm);
   }
 
-  @media (max-width: 900px) {
+  @include respond-below(lg) {
     .hero__content {
       grid-template-columns: 1fr;
     }
