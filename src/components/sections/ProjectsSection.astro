@@ -89,6 +89,10 @@ const { projects, locale, copy } = Astro.props;
 </section>
 
 <style lang="scss">
+  a:hover {
+    color: var(--color-primary);
+  }
+
   .projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

@@ -7,6 +7,7 @@ summary: Una app en Kotlin Multiplatform creada para dividir gastos compartidos 
 status: WIP
 problem: Después de una juntada con amigos, dividir gastos terminó siendo un ejercicio incómodo en Excel porque usar Splitwise implicaba pedirle a cada uno que se creara una cuenta para una necesidad de una sola vez. Splitit nació de querer algo más simple, más claro y más fácil de usar en la vida real.
 repositoryLabel: Repositorio público en GitHub disponible
+repositoryHref: https://github.com/bcalo93/splitit
 stack:
   - Kotlin Multiplatform
   - Lógica compartida

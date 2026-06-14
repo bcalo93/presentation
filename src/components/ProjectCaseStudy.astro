@@ -35,6 +35,7 @@ const hasNextStep = Boolean(project.data.nextStep);
           {
             project.data.repositoryHref ? (
               <a
+                class="case-study__label__link"
                 href={project.data.repositoryHref}
                 target="_blank"
                 rel="noreferrer"
@@ -197,6 +198,10 @@ const hasNextStep = Boolean(project.data.nextStep);
     font-size: 0.875rem;
     font-weight: 700;
     text-transform: uppercase;
+
+    &__link:hover {
+      color: var(--color-primary);
+    }
   }
 
   .case-study__body {

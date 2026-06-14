@@ -7,6 +7,7 @@ summary: A fast Astro portfolio built as a technical point of contact, with stru
 status: Completed
 problem: Create a portfolio that works as a clear introduction, a technical presentation, and a place to connect with peers without turning it into an overbuilt personal website.
 repositoryLabel: This repository
+repositoryHref: https://github.com/bcalo93/presentation
 stack:
   - Astro
   - TypeScript

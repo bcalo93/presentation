@@ -7,6 +7,7 @@ summary: A Kotlin Multiplatform expense-sharing project focused on payment-settl
 status: WIP
 problem: After a get-together with friends, splitting expenses turned into an awkward Excel exercise because using Splitwise meant asking everyone to create an account for a one-time need. Splitit came from wanting something simpler, clearer, and easier to use in real life.
 repositoryLabel: Public GitHub repository available
+repositoryHref: https://github.com/bcalo93/splitit
 stack:
   - Kotlin Multiplatform
   - Shared logic
