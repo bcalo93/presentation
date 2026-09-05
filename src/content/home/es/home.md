@@ -68,6 +68,14 @@ skills:
         - CSS/Sass
         - Accesibilidad
         - Rendimiento
+    - title: Ingeniería Móvil
+      items:
+        - Kotlin
+        - Compose Multiplatform
+        - Kotlin Multiplatform
+        - SQLDelight
+        - Android
+        - iOS (UI compartida)
     - title: Ingeniería Backend
       items:
         - Express
@@ -147,5 +155,8 @@ projectPage:
   links:
     eyebrow: Enlaces
     title: Referencias del proyecto
+  screenshots:
+    eyebrow: Capturas
+    title: La app en acción
   nextStepsHeading: Qué sigue
 ---

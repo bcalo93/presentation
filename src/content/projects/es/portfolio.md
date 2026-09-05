@@ -7,7 +7,7 @@ summary: Un portfolio rápido en Astro construido como un punto de contacto téc
 status: Completado
 problem: Crear un portfolio que funcione como una introducción clara, una presentación técnica y un lugar para conectar con pares, sin convertirlo en un sitio personal sobreconstruido.
 repositoryLabel: Este repositorio
-repositoryHref: https://github.com/bcalo93/splitit
+repositoryHref: https://github.com/bcalo93/presentation
 stack:
   - Astro
   - TypeScript
