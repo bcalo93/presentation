@@ -104,6 +104,31 @@ const hasNextStep = Boolean(project.data.nextStep);
     </div>
   </section>
 
+  {
+    project.data.screenshots.length > 0 && (
+      <section class="section case-study__section">
+        <div class="section__header">
+          <p class="eyebrow">{copy.screenshots.eyebrow}</p>
+          <h2>{copy.screenshots.title}</h2>
+        </div>
+        <div class="case-study__gallery">
+          {project.data.screenshots.map((shot) => (
+            <figure class="case-study__shot">
+              <img
+                src={shot.src}
+                alt={shot.alt}
+                loading="lazy"
+                width="270"
+                height="600"
+              />
+              <figcaption>{shot.alt}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
   <section
     class:list={[
       "section",
@@ -234,6 +259,30 @@ const hasNextStep = Boolean(project.data.nextStep);
     display: flex;
     flex-wrap: wrap;
     gap: space(md);
+  }
+
+  .case-study__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: space(lg);
+  }
+
+  .case-study__shot {
+    display: grid;
+    gap: space(sm);
+  }
+
+  .case-study__shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid color(border);
+    border-radius: radius(lg);
+    background: color(surface);
+  }
+
+  .case-study__shot figcaption {
+    color: color(text-muted);
+    font-size: 0.875rem;
   }
 
   @include respond-below(md) {
