@@ -49,9 +49,7 @@ projects:
   eyebrow: Proyectos
   title: Proyectos marcados por necesidades reales y decisiones técnicas
   description: Estos proyectos reflejan cómo pienso el diseño de aplicaciones, la arquitectura de software y la construcción de soluciones con una razón clara detrás.
-  problemLabel: Problema
   repositoryLabel: Repositorio
-  nextStepLabel: Próximo paso
   readCaseStudyLabel: Leer caso de estudio
 skills:
   eyebrow: Habilidades
@@ -68,6 +66,14 @@ skills:
         - CSS/Sass
         - Accesibilidad
         - Rendimiento
+    - title: Ingeniería Móvil
+      items:
+        - Kotlin
+        - Compose Multiplatform
+        - Kotlin Multiplatform
+        - SQLDelight
+        - Android
+        - iOS (UI compartida)
     - title: Ingeniería Backend
       items:
         - Express
@@ -147,5 +153,8 @@ projectPage:
   links:
     eyebrow: Enlaces
     title: Referencias del proyecto
+  screenshots:
+    eyebrow: Capturas
+    title: La app en acción
   nextStepsHeading: Qué sigue
 ---

@@ -60,6 +60,14 @@ const projects = defineCollection({
         }),
       )
       .default([]),
+    screenshots: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+        }),
+      )
+      .default([]),
   }),
 });
 
@@ -104,9 +112,7 @@ const home = defineCollection({
     }),
     experience: sectionIntro,
     projects: sectionIntro.extend({
-      problemLabel: z.string(),
       repositoryLabel: z.string(),
-      nextStepLabel: z.string(),
       readCaseStudyLabel: z.string(),
     }),
     skills: sectionIntro.extend({
@@ -141,6 +147,7 @@ const home = defineCollection({
       tradeoffs: sectionIntro.omit({ description: true }),
       status: sectionIntro.omit({ description: true }),
       links: sectionIntro.omit({ description: true }),
+      screenshots: sectionIntro.omit({ description: true }),
       nextStepsHeading: z.string(),
     }),
   }),

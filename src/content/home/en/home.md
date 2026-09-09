@@ -49,9 +49,7 @@ projects:
   eyebrow: Projects
   title: Projects shaped by real needs and technical decisions
   description: These projects reflect how I think about application design, software architecture, and building things with a clear reason behind them.
-  problemLabel: Problem
   repositoryLabel: Repository
-  nextStepLabel: Next step
   readCaseStudyLabel: Read case study
 skills:
   eyebrow: Skills
@@ -68,6 +66,14 @@ skills:
         - CSS/Sass
         - Accessibility
         - Performance
+    - title: Mobile Engineering
+      items:
+        - Kotlin
+        - Compose Multiplatform
+        - Kotlin Multiplatform
+        - SQLDelight
+        - Android
+        - iOS (shared UI)
     - title: Backend Engineering
       items:
         - Express
@@ -147,5 +153,8 @@ projectPage:
   links:
     eyebrow: Links
     title: Project references
+  screenshots:
+    eyebrow: Screenshots
+    title: The app in action
   nextStepsHeading: What comes next
 ---
