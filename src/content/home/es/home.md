@@ -49,9 +49,7 @@ projects:
   eyebrow: Proyectos
   title: Proyectos marcados por necesidades reales y decisiones técnicas
   description: Estos proyectos reflejan cómo pienso el diseño de aplicaciones, la arquitectura de software y la construcción de soluciones con una razón clara detrás.
-  problemLabel: Problema
   repositoryLabel: Repositorio
-  nextStepLabel: Próximo paso
   readCaseStudyLabel: Leer caso de estudio
 skills:
   eyebrow: Habilidades

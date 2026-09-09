@@ -112,9 +112,7 @@ const home = defineCollection({
     }),
     experience: sectionIntro,
     projects: sectionIntro.extend({
-      problemLabel: z.string(),
       repositoryLabel: z.string(),
-      nextStepLabel: z.string(),
       readCaseStudyLabel: z.string(),
     }),
     skills: sectionIntro.extend({

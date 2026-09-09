@@ -10,9 +10,7 @@ interface Props {
     eyebrow: string;
     title: string;
     description?: string;
-    problemLabel: string;
     repositoryLabel: string;
-    nextStepLabel: string;
     readCaseStudyLabel: string;
   };
 }
@@ -29,61 +27,47 @@ const { projects, locale, copy } = Astro.props;
 
   <div class="card-grid projects-grid">
     {
-      projects.map((project) => (
-        <article class="card project-card">
-          <div class="project-card__header">
-            <h3>{project.data.title}</h3>
-            <span class="chip chip--accent">{project.data.status}</span>
-          </div>
-          <div class="project-card__overview">
-            <p>{project.data.summary}</p>
-            <div class="project-card__meta">
-              <p>
-                <strong>{copy.problemLabel}:</strong> {project.data.problem}
-              </p>
-              <p>
-                <strong>{copy.repositoryLabel}:</strong>{" "}
-                {project.data.repositoryHref ? (
-                  <a
-                    href={project.data.repositoryHref}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {project.data.repositoryLabel}
-                  </a>
-                ) : (
-                  project.data.repositoryLabel
-                )}
-              </p>
+      projects.map((project) => {
+        const highlights = project.data.highlights.slice(0, 3);
+
+        return (
+          <article class="card project-card">
+            <div class="project-card__header">
+              <h3>{project.data.title}</h3>
+              <span class="chip chip--accent">{project.data.status}</span>
             </div>
-          </div>
-          <div class="pill-list">
-            {project.data.stack.map((item) => (
-              <span>{item}</span>
-            ))}
-          </div>
-          <div class="project-card__body">
+            <p class="project-card__summary">{project.data.summary}</p>
+            <div class="pill-list">
+              {project.data.stack.map((item) => (
+                <span>{item}</span>
+              ))}
+            </div>
             <ul class="list-muted project-card__highlights">
-              {project.data.highlights.map((highlight) => (
+              {highlights.map((highlight) => (
                 <li>{highlight}</li>
               ))}
             </ul>
-            {project.data.nextStep && (
-              <p class="project-card__next-step">
-                <strong>{copy.nextStepLabel}:</strong> {project.data.nextStep}
-              </p>
-            )}
-          </div>
-          <div class="project-card__actions">
-            <a
-              class="button-secondary"
-              href={getProjectPath(locale, project.data.path)}
-            >
-              {copy.readCaseStudyLabel}
-            </a>
-          </div>
-        </article>
-      ))
+            <div class="project-card__actions">
+              {project.data.repositoryHref && (
+                <a
+                  class="button-secondary"
+                  href={project.data.repositoryHref}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {copy.repositoryLabel}
+                </a>
+              )}
+              <a
+                class="button-secondary"
+                href={getProjectPath(locale, project.data.path)}
+              >
+                {copy.readCaseStudyLabel}
+              </a>
+            </div>
+          </article>
+        );
+      })
     }
   </div>
 </section>
@@ -106,17 +90,6 @@ const { projects, locale, copy } = Astro.props;
     height: 100%;
   }
 
-  .project-card__overview,
-  .project-card__meta,
-  .project-card__body {
-    display: grid;
-    gap: space(sm);
-  }
-
-  .project-card__overview {
-    align-content: start;
-  }
-
   .project-card__header {
     display: flex;
     justify-content: space-between;
@@ -124,18 +97,18 @@ const { projects, locale, copy } = Astro.props;
     align-items: center;
   }
 
-  .project-card__body {
+  .project-card__summary {
     align-content: start;
   }
 
-  .project-card__next-step {
-    padding-top: space(sm);
-    border-top: 1px solid color(border);
+  .project-card__highlights {
+    align-content: start;
   }
 
   .project-card__actions {
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: space(sm);
     margin-top: auto;
   }
 </style>
