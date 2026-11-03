@@ -1,4 +1,6 @@
 ---
+import SectionHeading from "@/components/SectionHeading.astro";
+
 interface Props {
   copy: {
     eyebrow: string;
@@ -15,37 +17,56 @@ const { copy } = Astro.props;
 ---
 
 <section class="section" id="skills" aria-labelledby="skills-title">
-  <div class="section__header">
-    <p class="eyebrow">{copy.eyebrow}</p>
-    <h2 id="skills-title">{copy.title}</h2>
-    {copy.description && <p>{copy.description}</p>}
-  </div>
+  <SectionHeading
+    eyebrow={copy.eyebrow}
+    title={copy.title}
+    description={copy.description}
+    index="03"
+    id="skills-title"
+  />
 
-  <div class="card-grid skills-grid">
+  <ul class="skills-matrix">
     {
       copy.groups.map((group) => (
-        <article class="card skills-card">
-          <h3>{group.title}</h3>
-          <div class="pill-list">
-            {group.items.map((item) => (
-              <span>{item}</span>
-            ))}
-          </div>
-        </article>
+        <li class="skills-matrix__row">
+          <h3 class="skills-matrix__title">{group.title}</h3>
+          <p class="skills-matrix__items">{group.items.join(", ")}</p>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>
 
 <style lang="scss">
   @use "../../assets/styles/index" as *;
 
-  .skills-grid {
-    @include responsive-grid(2, md);
+  .skills-matrix {
+    list-style: none;
+    border-top: 1px solid color(border);
   }
 
-  .skills-card {
+  .skills-matrix__row {
     display: grid;
-    gap: space(md);
+    grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
+    gap: space(2xl);
+    padding: space(lg) 0;
+    border-bottom: 1px solid color(border);
+  }
+
+  .skills-matrix__title {
+    font-family: $font-display;
+    font-size: var(--text-h3);
+  }
+
+  .skills-matrix__items {
+    color: color(text-muted);
+    line-height: 1.8;
+  }
+
+  @include respond-below(sm) {
+    .skills-matrix__row {
+      grid-template-columns: 1fr;
+      gap: space(2xs);
+    }
   }
 </style>

@@ -31,14 +31,14 @@ sortCollection(educationItems);
 
 <Hero copy={homeEntry.data.hero} />
 <ProfessionalSnapshot copy={homeEntry.data.snapshot} />
-<ExperienceTimeline
-  experiences={experiences}
-  copy={homeEntry.data.experience}
-/>
 <ProjectsSection
   projects={projects}
   copy={homeEntry.data.projects}
   locale={locale}
+/>
+<ExperienceTimeline
+  experiences={experiences}
+  copy={homeEntry.data.experience}
 />
 <SkillsMatrix copy={homeEntry.data.skills} />
 <EducationSection

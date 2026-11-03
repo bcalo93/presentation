@@ -7,7 +7,7 @@ import { SOCIAL_LINKS } from "@/constants/socials";
     SOCIAL_LINKS.map((link) => (
       <li>
         <a
-          class="chip"
+          class="social-links__item"
           href={link.href}
           target="_blank"
           rel="noreferrer"
@@ -19,3 +19,35 @@ import { SOCIAL_LINKS } from "@/constants/socials";
     ))
   }
 </ul>
+
+<style lang="scss">
+  @use "../assets/styles/index" as *;
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(sm) space(2xl);
+    list-style: none;
+  }
+
+  .social-links__item {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: color(text-muted);
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .social-links__item:hover,
+  .social-links__item:focus-visible {
+    color: color(accent);
+    border-bottom-color: color(accent);
+  }
+</style>

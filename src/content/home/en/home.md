@@ -8,10 +8,10 @@ nav:
   items:
     - id: home
       label: Home
-    - id: experience
-      label: Experience
     - id: projects
       label: Projects
+    - id: experience
+      label: Experience
     - id: skills
       label: Skills
     - id: education

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import SectionHeading from "@/components/SectionHeading.astro";
 
 interface Props {
   experiences: CollectionEntry<"experience">[];
@@ -14,63 +15,109 @@ const { experiences, copy } = Astro.props;
 ---
 
 <section class="section" id="experience" aria-labelledby="experience-title">
-  <div class="section__header">
-    <p class="eyebrow">{copy.eyebrow}</p>
-    <h2 id="experience-title">{copy.title}</h2>
-    {copy.description && <p>{copy.description}</p>}
-  </div>
+  <SectionHeading
+    eyebrow={copy.eyebrow}
+    title={copy.title}
+    description={copy.description}
+    index="02"
+    id="experience-title"
+  />
 
-  <div class="timeline">
+  <ol class="timeline">
     {
       experiences.map((experience) => (
-        <article class="timeline__item card">
+        <li class="timeline__item">
           <div class="timeline__meta">
-            <p>{experience.data.period}</p>
-            <h3>{experience.data.company}</h3>
-            <p>{experience.data.roles.join(" • ")}</p>
+            <span class="timeline__period">{experience.data.period}</span>
+            <span class="timeline__company">{experience.data.company}</span>
           </div>
           <div class="timeline__content">
-            <p>{experience.data.summary}</p>
-            <ul class="list-muted timeline__highlights">
+            <h3 class="timeline__roles">{experience.data.roles.join(" · ")}</h3>
+            <p class="timeline__summary">{experience.data.summary}</p>
+            <ul class="timeline__highlights">
               {experience.data.highlights.map((highlight) => (
                 <li>{highlight}</li>
               ))}
             </ul>
-            <div class="pill-list">
+            <ul class="timeline__stack">
               {experience.data.stack.map((item) => (
-                <span>{item}</span>
+                <li>{item}</li>
               ))}
-            </div>
+            </ul>
           </div>
-        </article>
+        </li>
       ))
     }
-  </div>
+  </ol>
 </section>
 
 <style lang="scss">
   @use "../../assets/styles/index" as *;
 
   .timeline {
+    position: relative;
     display: grid;
-    gap: space(lg);
+    gap: space(4xl);
+    padding-left: space(4xl);
+    list-style: none;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    width: 1px;
+    background: color(border-strong);
   }
 
   .timeline__item {
+    position: relative;
     display: grid;
-    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr);
     gap: space(2xl);
+  }
+
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: calc(-1 * #{space(4xl)});
+    width: 0.75rem;
+    height: 0.75rem;
+    background: color(canvas);
+    border: 1px solid color(accent);
+    transform: scale(1);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .timeline__item:hover::before {
+    transform: scale(1.4);
+    background: color(accent);
   }
 
   .timeline__meta {
     display: grid;
-    align-items: center;
-    gap: space(xs);
+    align-content: start;
+    gap: space(2xs);
   }
 
-  .timeline__meta p:first-child {
-    color: color(primary);
-    font-weight: 600;
+  .timeline__period {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .timeline__company {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    color: color(text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   .timeline__content {
@@ -78,9 +125,64 @@ const { experiences, copy } = Astro.props;
     gap: space(md);
   }
 
+  .timeline__roles {
+    font-family: $font-display;
+    font-size: var(--text-h3);
+  }
+
+  .timeline__summary {
+    color: color(text-muted);
+  }
+
+  .timeline__highlights {
+    display: grid;
+    gap: space(sm);
+    list-style: none;
+  }
+
+  .timeline__highlights li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: color(text-muted);
+  }
+
+  .timeline__highlights li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 1px;
+    background: color(accent);
+  }
+
+  .timeline__stack {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: space(2xs) space(sm);
+  }
+
+  .timeline__stack li {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+  }
+
+  .timeline__stack li + li::before {
+    content: "\00b7";
+    margin-right: space(sm);
+    color: color(border-strong);
+  }
+
   @include respond-below(sm) {
+    .timeline {
+      padding-left: space(3xl);
+    }
+
     .timeline__item {
       grid-template-columns: 1fr;
+      gap: space(md);
     }
   }
 </style>
