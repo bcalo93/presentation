@@ -1,0 +1,53 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description?: string;
+  index?: string;
+  id?: string;
+}
+
+const { eyebrow, title, description, index, id } = Astro.props;
+---
+
+<div class="section-heading">
+  {
+    index && (
+      <span class="section-heading__index" aria-hidden="true">
+        {index}
+      </span>
+    )
+  }
+  <p class="section-heading__eyebrow">{eyebrow}</p>
+  <h2 id={id}>{title}</h2>
+  {description && <p class="section-heading__description">{description}</p>}
+</div>
+
+<style lang="scss">
+  @use "../assets/styles/index" as *;
+
+  .section-heading {
+    display: grid;
+    gap: space(sm);
+    max-width: $content-width;
+    margin-bottom: space(2xl);
+  }
+
+  .section-heading__index {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+  }
+
+  .section-heading__eyebrow {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    color: color(text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .section-heading__description {
+    font-size: var(--text-lede);
+  }
+</style>
