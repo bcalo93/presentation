@@ -40,14 +40,10 @@ $spacing: (
 );
 
 $radii: (
-  sm: 6px,
+  sm: 4px,
   md: 8px,
-  lg: 12px,
+  lg: 16px,
   pill: 999px,
-);
-
-$shadows: (
-  card: 0 16px 40px -30px var(--color-shadow),
 );
 
 $breakpoints: (
@@ -66,10 +62,6 @@ $breakpoints: (
 
 @function radius($key) {
   @return map.get($radii, $key);
-}
-
-@function shadow($key) {
-  @return map.get($shadows, $key);
 }
 
 @function breakpoint($key) {

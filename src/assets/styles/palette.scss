@@ -11,8 +11,6 @@
   --color-accent: #9c3b22;
   --color-accent-hover: #7c2c17;
   --color-on-accent: #ffffff;
-
-  --color-shadow: rgba(21, 23, 26, 0.06);
 }
 
 :root[data-theme="dark"] {
@@ -28,21 +26,4 @@
   --color-accent: #ffa07a;
   --color-accent-hover: #ffb99d;
   --color-on-accent: #28140d;
-
-  --color-shadow: rgba(0, 0, 0, 0.35);
-}
-
-:root,
-:root[data-theme="dark"] {
-  --color-bg: var(--color-canvas);
-  --color-surface-alt: var(--color-surface-subtle);
-  --color-primary: var(--color-accent);
-  --color-primary-strong: var(--color-accent-hover);
-  --color-secondary: var(--color-accent);
-  --color-header-bg: color-mix(in srgb, var(--color-canvas) 88%, transparent);
-  --color-header-border: color-mix(
-    in srgb,
-    var(--color-border) 80%,
-    transparent
-  );
 }

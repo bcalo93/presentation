@@ -90,72 +90,12 @@ main [id] {
   border-top: 1px solid color(border);
 }
 
-.section__header {
-  @extend %section-header;
-}
-
-.eyebrow {
-  color: color(primary);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.pill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(sm);
-}
-
-.pill-list span,
-.chip {
-  @extend %chip;
-}
-
-.chip--accent {
-  border-color: transparent;
-  background: color(surface-alt);
-  color: color(primary);
-  font-weight: 700;
-}
-
-.cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(md);
-}
-
 .button {
   @extend %button-primary;
 }
 
 .button-secondary {
   @extend %button-secondary;
-}
-
-.card-grid {
-  display: grid;
-  gap: space(lg);
-}
-
-.card {
-  @extend %surface-card;
-}
-
-.card--accent {
-  border-color: color(secondary);
-  color: color(primary);
-}
-
-.social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(sm);
-}
-
-.list-muted {
-  @extend %muted-bullet-list;
 }
 
 @include respond-below(sm) {
