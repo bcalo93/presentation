@@ -1,6 +1,7 @@
 @use "sass:map";
 
-$layout-width: 1120px;
+$layout-width: 76rem;
+$gutter: clamp(1rem, 3vw, 2rem);
 $content-width: 48rem;
 
 $font-sans:

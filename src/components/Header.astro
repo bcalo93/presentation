@@ -26,8 +26,8 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     <a class="site-header__brand" href={page === "home" ? "#home" : homeHref}
       >Brahian Calo</a
     >
-    <nav aria-label={homeEntry.data.nav.ariaLabel}>
-      <ul class="site-header__nav">
+    <nav class="site-header__nav" aria-label={homeEntry.data.nav.ariaLabel}>
+      <ul class="site-header__nav-list">
         {
           navItems.map((item) => (
             <li>
@@ -35,26 +35,29 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
             </li>
           ))
         }
-        <li>
-          <a class="language-switcher" href={languageHref}>
-            {homeEntry.data.nav.languageLabels[switchTo]}
-          </a>
-        </li>
-        <li>
-          <button
-            class="theme-toggle"
-            type="button"
-            aria-label={homeEntry.data.nav.themeToggleLabel}
-            title={homeEntry.data.nav.themeToggleLabel}
-            data-theme-toggle
-          >
-            <span class="theme-toggle__icon" aria-hidden="true">
-              <ColorMode />
-            </span>
-          </button>
-        </li>
       </ul>
     </nav>
+    <div class="site-header__controls">
+      <a
+        class="language-switcher"
+        href={languageHref}
+        aria-label={homeEntry.data.nav.languageSwitcherLabel}
+      >
+        {homeEntry.data.nav.languageLabels[switchTo]}
+      </a>
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label={homeEntry.data.nav.themeToggleLabel}
+        title={homeEntry.data.nav.themeToggleLabel}
+        aria-pressed="false"
+        data-theme-toggle
+      >
+        <span class="theme-toggle__icon" aria-hidden="true">
+          <ColorMode />
+        </span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -64,12 +67,27 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     const button = document.querySelector("[data-theme-toggle]");
     if (!button) return;
 
+    const meta = document.getElementById("theme-color");
+
+    const applyTheme = (theme) => {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem(storageKey, theme);
+      if (meta) {
+        meta.setAttribute("content", theme === "dark" ? "#0E1419" : "#F4F1EA");
+      }
+      button.setAttribute("aria-pressed", String(theme === "dark"));
+    };
+
+    button.setAttribute(
+      "aria-pressed",
+      String(document.documentElement.dataset.theme === "dark"),
+    );
+
     button.addEventListener("click", () => {
       const currentTheme =
         document.documentElement.dataset.theme === "dark" ? "dark" : "light";
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.dataset.theme = nextTheme;
-      localStorage.setItem(storageKey, nextTheme);
+      applyTheme(nextTheme);
     });
   })();
 </script>
@@ -81,48 +99,65 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     position: sticky;
     top: 0;
     z-index: 10;
-    padding: space(md) 0;
+    padding: space(sm) 0;
     background: color(header-bg);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid color(header-border);
   }
 
   .site-header__inner {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas: "brand nav controls";
     align-items: center;
     gap: space(md);
   }
 
   .site-header__brand {
+    grid-area: brand;
     font-weight: 700;
+    white-space: nowrap;
   }
 
   .site-header__nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: space(md);
-    align-items: center;
+    grid-area: nav;
   }
 
-  .site-header__nav a {
+  .site-header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: space(md);
+  }
+
+  .site-header__nav-list a {
     color: color(text-muted);
     font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .site-header__controls {
+    grid-area: controls;
+    display: flex;
+    align-items: center;
+    gap: space(xs);
   }
 
   .language-switcher {
+    color: color(text-muted);
+    font-size: 0.95rem;
     font-weight: 700;
+    white-space: nowrap;
   }
 
   .theme-toggle {
     display: inline-grid;
     place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     padding: 0;
     border: 0;
-    border-radius: 0;
+    border-radius: radius(sm);
     background: transparent;
     color: color(text-muted);
     font: inherit;
@@ -131,7 +166,7 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
   }
 
   .theme-toggle:hover {
-    color: color(primary);
+    color: color(accent);
   }
 
   .theme-toggle__icon {
@@ -140,23 +175,31 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
   }
 
   .theme-toggle__icon :global(svg) {
-    width: 1rem;
-    height: 1rem;
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
-  .site-header__nav a:hover,
-  .site-header__brand:hover {
-    color: color(primary);
+  .site-header__nav-list a:hover,
+  .site-header__brand:hover,
+  .language-switcher:hover {
+    color: color(accent);
   }
 
   @include respond-below(sm) {
     .site-header__inner {
-      align-items: flex-start;
-      flex-direction: column;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "brand controls"
+        "nav nav";
+      gap: space(sm) space(md);
     }
 
     .site-header__nav {
-      justify-content: flex-start;
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: space(2xs);
+      -webkit-overflow-scrolling: touch;
     }
   }
 </style>

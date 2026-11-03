@@ -67,6 +67,10 @@ p {
   transform: translateY(0);
 }
 
+main [id] {
+  scroll-margin-top: 6rem;
+}
+
 .page-shell,
 .section,
 .site-header__inner,

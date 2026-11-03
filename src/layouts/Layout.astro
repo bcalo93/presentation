@@ -45,6 +45,7 @@ const {
         { locale: "es", href: alternatePaths.es ?? getHomePath("es") },
       ]}
     />
+    <meta name="theme-color" id="theme-color" content="#F4F1EA" />
     <script is:inline>
       (() => {
         const storageKey = "theme";
@@ -55,12 +56,22 @@ const {
             ? "dark"
             : "light");
         document.documentElement.dataset.theme = theme;
+        const meta = document.getElementById("theme-color");
+        if (meta) {
+          meta.setAttribute(
+            "content",
+            theme === "dark" ? "#0E1419" : "#F4F1EA",
+          );
+        }
       })();
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main">
+      {locale === "es" ? "Saltar al contenido" : "Skip to content"}
+    </a>
     <Header locale={locale} page={page} slug={slug} homeEntry={homeEntry} />
-    <main class="page-shell">
+    <main class="page-shell" id="main">
       <slot />
     </main>
     <Footer locale={locale} page={page} slug={slug} homeEntry={homeEntry} />
