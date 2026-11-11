@@ -118,30 +118,29 @@ const { copy } = Astro.props;
     position: absolute;
     inset: 0;
     border: 1px solid color(accent);
-    transform: translate(0.75rem, 0.75rem);
     pointer-events: none;
   }
 
-  .hero__frame::after {
+  .hero__frame::after,
+  .hero__media::after {
     content: "+";
     position: absolute;
-    top: -1rem;
-    left: -1rem;
     color: color(accent);
     font-family: $font-mono;
     font-size: 1.25rem;
     line-height: 1;
   }
 
+  .hero__frame::after {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
   .hero__media::after {
-    content: "+";
-    position: absolute;
-    right: 0.25rem;
-    bottom: 0.5rem;
-    color: color(accent);
-    font-family: $font-mono;
-    font-size: 1.25rem;
-    line-height: 1;
+    right: space(2xl);
+    bottom: space(2xl);
+    transform: translate(50%, 50%);
   }
 
   .hero__frame img {
