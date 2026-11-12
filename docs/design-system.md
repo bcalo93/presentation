@@ -1,161 +1,163 @@
-# Trazo: documento de diseño y plan de migración
+# Trazo: design document and migration plan
 
-## Estado y propósito
+## Status and purpose
 
-**Estado:** propuesta lista para implementación.
+**Status:** proposal ready for implementation.
 
-Este documento es la fuente de verdad para migrar el portfolio al design system **Trazo**. Está dirigido al agente o desarrollador que ejecute el rediseño y define la dirección visual, los fundamentos, los componentes, la accesibilidad, las fases de migración y los criterios de aceptación.
+This document is the source of truth for migrating the portfolio to the **Trazo** design system. It is aimed at the agent or developer executing the redesign and defines the visual direction, foundations, components, accessibility, migration phases and acceptance criteria.
 
-La migración debe conservar Astro, Sass, las rutas, las colecciones, el contenido bilingüe y el funcionamiento estático actuales. No requiere React, frameworks de UI ni librerías de animación.
+The migration must preserve the current Astro, Sass, routes, collections, bilingual content and static behavior. It does not require React, UI frameworks or animation libraries.
 
-## 1. Dirección de diseño: Trazo
+## 1. Design direction: Trazo
 
-**Concepto:** ingeniería hecha visible.
+**Concept:** engineering made visible.
 
-Trazo es un sistema visual editorial y técnico inspirado en planos, documentación de arquitectura y procesos de decisión. La interfaz debe comunicar que Brahian no solamente domina tecnologías, sino que:
+Trazo is an editorial and technical visual system inspired by blueprints, architecture documentation and decision-making processes. The interface must communicate that Brahian not only masters technologies, but also that he:
 
-- diseña sistemas;
-- lidera decisiones técnicas;
-- sigue cerca de la implementación;
-- valora la calidad y los trade-offs;
-- adopta IA con criterio práctico.
+- designs systems;
+- leads technical decisions;
+- stays close to implementation;
+- values quality and trade-offs;
+- adopts AI with practical judgment.
 
-La identidad debe alejarse del portfolio tecnológico genérico basado en tarjetas azules, pills y gradientes. El elemento memorable será una **línea de decisión**: un recorrido vertical con nodos e índices que conecta experiencia, arquitectura y casos de estudio.
+The identity must move away from the generic tech portfolio based on blue cards, pills and gradients. The memorable element will be a **decision line**: a vertical path with nodes and indexes that connects experience, architecture and case studies.
 
-### Personalidad
+### Personality
 
-- **Rigurosa**, pero no fría.
-- **Técnica**, sin recurrir a estética de terminal o “hacker”.
-- **Editorial**, con jerarquía tipográfica y espacio para leer.
-- **Cálida**, mediante fondos marfil y un acento cobre que dialoga con la fotografía actual.
-- **Precisa**, con líneas, coordenadas, numeración y metadatos.
+- **Rigorous**, but not cold.
+- **Technical**, without resorting to terminal or "hacker" aesthetics.
+- **Editorial**, with typographic hierarchy and room to read.
+- **Warm**, through ivory backgrounds and a copper accent that dialogues with the current photography.
+- **Precise**, with lines, coordinates, numbering and metadata.
 
-### Principios
+### Principles
 
-1. **Las decisiones tienen más protagonismo que la decoración.**
-2. **Los proyectos demuestran; las habilidades resumen.**
-3. **La home permite escanear; los casos de estudio permiten profundizar.**
-4. **Dark mode y light mode son dos composiciones deliberadas, no una inversión automática.**
-5. **El diseño no necesita React, animaciones de scroll ni JavaScript adicional para funcionar.**
+1. **Decisions take precedence over decoration.**
+2. **Projects demonstrate; skills summarize.**
+3. **The home page allows scanning; case studies allow depth.**
+4. **Dark mode and light mode are two deliberate compositions, not an automatic inversion.**
+5. **The design does not need React, scroll animations or additional JavaScript to work.**
 
-## 2. Diagnóstico del diseño actual
+## 2. Diagnosis of the current design
 
-### Elementos que deben conservarse
+### Elements that must be preserved
 
-- Contenido estructurado y completamente bilingüe.
-- Casos de estudio con problema, restricciones, arquitectura y trade-offs.
-- Fotografía personal, que aporta cercanía.
-- Astro estático, colecciones y separación entre contenido y presentación.
-- Preferencia de tema persistente y soporte inicial para `prefers-color-scheme`.
-- Navegación por anclas y rutas localizadas.
+- Structured and fully bilingual content.
+- Case studies with problem, constraints, architecture and trade-offs.
+- Personal photography, which adds closeness.
+- Static Astro, collections and separation between content and presentation.
+- Persistent theme preference and initial support for `prefers-color-scheme`.
+- Anchor navigation and localized routes.
 
-### Problemas que debe resolver la migración
+### Problems the migration must solve
 
-- Inter, azul y teal producen una identidad cercana a una plantilla tecnológica genérica.
-- El uso repetido de `.card`, `.pill-list` y `.chip` hace que proyectos, experiencia, educación y habilidades tengan la misma jerarquía.
-- Los proyectos más valiosos no destacan suficientemente sobre el resto del contenido.
-- Los casos de estudio presentan cada bloque como otra tarjeta, diluyendo su estructura narrativa.
-- Los tokens cubren principalmente color, espacio y radios; faltan decisiones sistemáticas de tipografía, movimiento y elevación.
-- Existen colores hardcodeados en el hero, fuera de la paleta.
-- Los tags estáticos tienen estilos hover aunque no sean interactivos.
-- La navegación móvil se limita a envolver elementos, sin una composición específica.
-- Faltan skip link, estado accesible del selector de tema y una estrategia uniforme para foco bajo el header sticky.
+- Inter, blue and teal produce an identity close to a generic tech template.
+- The repeated use of `.card`, `.pill-list` and `.chip` gives projects, experience, education and skills the same hierarchy.
+- The most valuable projects do not stand out enough from the rest of the content.
+- Case studies present every block as another card, diluting their narrative structure.
+- Tokens mainly cover color, space and radii; systematic decisions on typography, motion and elevation are missing.
+- There are hardcoded colors in the hero, outside the palette.
+- Static tags have hover styles even though they are not interactive.
+- Mobile navigation is limited to wrapping elements, without a specific composition.
+- There is no skip link, no accessible state for the theme toggle and no uniform strategy for focus under the sticky header.
 
-## 3. Arquitectura de la experiencia
+## 3. Experience architecture
 
-### Orden de la home
+### Home page order
 
 1. **Hero**
-2. **Resumen profesional**
-3. **Proyectos**
-4. **Experiencia**
-5. **Habilidades**
-6. **Educación**
-7. **Contacto**
+2. **Professional summary**
+3. **Projects**
+4. **Experience**
+5. **Skills**
+6. **Education**
+7. **Contact**
 
-Los proyectos deben aparecer antes de la experiencia porque son la evidencia más concreta del razonamiento técnico. El orden de navegación en los archivos `home.md` debe reflejar ese cambio. No será necesario modificar los esquemas de contenido.
+Projects must appear before experience because they are the most concrete evidence of technical reasoning. The navigation order in the `home.md` files must reflect this change. No content schema changes are required.
 
 ### Hero
 
-Composición asimétrica de 7/5 columnas:
+Desktop: asymmetric 7/5 column composition:
 
-- Rol como metadato técnico.
-- Nombre como elemento tipográfico dominante.
-- Descripción actual, sin reescribir su mensaje.
-- CTA principal a contacto y enlace secundario a proyectos.
-- Fotografía a la derecha, sin apariencia de tarjeta flotante.
-- Marco geométrico, pequeñas marcas de registro y una cuadrícula localizada detrás del retrato.
+- Role as technical metadata.
+- Name as the dominant typographic element.
+- Current description, without rewriting its message.
+- Primary CTA to contact and secondary link to projects.
+- Photograph on the right, without looking like a floating card.
+- Geometric frame, small registration marks and a localized grid behind the portrait.
 
-La fotografía debe conservar su proporción 4:5. El fondo cálido de la imagen se integra con el acento cobre del sistema.
+Mobile: the photograph becomes a small fixed square avatar (5rem wide, 4:5 ratio, `radius(md)`, accent border) placed next to role + name, without grid pattern or registration marks. Lede, CTAs and social links stay full width below to avoid irregular line wrapping.
 
-### Resumen profesional
+The photograph must keep its 4:5 ratio. The warm background of the image integrates with the system's copper accent.
 
-Los siete highlights se presentan como una **ficha de especificaciones**, en dos columnas y con índices discretos. Se eliminan las pills.
+### Professional summary
 
-No se deben extraer cifras mediante parsing ni modificar el contenido para fabricar métricas nuevas.
+The seven highlights are presented as a **spec sheet**, in two columns with discreet indexes. Pills are removed.
 
-### Proyectos
+Figures must not be extracted through parsing nor must the content be modified to fabricate new metrics.
 
-Dos composiciones editoriales de gran formato, una por proyecto:
+### Projects
 
-- Número de proyecto.
-- Estado.
-- Título y resumen.
-- Stack como lista técnica compacta.
-- Tres highlights.
-- Enlace dominante al caso de estudio y enlace secundario al repositorio.
-- Captura de SplitIt cuando exista; composición tipográfica de fallback para Portfolio.
+Two large editorial compositions, one per project:
 
-No se debe introducir contenido especial hardcodeado para SplitIt. El componente utilizará el primer screenshot disponible y un fallback para proyectos sin imágenes.
+- Project number.
+- Status.
+- Title and summary.
+- Stack as a compact technical list.
+- Three highlights.
+- Dominant link to the case study and secondary link to the repository.
+- SplitIt screenshot when available; typographic fallback composition for Portfolio.
 
-### Experiencia
+No special hardcoded content must be introduced for SplitIt. The component will use the first available screenshot and a fallback for projects without images.
 
-Una línea temporal vertical real:
+### Experience
 
-- Periodo y empresa como metadatos.
-- Rol y resumen con mayor jerarquía.
-- Logros como lista legible.
-- Stack al final, visualmente subordinado.
+A real vertical timeline:
 
-La línea de decisión se convierte aquí en el principal recurso gráfico.
+- Period and company as metadata.
+- Role and summary with greater hierarchy.
+- Achievements as a readable list.
+- Stack at the end, visually subordinate.
 
-### Habilidades
+The decision line becomes the main graphic resource here.
 
-Una matriz de capacidades, no una colección de siete tarjetas:
+### Skills
 
-- Nombre del grupo a la izquierda.
-- Elementos a la derecha como listas inline.
-- Separación mediante reglas horizontales.
-- Sin barras de dominio, porcentajes ni puntuaciones no sustentadas por el contenido.
+A capabilities matrix, not a collection of seven cards:
 
-### Educación y contacto
+- Group name on the left.
+- Items on the right as inline lists.
+- Separation through horizontal rules.
+- No mastery bars, percentages or scores not supported by the content.
 
-- Educación se reduce a un bloque compacto y tipográfico.
-- Contacto se convierte en el cierre visual de la página: gran titular, descripción, CTA de email y enlaces directos.
-- Footer mínimo, sin competir con el CTA final.
+### Education and contact
 
-## 4. Casos de estudio
+- Education is reduced to a compact, typographic block.
+- Contact becomes the visual closing of the page: large headline, description, email CTA and direct links.
+- Minimal footer, not competing with the final CTA.
 
-Cada página debe parecer un **documento de arquitectura bien editado**, no una sucesión de tarjetas.
+## 4. Case studies
 
-### Estructura
+Each page must look like a **well-edited architecture document**, not a succession of cards.
 
-1. Enlace de regreso.
-2. Header con título, resumen y metadatos.
-3. Navegación local por secciones en desktop.
-4. Problema como columna editorial de aproximadamente `68ch`.
-5. Restricciones, arquitectura y trade-offs como listas numeradas conectadas por la línea de decisión.
-6. Galería de capturas en retícula 2×2.
-7. Estado y próximos pasos como paneles complementarios.
-8. Enlaces finales.
+### Structure
 
-Las secciones deben conservar sus headings semánticos y recibir IDs estables para navegación local. No se debe añadir lightbox ni comportamiento de scroll dependiente de JavaScript.
+1. Back link.
+2. Header with title, summary and metadata.
+3. Local section navigation on desktop.
+4. Problem as an editorial column of approximately `68ch`.
+5. Constraints, architecture and trade-offs as numbered lists connected by the decision line.
+6. Screenshot gallery in a 2×2 grid.
+7. Status and next steps as complementary panels.
+8. Final links.
 
-## 5. Fundamentos del design system
+Sections must keep their semantic headings and receive stable IDs for local navigation. No lightbox or JavaScript-dependent scroll behavior must be added.
+
+## 5. Design system foundations
 
 ### 5.1 Color
 
-| Token semántico          | Light     | Dark      |
+| Semantic token           | Light     | Dark      |
 | ------------------------ | --------- | --------- |
 | `--color-canvas`         | `#F4F1EA` | `#0E1419` |
 | `--color-surface`        | `#FBF9F4` | `#151D24` |
@@ -168,161 +170,161 @@ Las secciones deben conservar sus headings semánticos y recibir IDs estables pa
 | `--color-accent-hover`   | `#7C2C17` | `#FFB99D` |
 | `--color-on-accent`      | `#FFFFFF` | `#28140D` |
 
-El header debe derivar su fondo translúcido de `--color-canvas`; no requiere una segunda paleta propia.
+The header must derive its translucent background from `--color-canvas`; it does not need its own second palette.
 
-#### Contraste de las combinaciones principales
+#### Contrast of the main combinations
 
-| Combinación                     | Ratio   |
-| ------------------------------- | ------- |
-| Light: texto/canvas             | 14.13:1 |
-| Light: texto secundario/canvas  | 5.61:1  |
-| Light: acento/canvas            | 6.08:1  |
-| Light: texto sobre botón acento | 6.86:1  |
-| Dark: texto/canvas              | 16.28:1 |
-| Dark: texto secundario/canvas   | 8.97:1  |
-| Dark: acento/canvas             | 9.32:1  |
-| Dark: texto sobre botón acento  | 8.83:1  |
+| Combination                  | Ratio   |
+| ---------------------------- | ------- |
+| Light: text/canvas           | 14.13:1 |
+| Light: secondary text/canvas | 5.61:1  |
+| Light: accent/canvas         | 6.08:1  |
+| Light: text on accent button | 6.86:1  |
+| Dark: text/canvas            | 16.28:1 |
+| Dark: secondary text/canvas  | 8.97:1  |
+| Dark: accent/canvas          | 9.32:1  |
+| Dark: text on accent button  | 8.83:1  |
 
-Todos superan WCAG AA para texto normal. El foco utiliza `--color-accent` con outline y offset, sin depender solamente de cambios de fondo.
+All exceed WCAG AA for normal text. Focus uses `--color-accent` with outline and offset, not relying only on background changes.
 
-### 5.2 Tipografía
+### 5.2 Typography
 
-- **Display y headings:** Bricolage Grotesque, pesos 600–700.
-- **Texto e interfaz:** IBM Plex Sans, pesos 400–600.
-- **Metadatos e índices:** `ui-monospace`, sin descargar una tercera familia.
+- **Display and headings:** Bricolage Grotesque, weights 600–700.
+- **Text and interface:** IBM Plex Sans, weights 400–600.
+- **Metadata and indexes:** `ui-monospace`, without downloading a third family.
 
-Las fuentes se autoalojan en WOFF2, con subconjunto latin, `font-display: swap` y sus licencias correspondientes.
+Fonts are self-hosted in WOFF2, with a latin subset, `font-display: swap` and their corresponding licenses.
 
-#### Escala principal
+#### Main scale
 
-| Uso              | Valor                       |
-| ---------------- | --------------------------- |
-| Metadata         | `0.75rem`                   |
-| Texto secundario | `0.875rem`                  |
-| Body             | `1rem`                      |
-| Lede             | `1.125–1.25rem`             |
-| H3               | `1.375rem`                  |
-| H2               | `clamp(2rem, 4vw, 3.25rem)` |
-| H1 de proyecto   | `clamp(2.75rem, 6vw, 5rem)` |
-| Nombre en hero   | `clamp(3.5rem, 8vw, 7rem)`  |
+| Use            | Value                       |
+| -------------- | --------------------------- |
+| Metadata       | `0.75rem`                   |
+| Secondary text | `0.875rem`                  |
+| Body           | `1rem`                      |
+| Lede           | `1.125–1.25rem`             |
+| H3             | `1.375rem`                  |
+| H2             | `clamp(2rem, 4vw, 3.25rem)` |
+| Project H1     | `clamp(2.75rem, 6vw, 5rem)` |
+| Hero name      | `clamp(3.5rem, 8vw, 7rem)`  |
 
-Body con interlineado `1.65`; headings entre `1.02` y `1.12`; tracking negativo únicamente en display.
+Body with `1.65` line height; headings between `1.02` and `1.12`; negative tracking only on display.
 
-### 5.3 Espacio y composición
+### 5.3 Space and composition
 
-- Escala base de 4 px: `4, 8, 12, 16, 24, 32, 48, 64, 96, 128`.
-- Contenedor máximo: `76rem`.
-- Columna de lectura: `68ch`.
-- Gutter fluido: `clamp(1rem, 3vw, 2rem)`.
-- Separación de secciones: `clamp(4.5rem, 9vw, 8rem)`.
-- Desktop: retícula de 12 columnas.
-- Tablet: 6 columnas.
-- Mobile: 4 columnas.
-- Breakpoints: `40rem`, `48rem` y `64rem`.
+- 4 px base scale: `4, 8, 12, 16, 24, 32, 48, 64, 96, 128`.
+- Maximum container: `76rem`.
+- Reading column: `68ch`.
+- Fluid gutter: `clamp(1rem, 3vw, 2rem)`.
+- Section spacing: `clamp(4.5rem, 9vw, 8rem)`.
+- Desktop: 12-column grid.
+- Tablet: 6 columns.
+- Mobile: 4 columns.
+- Breakpoints: `40rem`, `48rem` and `64rem`.
 
-### 5.4 Forma y elevación
+### 5.4 Shape and elevation
 
-- Radios: `4px`, `8px`, `16px` y `pill`.
-- Botones: radio pequeño.
-- Fotografía y screenshots: radio medio/grande.
-- Tags de stack: rectangulares, no pills.
-- Status: pill con texto e indicador, no solamente color.
-- Jerarquía mediante espacio, bordes y contraste de superficie.
-- Sin glassmorphism, gradientes decorativos ni sombras en cada bloque.
+- Radii: `4px`, `8px`, `16px` and `pill`.
+- Buttons: small radius.
+- Photographs and screenshots: medium/large radius.
+- Stack tags: rectangular, not pills.
+- Status: pill with text and indicator, not color alone.
+- Hierarchy through space, borders and surface contrast.
+- No glassmorphism, decorative gradients or shadows on every block.
 
-### 5.5 Componentes básicos
+### 5.5 Basic components
 
 #### Button
 
-- Primario: fondo acento y `--color-on-accent`.
-- Secundario: transparente con borde fuerte.
-- Text link: para acciones terciarias.
-- Altura mínima de 44 px.
-- Sin transformaciones de escala.
+- Primary: accent background and `--color-on-accent`.
+- Secondary: transparent with strong border.
+- Text link: for tertiary actions.
+- Minimum height of 44 px.
+- No scale transforms.
 
 #### TagList
 
-- Exclusivamente informativo.
-- Sin hover ni apariencia de botón.
-- Reutilizado en proyectos, experiencia y casos de estudio.
+- Strictly informational.
+- No hover or button appearance.
+- Reused in projects, experience and case studies.
 
 #### SectionHeading
 
-- Eyebrow, título y descripción opcional.
-- Índice de sección como elemento decorativo.
-- Componente Astro compartido para eliminar markup repetido.
+- Eyebrow, title and optional description.
+- Section index as a decorative element.
+- Shared Astro component to eliminate repeated markup.
 
 #### Panel
 
-- Reservado para metadatos, capturas y estados que realmente necesitan agrupación visual.
-- No será el contenedor predeterminado de toda sección.
+- Reserved for metadata, screenshots and states that genuinely need visual grouping.
+- It will not be the default container for every section.
 
-## 6. Temas, movimiento y accesibilidad
+## 6. Themes, motion and accessibility
 
-### Dark y light mode
+### Dark and light mode
 
-- Mantener `data-theme` y la clave `localStorage` existente: `theme`.
-- Conservar la inicialización inline para evitar FOUC.
-- Actualizar `color-scheme` y `meta[name="theme-color"]`.
-- Reflejar el estado del botón mediante `aria-pressed`.
-- Mantener iconos decorativos con `aria-hidden="true"`.
-- No animar colores durante la carga inicial.
+- Keep `data-theme` and the existing `localStorage` key: `theme`.
+- Preserve the inline initialization to avoid FOUC.
+- Update `color-scheme` and `meta[name="theme-color"]`.
+- Reflect the button state with `aria-pressed`.
+- Keep decorative icons with `aria-hidden="true"`.
+- Do not animate colors during initial load.
 
-### Movimiento
+### Motion
 
-- Entrada breve y escalonada del hero.
-- Aparición de la línea de decisión mediante CSS.
-- Desplazamiento máximo de 4 px en flechas o indicadores de enlace.
-- Duraciones: `120ms`, `200ms` y `480ms`.
-- Sin parallax, scroll-jacking, cursor personalizado ni animación permanente.
-- `prefers-reduced-motion: reduce` elimina reveals, transiciones no esenciales y smooth scroll.
+- Brief, staggered hero entrance.
+- Decision line appearance through CSS.
+- Maximum 4 px displacement on arrows or link indicators.
+- Durations: `120ms`, `200ms` and `480ms`.
+- No parallax, scroll-jacking, custom cursor or permanent animation.
+- `prefers-reduced-motion: reduce` removes reveals, non-essential transitions and smooth scroll.
 
-### Accesibilidad
+### Accessibility
 
-Objetivo: **WCAG 2.2 AA**.
+Goal: **WCAG 2.2 AA**.
 
-- Skip link a `main`.
-- `scroll-margin-top` para anclas y foco bajo el header.
-- Navegación completa por teclado.
-- Focus visible consistente.
-- Orden DOM igual al orden visual.
-- Objetivos interactivos preferentemente de 44×44 px.
-- Zoom al 200% sin navegación horizontal de contenido.
-- Capturas con sus alt text localizados actuales.
-- Prueba de español e inglés para evitar truncamientos.
+- Skip link to `main`.
+- `scroll-margin-top` for anchors and focus under the header.
+- Full keyboard navigation.
+- Consistent visible focus.
+- DOM order equal to visual order.
+- Interactive targets preferably 44×44 px.
+- 200% zoom without horizontal content scrolling.
+- Screenshots with their current localized alt text.
+- Test Spanish and English to avoid truncation.
 
-## 7. Restricciones de implementación
+## 7. Implementation constraints
 
-El agente ejecutor debe respetar las siguientes restricciones:
+The executing agent must respect the following constraints:
 
-1. No cambiar las rutas ni la estrategia de internacionalización.
-2. No modificar `src/content.config.ts`: la migración no necesita cambios de esquema.
-3. No reescribir el contenido editorial. Los únicos cambios permitidos en `home.md` son los necesarios para ordenar la navegación según la nueva home.
-4. No añadir React, un framework UI, una librería de animación ni JavaScript de cliente para tareas que CSS y HTML puedan resolver.
-5. Mantener el sitio estático y el uso actual de Astro y Sass.
-6. Usar tokens semánticos; no introducir colores hexadecimales en componentes.
-7. Hacer cambios acotados y seguir las convenciones existentes del proyecto.
-8. Ejecutar las validaciones indicadas después de cada fase.
-9. No publicar una combinación incompleta de sistemas visuales: la migración puede avanzar por fases, pero home y casos de estudio deben compartir el sistema completo antes del release.
+1. Do not change the routes or the internationalization strategy.
+2. Do not modify `src/content.config.ts`: the migration needs no schema changes.
+3. Do not rewrite the editorial content. The only allowed changes in `home.md` are those needed to reorder the navigation according to the new home page.
+4. Do not add React, a UI framework, an animation library or client-side JavaScript for tasks that CSS and HTML can solve.
+5. Keep the site static and the current use of Astro and Sass.
+6. Use semantic tokens; do not introduce hexadecimal colors in components.
+7. Make scoped changes and follow the project's existing conventions.
+8. Run the indicated validations after each phase.
+9. Do not ship an incomplete combination of visual systems: the migration may advance in phases, but home and case studies must share the complete system before release.
 
-## 8. Plan de migración
+## 8. Migration plan
 
-La migración debe realizarse en una rama visual, con entregas pequeñas y verificables, pero publicarse únicamente cuando home y casos de estudio compartan el sistema completo.
+The migration must be done on a visual branch, with small, verifiable deliverables, but released only when home and case studies share the complete system.
 
-### Fase 0 — Documentación y baseline
+### Phase 0 — Documentation and baseline
 
-**Alcance**
+**Scope**
 
-- Conservar este documento como referencia de implementación.
-- Capturar la versión actual en mobile/desktop y ambos temas.
-- Ejecutar `pnpm quality`.
-- Registrar las seis rutas localizadas como matriz de validación.
+- Keep this document as the implementation reference.
+- Capture the current version on mobile/desktop and both themes.
+- Run `pnpm quality`.
+- Record the six localized routes as the validation matrix.
 
-**Resultado:** diseño aprobado y baseline conocido.
+**Outcome:** approved design and known baseline.
 
-### Fase 1 — Foundations
+### Phase 1 — Foundations
 
-**Archivos principales**
+**Main files**
 
 - `src/assets/styles/_tokens.scss`
 - `src/assets/styles/palette.scss`
@@ -330,95 +332,95 @@ La migración debe realizarse en una rama visual, con entregas pequeñas y verif
 - `src/assets/styles/_patterns.scss`
 - `src/assets/styles/commons.scss`
 - `src/assets/styles/reset.scss`
-- Nuevo `src/assets/styles/fonts.scss`
-- Nuevos assets bajo `public/fonts/`
+- New `src/assets/styles/fonts.scss`
+- New assets under `public/fonts/`
 
-**Trabajo**
+**Work**
 
-1. Incorporar fuentes y escala tipográfica.
-2. Sustituir la paleta por tokens semánticos.
-3. Mantener temporalmente aliases de los nombres antiguos para evitar una migración big-bang.
-4. Eliminar gradientes y colores hardcodeados del hero durante su migración.
-5. Crear estilos globales de foco, selección, skip link y reduced motion.
-6. Añadir `src/components/SectionHeading.astro` y `src/components/TagList.astro`.
+1. Incorporate fonts and the typographic scale.
+2. Replace the palette with semantic tokens.
+3. Temporarily keep aliases of the old names to avoid a big-bang migration.
+4. Remove gradients and hardcoded colors from the hero during its migration.
+5. Create global styles for focus, selection, skip link and reduced motion.
+6. Add `src/components/SectionHeading.astro` and `src/components/TagList.astro`.
 
-**Validación:** `pnpm quality`, contraste y ausencia de FOUC.
+**Validation:** `pnpm quality`, contrast and absence of FOUC.
 
-### Fase 2 — Shell y navegación
+### Phase 2 — Shell and navigation
 
-**Archivos**
+**Files**
 
 - `src/layouts/Layout.astro`
 - `src/components/Header.astro`
 - `src/components/Footer.astro`
 
-**Trabajo**
+**Work**
 
-- Nuevo header compacto y grid global.
-- Navegación móvil en dos filas con scroll horizontal accesible, sin menú JavaScript.
+- New compact header and global grid.
+- Mobile navigation in two rows with accessible horizontal scroll, without a JavaScript menu.
 - Skip link.
-- Theme toggle accesible.
-- `theme-color` por modo.
-- Offsets para anchors y foco.
-- Footer simplificado.
+- Accessible theme toggle.
+- `theme-color` per mode.
+- Offsets for anchors and focus.
+- Simplified footer.
 
-**Validación:** teclado, persistencia del tema y cambio de idioma desde home y proyectos.
+**Validation:** keyboard, theme persistence and language switching from home and projects.
 
-### Fase 3 — Home
+### Phase 3 — Home
 
-**Archivos**
+**Files**
 
 - `src/components/Home.astro`
-- Todos los componentes de `src/components/sections/`
+- All components in `src/components/sections/`
 - `src/components/SocialLinks.astro`
 - `src/content/home/en/home.md`
 - `src/content/home/es/home.md`
 
-**Orden de implementación**
+**Implementation order**
 
 1. Hero.
 2. Snapshot.
 3. Projects.
 4. Experience.
 5. Skills.
-6. Education y Contact.
+6. Education and Contact.
 
-Cada sección debe abandonar el patrón genérico de tarjetas y adoptar su composición específica. No se deben alterar textos, datos ni interfaces de las colecciones. En los archivos `home.md` solo se reordenan los elementos de navegación para reflejar la home.
+Each section must leave the generic card pattern and adopt its specific composition. Texts, data and collection interfaces must not be altered. In the `home.md` files, only the navigation items are reordered to reflect the home page.
 
-**Validación:** 320, 375, 768, 1024 y 1440 px; ambos idiomas y temas.
+**Validation:** 320, 375, 768, 1024 and 1440 px; both languages and themes.
 
-### Fase 4 — Casos de estudio
+### Phase 4 — Case studies
 
-**Archivo principal**
+**Main file**
 
 - `src/components/ProjectCaseStudy.astro`
 
-**Trabajo**
+**Work**
 
-- Header editorial.
-- Metadatos semánticos.
-- Navegación local.
-- Listas de decisiones.
-- Nueva galería.
-- Paneles de estado y próximos pasos.
-- Eliminación del uso repetido de `.card`.
+- Editorial header.
+- Semantic metadata.
+- Local navigation.
+- Decision lists.
+- New gallery.
+- Status and next steps panels.
+- Removal of the repeated use of `.card`.
 
-**Validación:** las cuatro rutas de proyecto, contenido largo en español, capturas, anchors y cambio de idioma.
+**Validation:** the four project routes, long content in Spanish, screenshots, anchors and language switching.
 
-### Fase 5 — Limpieza y release
+### Phase 5 — Cleanup and release
 
-1. Eliminar aliases Sass que ya no tengan consumidores.
-2. Eliminar `secondary`, `header-bg` y tokens obsoletos.
-3. Confirmar que ningún componente contiene hexadecimales propios.
-4. Retirar `SummaryCard.astro` e `IconLink.astro`, actualmente sin imports, como limpieza separada del rediseño.
-5. Actualizar `docs/quality-checklist.md` con la matriz de temas, idiomas y viewports.
-6. Ejecutar revisión visual completa antes de publicar.
+1. Remove Sass aliases that no longer have consumers.
+2. Remove `secondary`, `header-bg` and obsolete tokens.
+3. Confirm that no component contains its own hexadecimals.
+4. Retire `SummaryCard.astro` and `IconLink.astro`, currently with no imports, as cleanup separate from the redesign.
+5. Update `docs/quality-checklist.md` with the themes, languages and viewports matrix.
+6. Run a full visual review before releasing.
 
-No se debe añadir un feature flag permanente. El rollback se realiza desde la rama o preview, sin mantener dos sistemas visuales en producción.
+No permanent feature flag must be added. Rollback is done from the branch or preview, without keeping two visual systems in production.
 
-## 9. Matriz de validación
+## 9. Validation matrix
 
-### Rutas
+### Routes
 
 - `/`
 - `/es`
@@ -435,41 +437,41 @@ No se debe añadir un feature flag permanente. El rollback se realiza desde la r
 - 1024 px
 - 1440 px
 
-### Variantes obligatorias
+### Mandatory variants
 
 - Light mode.
 - Dark mode.
-- Español.
-- Inglés.
+- Spanish.
+- English.
 - Reduced motion.
-- Zoom al 200%.
-- Navegación por teclado.
+- 200% zoom.
+- Keyboard navigation.
 
-### Comprobaciones funcionales
+### Functional checks
 
-- Cambio de tema y persistencia después de recargar.
-- Ausencia de FOUC al cargar con cualquier tema.
-- Cambio de idioma desde home y desde proyectos.
-- Navegación por anchors sin contenido tapado por el header.
-- Skip link operativo.
-- Enlaces de repositorio y contacto.
-- Capturas y textos alternativos.
-- Ausencia de overflow horizontal del contenido.
+- Theme switching and persistence after reload.
+- Absence of FOUC when loading with any theme.
+- Language switching from home and from projects.
+- Anchor navigation without content hidden by the header.
+- Working skip link.
+- Repository and contact links.
+- Screenshots and alternative texts.
+- No horizontal content overflow.
 
-## 10. Criterios de aceptación
+## 10. Acceptance criteria
 
-- [ ] Home y casos de estudio comparten tipografía, tokens, controles y lenguaje visual.
-- [ ] Proyectos aparecen antes que experiencia en ambos idiomas.
-- [ ] Light y dark mode mantienen la misma identidad y contraste AA.
-- [ ] No quedan colores hardcodeados en componentes.
-- [ ] Los tags estáticos ya no parecen interactivos.
-- [ ] No hay regresiones en rutas, anchors, hreflang, canonicals ni sitemap.
-- [ ] La preferencia de tema persiste sin flash inicial.
-- [ ] Teclado, foco, skip link, reduced motion y zoom al 200% funcionan correctamente.
-- [ ] No se añaden React, frameworks UI ni dependencias de animación.
-- [ ] `pnpm quality` pasa completamente.
-- [ ] Lighthouse en producción tiene como objetivo al menos 95 en Performance, Accessibility, Best Practices y SEO.
+- [ ] Home and case studies share typography, tokens, controls and visual language.
+- [ ] Projects appear before experience in both languages.
+- [ ] Light and dark mode keep the same identity and AA contrast.
+- [ ] No hardcoded colors remain in components.
+- [ ] Static tags no longer look interactive.
+- [ ] No regressions in routes, anchors, hreflang, canonicals or sitemap.
+- [ ] Theme preference persists without an initial flash.
+- [ ] Keyboard, focus, skip link, reduced motion and 200% zoom work correctly.
+- [ ] No React, UI frameworks or animation dependencies are added.
+- [ ] `pnpm quality` passes completely.
+- [ ] Lighthouse in production targets at least 95 in Performance, Accessibility, Best Practices and SEO.
 
-## 11. Resultado esperado
+## 11. Expected outcome
 
-El portfolio debe presentar a Brahian como un ingeniero y líder técnico que razona sobre sistemas y toma decisiones pragmáticas. La home debe comunicar seniority y evidencia rápidamente; los casos de estudio deben premiar la lectura profunda. Trazo debe lograr esa diferenciación mediante tipografía, composición y jerarquía, sin sacrificar rendimiento, accesibilidad ni la simplicidad arquitectónica existente.
+The portfolio must present Brahian as an engineer and technical leader who reasons about systems and makes pragmatic decisions. The home page must communicate seniority and evidence quickly; the case studies must reward deep reading. Trazo must achieve that differentiation through typography, composition and hierarchy, without sacrificing performance, accessibility or the existing architectural simplicity.

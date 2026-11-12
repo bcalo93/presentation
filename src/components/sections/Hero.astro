@@ -18,26 +18,30 @@ const { copy } = Astro.props;
 
 <section class="section hero" id="home">
   <div class="hero__content">
-    <div class="hero__copy">
-      <p class="hero__role">{copy.role}</p>
-      <h1>Brahian Calo</h1>
+    <div class="hero__identity">
+      <div class="hero__media">
+        <div class="hero__frame">
+          <Image
+            src={ProfilePhoto}
+            alt={copy.portraitAlt}
+            width={371}
+            height={464}
+            sizes="(max-width: 900px) 80px, 371px"
+          />
+        </div>
+      </div>
+      <div class="hero__titles">
+        <p class="hero__role">{copy.role}</p>
+        <h1>Brahian Calo</h1>
+      </div>
+    </div>
+    <div class="hero__rest">
       <p class="hero__lede">{copy.lede}</p>
       <div class="hero__cta">
         <a class="button" href="#contact">{copy.primaryCta}</a>
         <a class="button-secondary" href="#projects">{copy.secondaryCta}</a>
       </div>
       <SocialLinks />
-    </div>
-    <div class="hero__media">
-      <div class="hero__frame">
-        <Image
-          src={ProfilePhoto}
-          alt={copy.portraitAlt}
-          width={371}
-          height={464}
-          sizes="(max-width: 900px) 100vw, 371px"
-        />
-      </div>
     </div>
   </div>
 </section>
@@ -52,7 +56,20 @@ const { copy } = Astro.props;
     align-items: center;
   }
 
-  .hero__copy {
+  .hero__identity {
+    display: contents;
+  }
+
+  .hero__titles {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    gap: space(lg);
+  }
+
+  .hero__rest {
+    grid-column: 1;
+    grid-row: 2;
     display: grid;
     gap: space(xl);
     max-width: 42rem;
@@ -91,6 +108,8 @@ const { copy } = Astro.props;
   }
 
   .hero__media {
+    grid-column: 2;
+    grid-row: 1 / span 2;
     position: relative;
     padding: space(2xl) space(2xl) space(2xl) 0;
     justify-self: end;
@@ -152,11 +171,47 @@ const { copy } = Astro.props;
   @include respond-below(lg) {
     .hero__content {
       grid-template-columns: 1fr;
+      gap: space(xl);
+    }
+
+    .hero__identity {
+      display: flex;
+      align-items: center;
+      gap: space(lg);
+    }
+
+    .hero__titles {
+      gap: space(xs);
+    }
+
+    .hero h1 {
+      line-height: 1.02;
     }
 
     .hero__media {
-      max-width: 24rem;
-      justify-self: start;
+      flex: 0 0 5rem;
+      width: 5rem;
+      padding: 0;
+    }
+
+    .hero__media::before,
+    .hero__media::after,
+    .hero__frame::after {
+      display: none;
+    }
+
+    .hero__frame {
+      border-radius: radius(md);
+      overflow: hidden;
+    }
+
+    .hero__frame::before {
+      border-radius: radius(md);
+    }
+
+    .hero__frame img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
     }
   }
 </style>
