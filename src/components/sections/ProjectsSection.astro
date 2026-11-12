@@ -1,7 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { getProjectPath } from "@/i18n/config";
+import { getHomePath, getProjectPath, locales } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
+import SectionHeading from "@/components/SectionHeading.astro";
+import TagList from "@/components/TagList.astro";
 
 interface Props {
   projects: CollectionEntry<"projects">[];
@@ -16,54 +19,111 @@ interface Props {
 }
 
 const { projects, locale, copy } = Astro.props;
+
+const allProjects = await getCollection("projects");
+
+const routes = locales.flatMap((loc) => {
+  const homeRoute = getHomePath(loc);
+  const projectRoutes = allProjects
+    .filter((project) => project.data.locale === loc)
+    .sort((left, right) => left.data.order - right.data.order)
+    .map((project) => getProjectPath(loc, project.data.path));
+
+  return [homeRoute, ...projectRoutes];
+});
 ---
 
 <section class="section" id="projects" aria-labelledby="projects-title">
-  <div class="section__header">
-    <p class="eyebrow">{copy.eyebrow}</p>
-    <h2 id="projects-title">{copy.title}</h2>
-    {copy.description && <p>{copy.description}</p>}
-  </div>
+  <SectionHeading
+    eyebrow={copy.eyebrow}
+    title={copy.title}
+    description={copy.description}
+    index="01"
+    id="projects-title"
+  />
 
-  <div class="card-grid projects-grid">
+  <div class="projects-list">
     {
-      projects.map((project) => {
+      projects.map((project, index) => {
         const highlights = project.data.highlights.slice(0, 3);
+        const screenshot = project.data.screenshots[0];
 
         return (
-          <article class="card project-card">
-            <div class="project-card__header">
-              <h3>{project.data.title}</h3>
-              <span class="chip chip--accent">{project.data.status}</span>
-            </div>
-            <p class="project-card__summary">{project.data.summary}</p>
-            <div class="pill-list">
-              {project.data.stack.map((item) => (
-                <span>{item}</span>
-              ))}
-            </div>
-            <ul class="list-muted project-card__highlights">
-              {highlights.map((highlight) => (
-                <li>{highlight}</li>
-              ))}
-            </ul>
-            <div class="project-card__actions">
-              {project.data.repositoryHref && (
-                <a
-                  class="button-secondary"
-                  href={project.data.repositoryHref}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {copy.repositoryLabel}
-                </a>
-              )}
-              <a
-                class="button-secondary"
-                href={getProjectPath(locale, project.data.path)}
-              >
-                {copy.readCaseStudyLabel}
-              </a>
+          <article class="project">
+            <header class="project__meta">
+              <span class="project__number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span class="project__status">
+                <span class="project__status-dot" aria-hidden="true" />
+                {project.data.status}
+              </span>
+            </header>
+
+            <div class="project__body">
+              <div class="project__copy">
+                <h3 class="project__title">{project.data.title}</h3>
+                <p class="project__summary">{project.data.summary}</p>
+                <TagList items={project.data.stack} />
+                <ul class="project__highlights">
+                  {highlights.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+                <div class="project__actions">
+                  <a
+                    class="project__link"
+                    href={getProjectPath(locale, project.data.path)}
+                  >
+                    {copy.readCaseStudyLabel}
+                  </a>
+                  {project.data.repositoryHref && (
+                    <a
+                      class="project__link project__link--secondary"
+                      href={project.data.repositoryHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {copy.repositoryLabel}
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div class="project__media">
+                {screenshot ? (
+                  <img
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="project__blueprint" aria-hidden="true">
+                    <div class="project__blueprint-head">
+                      <span class="project__blueprint-ref">
+                        {project.data.title}
+                      </span>
+                      <span class="project__blueprint-sheet">01</span>
+                    </div>
+                    <ol class="project__blueprint-routes">
+                      {routes.map((route, routeIndex) => (
+                        <li>
+                          <span class="project__route-index">
+                            {String(routeIndex + 1).padStart(2, "0")}
+                          </span>
+                          <code>{route}</code>
+                        </li>
+                      ))}
+                    </ol>
+                    <div class="project__blueprint-meta">
+                      <span>ASTRO</span>
+                      <span>SSG</span>
+                      <span>EN·ES</span>
+                      <span>WCAG AA</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </article>
         );
@@ -75,40 +135,285 @@ const { projects, locale, copy } = Astro.props;
 <style lang="scss">
   @use "../../assets/styles/index" as *;
 
-  a:hover {
-    color: color(primary);
+  .projects-list {
+    position: relative;
+    display: grid;
+    gap: space(5xl);
   }
 
-  .projects-grid {
-    @include responsive-grid(2, md);
+  .projects-list::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    width: 1px;
+    background: color(border-strong);
   }
 
-  .project-card {
+  .project {
+    position: relative;
+    display: grid;
+    gap: space(xl);
+    padding-left: space(3xl);
+  }
+
+  .project::before {
+    content: "";
+    position: absolute;
+    top: 0.15rem;
+    left: 0;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: color(canvas);
+    border: 1px solid color(accent);
+  }
+
+  .project__meta {
     display: flex;
-    flex-direction: column;
-    gap: space(md);
-    height: 100%;
-  }
-
-  .project-card__header {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: space(md);
+  }
+
+  .project__number {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .project__status {
+    display: inline-flex;
     align-items: center;
+    gap: space(2xs);
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
   }
 
-  .project-card__summary {
+  .project__status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: radius(pill);
+    background: color(accent);
+  }
+
+  .project__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: space(2xl) space(3xl);
+    align-items: start;
+  }
+
+  .project:nth-child(even) .project__copy {
+    order: 2;
+  }
+
+  .project:nth-child(even) .project__media {
+    order: 1;
+    justify-self: start;
+  }
+
+  .project__copy {
+    display: grid;
+    gap: space(md);
     align-content: start;
   }
 
-  .project-card__highlights {
-    align-content: start;
+  .project__title {
+    font-family: $font-display;
+    font-size: var(--text-h2);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
-  .project-card__actions {
+  .project__summary {
+    font-size: var(--text-lede);
+  }
+
+  .project__highlights {
+    display: grid;
+    gap: space(sm);
+    list-style: none;
+  }
+
+  .project__highlights li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: color(text-muted);
+  }
+
+  .project__highlights li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 1px;
+    background: color(accent);
+  }
+
+  .project__actions {
     display: flex;
     flex-wrap: wrap;
+    gap: space(lg);
+    align-items: center;
+    margin-top: space(sm);
+  }
+
+  .project__link {
+    display: inline-flex;
+    align-items: center;
+    gap: space(xs);
+    min-height: 2.75rem;
+    color: color(accent);
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+  }
+
+  .project__link::after {
+    content: "\2192";
+  }
+
+  .project__link:hover {
+    border-bottom-color: color(accent);
+  }
+
+  .project__link--secondary {
+    color: color(text-muted);
+    font-weight: 500;
+  }
+
+  .project__link--secondary::after {
+    content: "\2197";
+  }
+
+  .project__link--secondary:hover {
+    color: color(accent);
+    border-bottom-color: color(accent);
+  }
+
+  .project__media {
+    justify-self: end;
+    max-width: 16rem;
+    width: 100%;
+  }
+
+  .project__media img {
+    width: 100%;
+    height: auto;
+    border: 1px solid color(border);
+    background: color(surface);
+  }
+
+  .project__blueprint {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: space(md);
+    aspect-ratio: 4 / 5;
+    padding: space(md);
+    border: 1px solid color(border-strong);
+    background-color: color(surface-subtle);
+    background-image:
+      linear-gradient(to right, color(border) 1px, transparent 1px),
+      linear-gradient(to bottom, color(border) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+  }
+
+  .project__blueprint-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
     gap: space(sm);
-    margin-top: auto;
+    padding-bottom: space(sm);
+    border-bottom: 1px solid color(border-strong);
+  }
+
+  .project__blueprint-ref {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color(text);
+  }
+
+  .project__blueprint-sheet {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    color: color(text-muted);
+  }
+
+  .project__blueprint-routes {
+    position: relative;
+    display: grid;
+    align-content: center;
+    gap: space(sm);
+    margin: 0;
+    padding-left: space(md);
+    list-style: none;
+  }
+
+  .project__blueprint-routes::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    width: 1px;
+    background: color(border-strong);
+  }
+
+  .project__blueprint-routes li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: space(sm);
+  }
+
+  .project__route-index {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    color: color(accent);
+  }
+
+  .project__blueprint-routes code {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    color: color(text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .project__blueprint-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(2xs) space(sm);
+    padding-top: space(sm);
+    border-top: 1px solid color(border);
+  }
+
+  .project__blueprint-meta span {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: color(text-muted);
+  }
+
+  @include respond-below(md) {
+    .project__body {
+      grid-template-columns: 1fr;
+    }
+
+    .project:nth-child(even) .project__copy,
+    .project:nth-child(even) .project__media {
+      order: 0;
+    }
+
+    .project__media {
+      justify-self: start;
+    }
   }
 </style>

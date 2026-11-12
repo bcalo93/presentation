@@ -8,10 +8,10 @@ nav:
   items:
     - id: home
       label: Home
-    - id: experience
-      label: Experience
     - id: projects
       label: Projects
+    - id: experience
+      label: Experience
     - id: skills
       label: Skills
     - id: education
@@ -19,6 +19,7 @@ nav:
     - id: contact
       label: Contact
   themeToggleLabel: Toggle color theme
+  menuLabel: Menu
   languageSwitcherLabel: Switch language
   languageLabels:
     en: English
@@ -118,10 +119,7 @@ contact:
   title: Open to connecting with people in tech
   description: If you’d like to connect, exchange ideas, or talk about software, architecture, or AI-first ways of working, feel free to reach out.
   emailCta: Send email
-  linkedinCta: Open LinkedIn
   links:
-    - label: Email
-      value: bcalo93@gmail.com
     - label: LinkedIn
       value: linkedin.com/in/brahian-calo-suhr
     - label: GitHub

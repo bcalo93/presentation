@@ -1,6 +1,8 @@
 ---
 import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import SectionHeading from "@/components/SectionHeading.astro";
+import TagList from "@/components/TagList.astro";
 
 interface Props {
   homeEntry: CollectionEntry<"home">;
@@ -12,30 +14,31 @@ const { homeEntry, project, backHref } = Astro.props;
 const { Content } = await render(project);
 const copy = homeEntry.data.projectPage;
 const hasNextStep = Boolean(project.data.nextStep);
+const hasScreenshots = project.data.screenshots.length > 0;
+const hasLinks = project.data.links.length > 0;
+const tocLabel =
+  homeEntry.data.locale === "es" ? "En esta página" : "On this page";
 ---
 
 <article class="case-study">
   <a class="case-study__back-link" href={backHref}>{copy.backToProjects}</a>
 
-  <header class="case-study__hero">
-    <div class="case-study__hero-copy">
-      <p class="eyebrow">{copy.eyebrow}</p>
-      <h1>{project.data.title}</h1>
-      <p class="case-study__summary">{project.data.summary}</p>
-    </div>
+  <header class="case-study__header">
+    <p class="case-study__eyebrow">{copy.eyebrow}</p>
+    <h1>{project.data.title}</h1>
+    <p class="case-study__summary">{project.data.summary}</p>
 
-    <div class="case-study__meta card">
-      <div>
-        <p class="case-study__label">{copy.statusLabel}</p>
-        <p>{project.data.status}</p>
+    <dl class="case-study__meta">
+      <div class="case-study__meta-item">
+        <dt>{copy.statusLabel}</dt>
+        <dd>{project.data.status}</dd>
       </div>
-      <div>
-        <p class="case-study__label">{copy.repositoryLabel}</p>
-        <p>
+      <div class="case-study__meta-item">
+        <dt>{copy.repositoryLabel}</dt>
+        <dd>
           {
             project.data.repositoryHref ? (
               <a
-                class="case-study__label-link"
                 href={project.data.repositoryHref}
                 target="_blank"
                 rel="noreferrer"
@@ -46,139 +49,206 @@ const hasNextStep = Boolean(project.data.nextStep);
               project.data.repositoryLabel
             )
           }
-        </p>
+        </dd>
       </div>
-      <div>
-        <p class="case-study__label">{copy.stackLabel}</p>
-        <div class="pill-list">
-          {project.data.stack.map((item) => <span>{item}</span>)}
-        </div>
+      <div class="case-study__meta-item">
+        <dt>{copy.stackLabel}</dt>
+        <dd>
+          <TagList items={project.data.stack} />
+        </dd>
       </div>
-    </div>
+    </dl>
   </header>
 
-  <section class="section case-study__section">
-    <div class="section__header">
-      <p class="eyebrow">{copy.problem.eyebrow}</p>
-      <h2>{copy.problem.title}</h2>
-    </div>
-    <div class="card case-study__body">
-      <p>{project.data.problem}</p>
-      <Content />
-    </div>
-  </section>
-
-  <section class="section case-study__section">
-    <div class="section__header">
-      <p class="eyebrow">{copy.constraints.eyebrow}</p>
-      <h2>{copy.constraints.title}</h2>
-    </div>
-    <div class="card">
-      <ul class="list-muted case-study__list">
-        {project.data.constraints.map((item) => <li>{item}</li>)}
+  <div class="case-study__layout">
+    <nav class="case-study__toc" aria-label={tocLabel}>
+      <ul>
+        <li><a href="#problem">{copy.problem.eyebrow}</a></li>
+        <li><a href="#constraints">{copy.constraints.eyebrow}</a></li>
+        <li><a href="#architecture">{copy.architecture.eyebrow}</a></li>
+        <li><a href="#tradeoffs">{copy.tradeoffs.eyebrow}</a></li>
+        {
+          hasScreenshots && (
+            <li>
+              <a href="#screenshots">{copy.screenshots.eyebrow}</a>
+            </li>
+          )
+        }
+        <li><a href="#status">{copy.status.eyebrow}</a></li>
       </ul>
-    </div>
-  </section>
+    </nav>
 
-  <section class="section case-study__section">
-    <div class="section__header">
-      <p class="eyebrow">{copy.architecture.eyebrow}</p>
-      <h2>{copy.architecture.title}</h2>
-    </div>
-    <div class="card">
-      <ul class="list-muted case-study__list">
-        {project.data.architecture.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  <section class="section case-study__section">
-    <div class="section__header">
-      <p class="eyebrow">{copy.tradeoffs.eyebrow}</p>
-      <h2>{copy.tradeoffs.title}</h2>
-    </div>
-    <div class="card">
-      <ul class="list-muted case-study__list">
-        {project.data.tradeoffs.map((item) => <li>{item}</li>)}
-      </ul>
-    </div>
-  </section>
-
-  {
-    project.data.screenshots.length > 0 && (
-      <section class="section case-study__section">
-        <div class="section__header">
-          <p class="eyebrow">{copy.screenshots.eyebrow}</p>
-          <h2>{copy.screenshots.title}</h2>
-        </div>
-        <div class="case-study__gallery">
-          {project.data.screenshots.map((shot) => (
-            <figure class="case-study__shot">
-              <img
-                src={shot.src}
-                alt={shot.alt}
-                loading="lazy"
-                width="270"
-                height="600"
-              />
-              <figcaption>{shot.alt}</figcaption>
-            </figure>
-          ))}
+    <div class="case-study__content">
+      <section
+        class="case-study__section case-study__problem"
+        id="problem"
+        aria-labelledby="problem-title"
+      >
+        <SectionHeading
+          eyebrow={copy.problem.eyebrow}
+          title={copy.problem.title}
+          id="problem-title"
+        />
+        <div class="case-study__problem-body">
+          <p>{project.data.problem}</p>
+          <Content />
         </div>
       </section>
-    )
-  }
 
-  <section
-    class:list={[
-      "section",
-      "case-study__grid",
-      !hasNextStep && "case-study__grid--single",
-    ]}
-  >
-    <div class="card">
-      <p class="eyebrow">{copy.status.eyebrow}</p>
-      <h2>{copy.status.title}</h2>
-      <p>{project.data.statusNote}</p>
-    </div>
-    {
-      hasNextStep && (
-        <div class="card">
-          <p class="eyebrow">{project.data.nextStepsTitle}</p>
-          <h2>{copy.nextStepsHeading}</h2>
-          <p>{project.data.nextStep}</p>
-          <ul class="list-muted case-study__list">
-            {project.data.roadmap.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-  </section>
+      <section
+        class="case-study__section"
+        id="constraints"
+        aria-labelledby="constraints-title"
+      >
+        <SectionHeading
+          eyebrow={copy.constraints.eyebrow}
+          title={copy.constraints.title}
+          index="01"
+          id="constraints-title"
+        />
+        <ol class="decision-list">
+          {
+            project.data.constraints.map((item) => (
+              <li class="decision-list__item">
+                <p>{item}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
 
-  {
-    project.data.links.length > 0 && (
-      <section class="section case-study__section">
-        <div class="section__header">
-          <p class="eyebrow">{copy.links.eyebrow}</p>
-          <h2>{copy.links.title}</h2>
-        </div>
-        <div class="card case-study__links">
-          {project.data.links.map((link) => (
-            <a
-              class="button-secondary"
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {link.label}
-            </a>
-          ))}
+      <section
+        class="case-study__section"
+        id="architecture"
+        aria-labelledby="architecture-title"
+      >
+        <SectionHeading
+          eyebrow={copy.architecture.eyebrow}
+          title={copy.architecture.title}
+          index="02"
+          id="architecture-title"
+        />
+        <ol class="decision-list">
+          {
+            project.data.architecture.map((item) => (
+              <li class="decision-list__item">
+                <p>{item}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section
+        class="case-study__section"
+        id="tradeoffs"
+        aria-labelledby="tradeoffs-title"
+      >
+        <SectionHeading
+          eyebrow={copy.tradeoffs.eyebrow}
+          title={copy.tradeoffs.title}
+          index="03"
+          id="tradeoffs-title"
+        />
+        <ol class="decision-list">
+          {
+            project.data.tradeoffs.map((item) => (
+              <li class="decision-list__item">
+                <p>{item}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      {
+        hasScreenshots && (
+          <section
+            class="case-study__section"
+            id="screenshots"
+            aria-labelledby="screenshots-title"
+          >
+            <SectionHeading
+              eyebrow={copy.screenshots.eyebrow}
+              title={copy.screenshots.title}
+              id="screenshots-title"
+            />
+            <div class="case-study__gallery">
+              {project.data.screenshots.map((shot) => (
+                <figure class="case-study__shot">
+                  <img src={shot.src} alt={shot.alt} loading="lazy" />
+                  <figcaption>{shot.alt}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <section
+        class="case-study__section"
+        id="status"
+        aria-labelledby="status-title"
+      >
+        <div
+          class:list={[
+            "case-study__status",
+            !hasNextStep && "case-study__status--single",
+          ]}
+        >
+          <div class="case-study__panel">
+            <p class="case-study__panel-eyebrow">{copy.status.eyebrow}</p>
+            <h2 id="status-title">{copy.status.title}</h2>
+            <p>{project.data.statusNote}</p>
+          </div>
+          {
+            hasNextStep && (
+              <div class="case-study__panel case-study__panel--next">
+                <p class="case-study__panel-eyebrow">
+                  {project.data.nextStepsTitle}
+                </p>
+                <h3>{copy.nextStepsHeading}</h3>
+                <p>{project.data.nextStep}</p>
+                <ul class="case-study__roadmap">
+                  {project.data.roadmap.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
         </div>
       </section>
-    )
-  }
+
+      {
+        hasLinks && (
+          <section
+            class="case-study__section"
+            id="links"
+            aria-labelledby="links-title"
+          >
+            <SectionHeading
+              eyebrow={copy.links.eyebrow}
+              title={copy.links.title}
+              id="links-title"
+            />
+            <div class="case-study__links">
+              {project.data.links.map((link) => (
+                <a
+                  class="case-study__link"
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </div>
 </article>
 
 <style lang="scss">
@@ -186,73 +256,265 @@ const hasNextStep = Boolean(project.data.nextStep);
 
   .case-study {
     display: grid;
-    gap: space(2xl);
+    gap: space(4xl);
   }
 
   .case-study__back-link {
     display: inline-flex;
+    align-items: center;
+    gap: space(xs);
     width: fit-content;
-    color: color(primary);
-    font-weight: 600;
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    transition: color 0.2s ease;
   }
 
-  .case-study__hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 1fr);
-    gap: space(2xl);
-    align-items: start;
-    padding: space(md) 0 space(2xl);
+  .case-study__back-link::before {
+    content: "\2190";
+    color: color(accent);
   }
 
-  .case-study__hero-copy {
+  .case-study__back-link:hover {
+    color: color(accent);
+  }
+
+  .case-study__header {
     display: grid;
     gap: space(md);
-    max-width: 48rem;
+  }
+
+  .case-study__eyebrow {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color(text-muted);
   }
 
   .case-study__summary {
-    font-size: 1.1rem;
+    font-size: var(--text-lede);
+    color: color(text-muted);
+    max-width: 68ch;
   }
 
   .case-study__meta {
     display: grid;
-    gap: space(lg);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: space(lg) 0 0;
+    border-top: 1px solid color(border);
+    border-bottom: 1px solid color(border);
   }
 
-  .case-study__label {
-    margin-bottom: space(2xs);
-    color: color(text);
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .case-study__label-link:hover {
-    color: color(primary);
-  }
-
-  .case-study__body {
+  .case-study__meta-item {
     display: grid;
-    gap: space(md);
+    gap: space(2xs);
+    align-content: start;
+    padding: space(md) space(lg) space(md) 0;
   }
 
-  .case-study__body :global(p) + :global(p) {
+  .case-study__meta-item + .case-study__meta-item {
+    padding-left: space(lg);
+    border-left: 1px solid color(border);
+  }
+
+  .case-study__meta dt,
+  .case-study__meta dd {
+    margin: 0;
+  }
+
+  .case-study__meta dt {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color(text-muted);
+  }
+
+  .case-study__meta dd {
+    color: color(text);
+  }
+
+  .case-study__meta a {
+    color: color(accent);
+  }
+
+  .case-study__meta a:hover {
+    color: color(accent-hover);
+  }
+
+  .case-study__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: space(2xl);
+    align-items: start;
+  }
+
+  .case-study__toc {
+    display: none;
+  }
+
+  .case-study__toc ul {
+    display: grid;
+    gap: space(sm);
+    padding-left: space(md);
+    border-left: 1px solid color(border);
+    list-style: none;
+  }
+
+  .case-study__toc a {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .case-study__toc a:hover {
+    color: color(accent);
+  }
+
+  .case-study__content {
+    display: grid;
+    gap: space(5xl);
+    min-width: 0;
+  }
+
+  .case-study__section {
+    display: grid;
+    gap: space(2xl);
+  }
+
+  .case-study__problem {
+    max-width: 68ch;
+  }
+
+  .case-study__problem-body :global(p + p) {
     margin-top: space(md);
   }
 
-  .case-study__grid {
-    @include responsive-grid(2, md);
+  .decision-list {
+    --decision-gutter: #{space(4xl)};
+    position: relative;
+    display: grid;
+    gap: space(2xl);
+    margin: 0;
+    padding-left: var(--decision-gutter);
+    list-style: none;
+    counter-reset: decision;
   }
 
-  .case-study__grid .card {
-    display: flex;
-    flex-direction: column;
-    gap: space(md);
-    align-items: flex-start;
+  .decision-list::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    width: 1px;
+    background: color(border-strong);
   }
 
-  .case-study__grid--single {
+  .decision-list__item {
+    position: relative;
+    counter-increment: decision;
+  }
+
+  .decision-list__item::before {
+    content: counter(decision, decimal-leading-zero);
+    position: absolute;
+    top: 0.15rem;
+    left: calc(-1 * var(--decision-gutter) + 6px);
+    transform: translateX(-50%);
+    padding: 0 space(2xs);
+    background: color(canvas);
+    color: color(accent);
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .case-study__gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: space(lg);
+  }
+
+  .case-study__shot {
+    display: grid;
+    gap: space(sm);
+    margin: 0;
+    justify-self: center;
+    max-width: 14rem;
+  }
+
+  .case-study__shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid color(border);
+    background: color(surface);
+  }
+
+  .case-study__shot figcaption {
+    font-size: var(--text-sm);
+    color: color(text-muted);
+  }
+
+  .case-study__status {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-study__status--single {
     grid-template-columns: 1fr;
+  }
+
+  .case-study__panel {
+    display: grid;
+    gap: space(md);
+    align-content: start;
+    padding: space(lg);
+    border-top: 1px solid color(border-strong);
+  }
+
+  .case-study__panel + .case-study__panel {
+    border-left: 1px solid color(border);
+    background: color(surface);
+  }
+
+  .case-study__panel-eyebrow {
+    font-family: $font-mono;
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color(text-muted);
+  }
+
+  .case-study__panel h2,
+  .case-study__panel h3 {
+    font-size: var(--text-h3);
+    line-height: 1.12;
+  }
+
+  .case-study__roadmap {
+    display: grid;
+    gap: space(sm);
+    list-style: none;
+  }
+
+  .case-study__roadmap li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: color(text-muted);
+  }
+
+  .case-study__roadmap li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.5rem;
+    height: 1px;
+    background: color(accent);
   }
 
   .case-study__links {
@@ -261,34 +523,74 @@ const hasNextStep = Boolean(project.data.nextStep);
     gap: space(md);
   }
 
-  .case-study__gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: space(lg);
-  }
-
-  .case-study__shot {
-    display: grid;
-    gap: space(sm);
-  }
-
-  .case-study__shot img {
-    width: 100%;
-    height: auto;
+  .case-study__link {
+    display: inline-flex;
+    align-items: center;
+    gap: space(xs);
+    padding: space(sm) space(md);
     border: 1px solid color(border);
-    border-radius: radius(lg);
-    background: color(surface);
+    color: color(accent);
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
-  .case-study__shot figcaption {
-    color: color(text-muted);
-    font-size: 0.875rem;
+  .case-study__link::after {
+    content: "\2197";
+  }
+
+  .case-study__link:hover {
+    border-color: color(accent);
+    color: color(accent-hover);
+  }
+
+  @media (min-width: #{breakpoint(md)}) {
+    .case-study__layout {
+      grid-template-columns: 13rem minmax(0, 1fr);
+      gap: space(3xl);
+    }
+
+    .case-study__toc {
+      display: block;
+      position: sticky;
+      top: 6rem;
+    }
   }
 
   @include respond-below(md) {
-    .case-study__hero,
-    .case-study__grid {
+    .case-study__meta {
       grid-template-columns: 1fr;
+    }
+
+    .case-study__meta-item {
+      padding: space(md) 0;
+    }
+
+    .case-study__meta-item + .case-study__meta-item {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid color(border);
+    }
+
+    .case-study__status {
+      grid-template-columns: 1fr;
+      gap: space(2xl);
+    }
+
+    .case-study__panel + .case-study__panel {
+      border-left: 0;
+    }
+  }
+
+  @include respond-below(sm) {
+    .decision-list {
+      --decision-gutter: #{space(3xl)};
+    }
+
+    .case-study__gallery {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

@@ -18,24 +18,30 @@ const { copy } = Astro.props;
 
 <section class="section hero" id="home">
   <div class="hero__content">
-    <div class="hero__copy">
-      <p class="eyebrow">{copy.role}</p>
-      <h1>Brahian Calo</h1>
+    <div class="hero__identity">
+      <div class="hero__media">
+        <div class="hero__frame">
+          <Image
+            src={ProfilePhoto}
+            alt={copy.portraitAlt}
+            width={371}
+            height={464}
+            sizes="(max-width: 900px) 80px, 371px"
+          />
+        </div>
+      </div>
+      <div class="hero__titles">
+        <p class="hero__role">{copy.role}</p>
+        <h1>Brahian Calo</h1>
+      </div>
+    </div>
+    <div class="hero__rest">
       <p class="hero__lede">{copy.lede}</p>
-      <div class="cta-row">
+      <div class="hero__cta">
         <a class="button" href="#contact">{copy.primaryCta}</a>
         <a class="button-secondary" href="#projects">{copy.secondaryCta}</a>
       </div>
       <SocialLinks />
-    </div>
-    <div class="hero__photo card">
-      <Image
-        src={ProfilePhoto}
-        alt={copy.portraitAlt}
-        width={371}
-        height={464}
-        sizes="(max-width: 900px) 100vw, 371px"
-      />
     </div>
   </div>
 </section>
@@ -45,44 +51,167 @@ const { copy } = Astro.props;
 
   .hero__content {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 371px);
-    gap: space(2xl);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: space(2xl) space(3xl);
     align-items: center;
   }
 
-  .hero__copy {
+  .hero__identity {
+    display: contents;
+  }
+
+  .hero__titles {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    gap: space(lg);
+  }
+
+  .hero__rest {
+    grid-column: 1;
+    grid-row: 2;
     display: grid;
     gap: space(xl);
     max-width: 42rem;
   }
 
+  .hero__role {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero__role::before {
+    content: "// ";
+    color: color(accent);
+  }
+
+  .hero h1 {
+    font-family: $font-display;
+    font-size: var(--text-hero);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
   .hero__lede {
-    font-size: 1.125rem;
+    font-size: var(--text-lede);
     max-width: 38rem;
   }
 
-  .hero__photo {
-    padding: space(sm);
-    background:
-      linear-gradient(
-        180deg,
-        rgba(37, 99, 235, 0.08),
-        rgba(20, 184, 166, 0.04)
-      ),
-      color(surface);
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(md);
   }
 
-  .hero__photo img {
-    border-radius: radius(sm);
+  .hero__media {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: relative;
+    padding: space(2xl) space(2xl) space(2xl) 0;
+    justify-self: end;
+  }
+
+  .hero__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, color(border) 1px, transparent 1px),
+      linear-gradient(to bottom, color(border) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+    background-position: top left;
+    opacity: 0.5;
+  }
+
+  .hero__frame {
+    position: relative;
+    background: color(surface-subtle);
+  }
+
+  .hero__frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid color(accent);
+    pointer-events: none;
+  }
+
+  .hero__frame::after,
+  .hero__media::after {
+    content: "+";
+    position: absolute;
+    color: color(accent);
+    font-family: $font-mono;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .hero__frame::after {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero__media::after {
+    right: space(2xl);
+    bottom: space(2xl);
+    transform: translate(50%, 50%);
+  }
+
+  .hero__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   @include respond-below(lg) {
     .hero__content {
       grid-template-columns: 1fr;
+      gap: space(xl);
     }
 
-    .hero__photo {
-      max-width: 24rem;
+    .hero__identity {
+      display: flex;
+      align-items: center;
+      gap: space(lg);
+    }
+
+    .hero__titles {
+      gap: space(xs);
+    }
+
+    .hero h1 {
+      line-height: 1.02;
+    }
+
+    .hero__media {
+      flex: 0 0 5rem;
+      width: 5rem;
+      padding: 0;
+    }
+
+    .hero__media::before,
+    .hero__media::after,
+    .hero__frame::after {
+      display: none;
+    }
+
+    .hero__frame {
+      border-radius: radius(md);
+      overflow: hidden;
+    }
+
+    .hero__frame::before {
+      border-radius: radius(md);
+    }
+
+    .hero__frame img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
     }
   }
 </style>

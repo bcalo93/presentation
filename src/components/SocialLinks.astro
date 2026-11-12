@@ -1,4 +1,5 @@
 ---
+import SocialIcon from "@/components/SocialIcon.astro";
 import { SOCIAL_LINKS } from "@/constants/socials";
 ---
 
@@ -7,15 +8,46 @@ import { SOCIAL_LINKS } from "@/constants/socials";
     SOCIAL_LINKS.map((link) => (
       <li>
         <a
-          class="chip"
+          class="social-links__item"
           href={link.href}
           target="_blank"
           rel="noreferrer"
           aria-label={link.label}
+          title={link.value}
         >
-          {link.label}
+          <SocialIcon name={link.id} />
         </a>
       </li>
     ))
   }
 </ul>
+
+<style lang="scss">
+  @use "../assets/styles/index" as *;
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(sm) space(md);
+    list-style: none;
+  }
+
+  .social-links__item {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: color(text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .social-links__item :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .social-links__item:hover,
+  .social-links__item:focus-visible {
+    color: color(accent);
+  }
+</style>

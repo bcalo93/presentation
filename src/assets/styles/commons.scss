@@ -1,40 +1,74 @@
 @use "./index" as *;
 
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lede: 1.125rem;
+  --text-h3: 1.375rem;
+  --text-h2: clamp(2rem, 4vw, 3.25rem);
+  --text-h1: clamp(2.75rem, 6vw, 5rem);
+  --text-hero: clamp(3.5rem, 8vw, 7rem);
+}
+
 html,
 body {
-  font-family:
-    Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
-    sans-serif;
+  font-family: $font-sans;
   font-size: 16px;
-  background: color(bg);
+  background: color(canvas);
   color: color(text);
 }
 
 body {
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 h1,
 h2,
 h3 {
-  line-height: 1.1;
+  font-family: $font-display;
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
 h1 {
-  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  font-size: var(--text-h1);
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-size: var(--text-h2);
+  line-height: 1.08;
 }
 
 h3 {
-  font-size: 1.15rem;
+  font-size: var(--text-h3);
+  line-height: 1.12;
 }
 
 p {
   color: color(text-muted);
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: space(sm) space(md);
+  border-radius: 0 0 radius(sm) 0;
+  background: color(accent);
+  color: color(on-accent);
+  transform: translateY(-100%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+main [id] {
+  scroll-margin-top: 6rem;
 }
 
 .page-shell,
@@ -56,72 +90,12 @@ p {
   border-top: 1px solid color(border);
 }
 
-.section__header {
-  @extend %section-header;
-}
-
-.eyebrow {
-  color: color(primary);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.pill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(sm);
-}
-
-.pill-list span,
-.chip {
-  @extend %chip;
-}
-
-.chip--accent {
-  border-color: transparent;
-  background: color(surface-alt);
-  color: color(primary);
-  font-weight: 700;
-}
-
-.cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(md);
-}
-
 .button {
   @extend %button-primary;
 }
 
 .button-secondary {
   @extend %button-secondary;
-}
-
-.card-grid {
-  display: grid;
-  gap: space(lg);
-}
-
-.card {
-  @extend %surface-card;
-}
-
-.card--accent {
-  border-color: color(secondary);
-  color: color(primary);
-}
-
-.social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: space(sm);
-}
-
-.list-muted {
-  @extend %muted-bullet-list;
 }
 
 @include respond-below(sm) {

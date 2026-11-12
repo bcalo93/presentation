@@ -1,4 +1,6 @@
 ---
+import SectionHeading from "@/components/SectionHeading.astro";
+
 interface Props {
   copy: {
     eyebrow: string;
@@ -11,16 +13,60 @@ interface Props {
 const { copy } = Astro.props;
 ---
 
-<section class="section" aria-labelledby="snapshot-title">
-  <div class="section__header">
-    <p class="eyebrow">{copy.eyebrow}</p>
-    <h2 id="snapshot-title">{copy.title}</h2>
-    {copy.description && <p>{copy.description}</p>}
-  </div>
+<section class="section" id="snapshot" aria-labelledby="snapshot-title">
+  <SectionHeading
+    eyebrow={copy.eyebrow}
+    title={copy.title}
+    description={copy.description}
+    id="snapshot-title"
+  />
 
-  <div class="card">
-    <div class="pill-list">
-      {copy.highlights.map((item) => <span>{item}</span>)}
-    </div>
-  </div>
+  <ul class="snapshot-sheet">
+    {
+      copy.highlights.map((item, index) => (
+        <li class="snapshot-sheet__row">
+          <span class="snapshot-sheet__index" aria-hidden="true">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span>{item}</span>
+        </li>
+      ))
+    }
+  </ul>
 </section>
+
+<style lang="scss">
+  @use "../../assets/styles/index" as *;
+
+  .snapshot-sheet {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: space(2xl);
+    list-style: none;
+  }
+
+  .snapshot-sheet__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: space(md);
+    padding: space(md) 0;
+    border-top: 1px solid color(border);
+  }
+
+  .snapshot-sheet__index {
+    font-family: $font-mono;
+    font-size: var(--text-sm);
+    color: color(text-muted);
+    padding-top: 0.15rem;
+  }
+
+  .snapshot-sheet__row span:last-child {
+    color: color(text);
+  }
+
+  @include respond-below(sm) {
+    .snapshot-sheet {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

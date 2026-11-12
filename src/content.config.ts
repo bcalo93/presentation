@@ -94,6 +94,7 @@ const home = defineCollection({
       ariaLabel: z.string(),
       items: z.array(navItem).min(1),
       themeToggleLabel: z.string(),
+      menuLabel: z.string(),
       languageSwitcherLabel: z.string(),
       languageLabels: z.object({
         en: z.string(),
@@ -128,7 +129,6 @@ const home = defineCollection({
     education: sectionIntro,
     contact: sectionIntro.extend({
       emailCta: z.string(),
-      linkedinCta: z.string(),
       links: z.array(contactLink).min(1),
     }),
     footer: z.object({
