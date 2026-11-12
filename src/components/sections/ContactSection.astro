@@ -1,5 +1,6 @@
 ---
 import SectionHeading from "@/components/SectionHeading.astro";
+import SocialIcon from "@/components/SocialIcon.astro";
 
 interface Props {
   copy: {
@@ -7,7 +8,6 @@ interface Props {
     title: string;
     description?: string;
     emailCta: string;
-    linkedinCta: string;
     links: Array<{
       label: string;
       value: string;
@@ -21,6 +21,12 @@ const hrefByLabel: Record<string, string> = {
   Email: "mailto:bcalo93@gmail.com",
   LinkedIn: "https://www.linkedin.com/in/brahian-calo-suhr/",
   GitHub: "https://github.com/bcalo93",
+};
+
+const iconByLabel: Record<string, "github" | "linkedin" | "email"> = {
+  Email: "email",
+  LinkedIn: "linkedin",
+  GitHub: "github",
 };
 ---
 
@@ -37,34 +43,33 @@ const hrefByLabel: Record<string, string> = {
     <a class="button" href="mailto:bcalo93@gmail.com">{copy.emailCta}</a>
 
     <ul class="contact-links">
-      <li>
-        <a
-          class="contact-link"
-          href="https://www.linkedin.com/in/brahian-calo-suhr/"
-          target="_blank"
-          rel="noreferrer">{copy.linkedinCta}</a
-        >
-      </li>
       {
         copy.links.map((item) => {
           const href = hrefByLabel[item.label];
+          const icon = iconByLabel[item.label];
 
-          return (
-            <li>
-              {href ? (
-                <a
-                  class="contact-link"
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                >
-                  {item.value}
-                </a>
-              ) : (
+          if (!href || !icon) {
+            return (
+              <li>
                 <span class="contact-link contact-link--static">
                   {item.value}
                 </span>
-              )}
+              </li>
+            );
+          }
+
+          return (
+            <li>
+              <a
+                class="contact-link"
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noreferrer" : undefined}
+                aria-label={item.label}
+                title={item.value}
+              >
+                <SocialIcon name={icon} />
+              </a>
             </li>
           );
         })
@@ -77,32 +82,36 @@ const hrefByLabel: Record<string, string> = {
   @use "../../assets/styles/index" as *;
 
   .contact-close {
-    display: grid;
-    gap: space(3xl);
-    justify-items: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: space(md) space(xl);
   }
 
   .contact-links {
     display: flex;
     flex-wrap: wrap;
-    gap: space(sm) space(2xl);
+    gap: space(md);
     list-style: none;
   }
 
   .contact-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
     color: color(text-muted);
-    text-decoration: underline;
-    text-decoration-color: color(border);
-    text-underline-offset: 0.3em;
+    transition: color 0.2s ease;
   }
 
-  .contact-link:hover,
-  .contact-link:focus-visible {
+  .contact-link :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  a.contact-link:hover,
+  a.contact-link:focus-visible {
     color: color(accent);
-    text-decoration-color: color(accent);
   }
 
   .contact-link--static {

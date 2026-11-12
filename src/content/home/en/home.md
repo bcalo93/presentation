@@ -118,10 +118,7 @@ contact:
   title: Open to connecting with people in tech
   description: If you’d like to connect, exchange ideas, or talk about software, architecture, or AI-first ways of working, feel free to reach out.
   emailCta: Send email
-  linkedinCta: Open LinkedIn
   links:
-    - label: Email
-      value: bcalo93@gmail.com
     - label: LinkedIn
       value: linkedin.com/in/brahian-calo-suhr
     - label: GitHub

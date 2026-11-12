@@ -128,7 +128,6 @@ const home = defineCollection({
     education: sectionIntro,
     contact: sectionIntro.extend({
       emailCta: z.string(),
-      linkedinCta: z.string(),
       links: z.array(contactLink).min(1),
     }),
     footer: z.object({
