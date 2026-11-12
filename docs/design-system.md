@@ -274,6 +274,7 @@ Body with `1.65` line height; headings between `1.02` and `1.12`; negative track
 
 - Brief, staggered hero entrance.
 - Decision line appearance through CSS.
+- Mobile menu panel drops from the top on open and slides back up on close (`200ms`, `@starting-style` + `allow-discrete`).
 - Maximum 4 px displacement on arrows or link indicators.
 - Durations: `120ms`, `200ms` and `480ms`.
 - No parallax, scroll-jacking, custom cursor or permanent animation.

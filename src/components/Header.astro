@@ -339,6 +339,24 @@ const { nav } = homeEntry.data;
       background: color(surface);
       max-height: calc(100dvh - 4.25rem);
       overflow-y: auto;
+      opacity: 0;
+      transform: translateY(-1rem);
+      transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        display 200ms allow-discrete;
+    }
+
+    .mobile-menu:popover-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @starting-style {
+      .mobile-menu:popover-open {
+        opacity: 0;
+        transform: translateY(-1rem);
+      }
     }
 
     .mobile-menu__list a {
