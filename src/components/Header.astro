@@ -19,6 +19,7 @@ const navItems = homeEntry.data.nav.items.map((item) => ({
 }));
 const switchTo = locale === "en" ? "es" : "en";
 const languageHref = getSwitcherPath(switchTo, page, slug);
+const { nav } = homeEntry.data;
 ---
 
 <header class="site-header">
@@ -26,7 +27,7 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     <a class="site-header__brand" href={page === "home" ? "#home" : homeHref}
       >Brahian Calo</a
     >
-    <nav class="site-header__nav" aria-label={homeEntry.data.nav.ariaLabel}>
+    <nav class="site-header__nav" aria-label={nav.ariaLabel}>
       <ul class="site-header__nav-list">
         {
           navItems.map((item) => (
@@ -41,15 +42,15 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
       <a
         class="language-switcher"
         href={languageHref}
-        aria-label={homeEntry.data.nav.languageSwitcherLabel}
+        aria-label={nav.languageSwitcherLabel}
       >
-        {homeEntry.data.nav.languageLabels[switchTo]}
+        {nav.languageLabels[switchTo]}
       </a>
       <button
         class="theme-toggle"
         type="button"
-        aria-label={homeEntry.data.nav.themeToggleLabel}
-        title={homeEntry.data.nav.themeToggleLabel}
+        aria-label={nav.themeToggleLabel}
+        title={nav.themeToggleLabel}
         aria-pressed="false"
         data-theme-toggle
       >
@@ -57,9 +58,39 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
           <ColorMode />
         </span>
       </button>
+      <button
+        class="nav-toggle"
+        type="button"
+        popovertarget="mobile-menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label={nav.menuLabel}
+        title={nav.menuLabel}
+        data-nav-toggle
+      >
+        <span class="nav-toggle__icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
     </div>
   </div>
 </header>
+
+<div id="mobile-menu" popover="auto" class="mobile-menu">
+  <nav aria-label={nav.ariaLabel}>
+    <ul class="mobile-menu__list">
+      {
+        navItems.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
 
 <script is:inline>
   (() => {
@@ -89,6 +120,33 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
       applyTheme(nextTheme);
     });
+  })();
+</script>
+
+<script is:inline>
+  (() => {
+    const toggle = document.querySelector("[data-nav-toggle]");
+    const menu = document.getElementById("mobile-menu");
+    if (!toggle || !menu) return;
+
+    const sync = () => {
+      toggle.setAttribute(
+        "aria-expanded",
+        String(menu.matches(":popover-open")),
+      );
+    };
+
+    menu.addEventListener("toggle", sync);
+
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) menu.hidePopover();
+    });
+
+    window
+      .matchMedia("(min-width: 720px)")
+      .addEventListener("change", (event) => {
+        if (event.matches) menu.hidePopover();
+      });
   })();
 </script>
 
@@ -180,6 +238,10 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
     height: 1.125rem;
   }
 
+  .nav-toggle {
+    display: none;
+  }
+
   .site-header__nav-list a:hover,
   .site-header__brand:hover,
   .language-switcher:hover {
@@ -189,18 +251,112 @@ const languageHref = getSwitcherPath(switchTo, page, slug);
   @include respond-below(sm) {
     .site-header__inner {
       grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "brand controls"
-        "nav nav";
-      gap: space(sm) space(md);
+      grid-template-areas: "brand controls";
     }
 
     .site-header__nav {
+      display: none;
+    }
+
+    .nav-toggle {
+      display: inline-grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: 0;
+      border: 0;
+      border-radius: radius(sm);
+      background: transparent;
+      color: color(text-muted);
+      font: inherit;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .nav-toggle:hover,
+    .nav-toggle[aria-expanded="true"] {
+      color: color(accent);
+    }
+
+    .nav-toggle__icon {
+      position: relative;
+      display: block;
+      width: 1.125rem;
+      height: 0.75rem;
+    }
+
+    .nav-toggle__icon span {
+      position: absolute;
+      left: 0;
       width: 100%;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      padding-bottom: space(2xs);
-      -webkit-overflow-scrolling: touch;
+      height: 2px;
+      background: currentColor;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        top 0.2s ease;
+    }
+
+    .nav-toggle__icon span:nth-child(1) {
+      top: 0;
+    }
+
+    .nav-toggle__icon span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .nav-toggle__icon span:nth-child(3) {
+      bottom: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__icon span:nth-child(1) {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] .nav-toggle__icon span:nth-child(3) {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: calc(4.25rem + 1px);
+      left: 0;
+      right: 0;
+      width: auto;
+      max-width: none;
+      margin: 0;
+      padding: space(xs) $gutter space(md);
+      border: 0;
+      border-bottom: 1px solid color(border-strong);
+      background: color(surface);
+      max-height: calc(100dvh - 4.25rem);
+      overflow-y: auto;
+    }
+
+    .mobile-menu__list a {
+      display: flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding: space(sm) 0;
+      border-top: 1px solid color(border);
+      color: color(text);
+      font-size: 1.05rem;
+    }
+
+    .mobile-menu__list li:first-child a {
+      border-top: 0;
+    }
+
+    .mobile-menu__list a:hover {
+      color: color(accent);
     }
   }
 </style>

@@ -19,6 +19,7 @@ nav:
     - id: contact
       label: Contacto
   themeToggleLabel: Cambiar tema de color
+  menuLabel: Menú
   languageSwitcherLabel: Cambiar idioma
   languageLabels:
     en: English

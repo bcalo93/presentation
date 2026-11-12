@@ -298,7 +298,7 @@ Goal: **WCAG 2.2 AA**.
 The executing agent must respect the following constraints:
 
 1. Do not change the routes or the internationalization strategy.
-2. Do not modify `src/content.config.ts`: the migration needs no schema changes.
+2. Do not modify `src/content.config.ts` beyond additive UI labels (e.g. `nav.menuLabel`): the migration needs no content model changes.
 3. Do not rewrite the editorial content. The only allowed changes in `home.md` are those needed to reorder the navigation according to the new home page.
 4. Do not add React, a UI framework, an animation library or client-side JavaScript for tasks that CSS and HTML can solve.
 5. Keep the site static and the current use of Astro and Sass.
@@ -357,7 +357,7 @@ The migration must be done on a visual branch, with small, verifiable deliverabl
 **Work**
 
 - New compact header and global grid.
-- Mobile navigation in two rows with accessible horizontal scroll, without a JavaScript menu.
+- Mobile navigation as a hamburger menu on mobile only: a native `popover` disclosure listing all sections in a full-width panel below the header; desktop keeps the inline navigation. Minimal inline script only to sync `aria-expanded` and close after link activation, Escape, outside click or resizing to desktop. Requires the `nav.menuLabel` field in the home collections.
 - Skip link.
 - Accessible theme toggle.
 - `theme-color` per mode.
@@ -453,6 +453,7 @@ No permanent feature flag must be added. Rollback is done from the branch or pre
 - Absence of FOUC when loading with any theme.
 - Language switching from home and from projects.
 - Anchor navigation without content hidden by the header.
+- Mobile menu: opens from the hamburger button and closes on link activation, Escape, outside click and desktop resize.
 - Working skip link.
 - Repository and contact links.
 - Screenshots and alternative texts.
